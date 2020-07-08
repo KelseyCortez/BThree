@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('code-kitchen:server');
+var debug = require('debug')('eyewatchSOS:server');
 var http = require('http');
 
 /**
