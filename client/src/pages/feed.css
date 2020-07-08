@@ -1,0 +1,70 @@
+header{ 
+    border: chartreuse 4px solid;
+    height: 200px
+}
+
+
+.ChatArea{ 
+
+    height: 100px; 
+    width: 100px;
+    background-color: red;
+
+} 
+
+.AccountArea{ 
+    height: 100px; 
+    width: 100px;
+}
+
+.FriendsArea{  
+
+    height: 100px; 
+    width: 100px;
+    background-color: blue;
+} 
+
+.LocationArea{  
+
+    height: 300px; 
+    width: 500px; 
+    background-color: blueviolet;
+
+} 
+
+.NotificationsArea{  
+
+    height: 100px; 
+    width: 100px; 
+    background-color: coral;
+
+} 
+
+.flexRow{ 
+    display: flex; 
+    flex-direction: row;
+
+} 
+
+.flexColumn{ 
+    display: flex; 
+    flex-direction: column;
+
+
+} 
+
+.quickLinks{ 
+    position: absolute; 
+    right: 0px; 
+    justify-content: flex-end; 
+    background-color: yellow;
+} 
+
+.spaceBetween{ 
+    justify-content: space-between;
+    
+} 
+
+.end{ 
+    align-items: flex-end;
+}
