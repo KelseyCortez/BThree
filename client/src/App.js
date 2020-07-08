@@ -13,7 +13,8 @@ function App() {
           <h1>Welcome to the safety app.</h1>
         </div> 
 
-        <Route path="/register" component={Register} />  
+        <Route path="/register" component={Register} /> 
+ 
         <Route path="/login" component={Login} />
 
         <Switch>
