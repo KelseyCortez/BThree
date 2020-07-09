@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+#keeping config to mac to not cause issues with Windows user partners.
+/config
+
 # testing
 /coverage
 

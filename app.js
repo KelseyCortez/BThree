@@ -4,7 +4,8 @@ let socket = require('socket.io')
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let apiRouter = require('./routes/api');
-let logger = require('morgan')
+let logger = require('morgan');
+let smsRouter = require('./routes/sms');
 
 let app = express();
 
@@ -17,6 +18,8 @@ app.use(cookieParser());
 
 
 app.use('/api/v1/', apiRouter);
+app.use('/api/v1/sms', smsRouter);
+
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client/build/index.html'))
