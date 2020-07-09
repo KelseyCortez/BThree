@@ -1,3 +1,4 @@
+import MapContainer from './component/MapContainer';
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
@@ -45,7 +46,7 @@ function App() {
   };
 
   useEffect(() => {
-    // This function runs voicCommands function whenever the page loads.
+    // This function runs voiceCommands function whenever the page loads.
     voiceCommands();
   });
 
@@ -59,8 +60,11 @@ function App() {
 
         <Route path="/login" component={Login} />
         <Route path="/feed" component={Feed} />
+
+        <Route path="/map" component={MapContainer} />
         <Route path="/account" component={Account} />
         <Route path="/chat" component={Chat} />
+
 
         <Switch>
           <Route path="/" />
