@@ -8,8 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      name: {
+        type: Sequelize.TEXT
+      },
+      
       phoneNumber: {
-        type: Sequelize.INTEGER
+        type: Sequelize.TEXT
       },
       relationship: {
         type: Sequelize.TEXT
@@ -22,7 +26,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      UserId: {
+      userId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',

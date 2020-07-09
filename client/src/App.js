@@ -1,10 +1,14 @@
+import About from './pages/about';
+import MapContainer from './component/MapContainer';
 import React, { useState, useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Register from './pages/register'
 import Login from './pages/login';
-import Feed from './pages/feed';
+import Feed from "./pages/feed";
+import Account from "./pages/account";
+import Chat from "./component/Chat";
 
 // creates variables that allow chrome speech recognition
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -49,26 +53,42 @@ function App() {
      console.log('hello');
     })
     voiceCommands();
+<<<<<<< HEAD
    
+=======
+    fetch('/api/v1/users')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+    })
+>>>>>>> b85c1dcf0d228cbadd43e00f973c7d8bd47111b6
   })
 
   
   return (
     <Router>
-      <div className="App"> 
-
+      <div className="App">
         <div>
           <h1>Welcome to the safety app.</h1>
+
         </div> 
-        <Route path="/register" component={Register} /> 
- 
-        <Route path="/login" component={Login} /> 
-        <Route path="/feed" component={Feed} />
+        
+        <div>
+          <Route path="/register" component={Register} /> 
+          <Route path="/login" component={Login} /> 
+          <Route path="/feed" component={Feed} /> 
+          <Route path="/account"  component={Account}/> 
+          <Route path="/about" component={About}/> 
+        </div>
+     
+
+        <Route path="/map" component={MapContainer} />
+        <Route path="/account" component={Account} />
+        <Route path="/chat" component={Chat} />
+
 
         <Switch>
-          <Route path="/"/>
-         
-
+          <Route path="/" />
         </Switch>
       </div>
     </Router>
