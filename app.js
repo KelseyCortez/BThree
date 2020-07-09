@@ -1,9 +1,11 @@
 let createError = require('http-errors');
 let express = require('express');
+let socket = require('socket.io')
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let apiRouter = require('./routes/api');
-let logger = require('morgan')
+let logger = require('morgan');
+let smsRouter = require('./routes/sms');
 
 let app = express();
 
@@ -16,6 +18,8 @@ app.use(cookieParser());
 
 
 app.use('/api/v1/', apiRouter);
+app.use('/api/v1/sms', smsRouter);
+
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client/build/index.html'))
@@ -32,8 +36,17 @@ app.use(function(err, req, res, next) {
   res.json(err);
 });
 
-// app.listen(3002, () => {
-//     console.log('listening on 3002')
-// })
+
+io = socket();
+
+io.on('connection', (socket) => {
+  console.log(socket.id)
+
+  socket.on('SEND_MESSAGE', function(data) {
+    io.emit('RECEIVE_MESSAGE', data)
+  })
+})
+
+app.io = io
 
 module.exports = app;
