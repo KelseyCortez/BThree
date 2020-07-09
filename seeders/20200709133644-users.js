@@ -1,8 +1,8 @@
-'use strict';
+// 'use strict';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Users', [{
+    await queryInterface.bulkInsert('Users', [{
       firstName: 'John',
       lastName: 'Doe',
       userName: 'JD87',
@@ -10,6 +10,7 @@ module.exports = {
       password: 'password',
       email: 'jdoe@yahoo.com',
       createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       firstName: 'Jane',
@@ -19,6 +20,7 @@ module.exports = {
       password: 'password123',
       email: 'janedoe@yahoo.com',
       createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       firstName: 'David',
@@ -28,6 +30,7 @@ module.exports = {
       password: 'password789',
       email: 'dfost@yahoo.com',
       createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       firstName: 'Parker',
@@ -37,6 +40,7 @@ module.exports = {
       password: 'password1111',
       email: 'pj@gmail.com',
       createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       firstName: 'Zahria',
@@ -46,6 +50,7 @@ module.exports = {
       password: 'password3434',
       email: 'zahria@yahoo.com',
       createdAt: new Date(),
+      updatedAt: new Date(),
     },
 
 
@@ -53,7 +58,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Users', null, {});
+    await queryInterface.bulkDelete('Users', null, {});
 
   }
 };
