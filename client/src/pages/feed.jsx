@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './feed.css'
 import { Link } from 'react-router-dom';
+import Timeline from '../component/Timeline';
+import Chat from '../component/Chat'
 
 
 class Feed extends Component {
@@ -28,7 +30,8 @@ class Feed extends Component {
                     <div className="TimelineArea flexColumn"> 
                         Timeline 
 
-                        <div className="TextArea"> </div>
+                        <div className="TextArea"> <Timeline /> </div>
+                        
                     
                     </div>
 
@@ -41,7 +44,7 @@ class Feed extends Component {
                     <div className="ChatArea flexColumn"> 
                         Chat
                     
-                        <div className="TextArea"> </div>
+                        <div className="TextArea"> <Chat /> </div>
                      </div>
 
                 </div>
