@@ -1,11 +1,18 @@
+let createError = require('http-errors');
 let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let apiRouter = require('./routes/api');
+let logger = require('morgan')
 
 let app = express();
 
 app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 
 app.use('/api/v1/', apiRouter);
@@ -25,6 +32,8 @@ app.use(function(err, req, res, next) {
   res.json(err);
 });
 
-
+// app.listen(3002, () => {
+//     console.log('listening on 3002')
+// })
 
 module.exports = app;
