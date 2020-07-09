@@ -3,8 +3,10 @@ var router = express.Router();
 const db = require('../models');
 
 
-router.get('/', function(req, res, next) {
-    
+router.get('/users', function (req, res, next) {
+    db.Users.findAll().then((data) => {
+        res.json(data);
+    });
 });
 
 module.exports = router;
