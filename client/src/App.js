@@ -4,7 +4,8 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Register from './pages/register'
 import Login from './pages/login';
-import Feed from './pages/feed';
+import Feed from './pages/feed'; 
+import Account from './pages/account'
 
 // creates variables that allow chrome speech recognition
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -61,7 +62,8 @@ function App() {
         <Route path="/register" component={Register} /> 
  
         <Route path="/login" component={Login} /> 
-        <Route path="/feed" component={Feed} />
+        <Route path="/feed" component={Feed} /> 
+        <Route path="/account"  component={Account}/>
 
         <Switch>
           <Route path="/"/>
