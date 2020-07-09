@@ -53,15 +53,11 @@ function App() {
      console.log('hello');
     })
     voiceCommands();
-<<<<<<< HEAD
-   
-=======
     fetch('/api/v1/users')
     .then(res => res.json())
     .then(data => {
       console.log(data)
     })
->>>>>>> b85c1dcf0d228cbadd43e00f973c7d8bd47111b6
   })
 
   

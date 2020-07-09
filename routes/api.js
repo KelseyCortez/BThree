@@ -4,12 +4,8 @@ const db = require('../models');
 
 
 router.get('/users', function (req, res, next) {
-<<<<<<< HEAD
-    db.Users.findAll().then((data) => {
-=======
     // res.send(req.params.id)
     db.User.findAll().then((data) => {
->>>>>>> b85c1dcf0d228cbadd43e00f973c7d8bd47111b6
         res.json(data);
     });
 });
