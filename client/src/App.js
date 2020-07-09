@@ -50,7 +50,16 @@ function App() {
   useEffect(() => {
     // This function runs voiceCommands function whenever the page loads.
     voiceCommands();
+
+    fetch('/api/v1/users')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+      })
+  })
+
   });
+
 
   return (
     <Router>
