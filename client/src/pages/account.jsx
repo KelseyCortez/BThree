@@ -1,13 +1,40 @@
 import React, { Component } from 'react'
-import './account.css' 
-import Button from 'react-bootstrap/Button'
+import './account.css'
+import Button from 'react-bootstrap/Button' 
 
 class Account extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            Name: "",
+            Username: "",
+            Password: "",
+            Email: "",
+            CellNumber: "",
+            Age: "",
+            FriendList: []
+
+
+
+        }
+    }
+    makeAccountChanges = (e) => { 
+        fetch()
+
+
+
+
     }
     render() {
+
+        let name = this.state.Name
+        let username = this.state.Username
+        let password = this.state.Password
+        let email = this.state.Email
+        let cellNumber = this.state.cellNumber
+        let age = this.state.Age
+        let FriendList = this.state.FriendList
+
         return (
             <div className="AccountPage">
 
@@ -17,14 +44,14 @@ class Account extends Component {
 
                     <div className="TextArea">
 
-                        <div>Name: </div>  
-                        <div>Username: </div> 
-                        <div>Age: </div> 
-                        <div>Password: </div> 
-                        <div>Email:  </div> 
-                        <div>Cellular Number: </div> 
-                        <div> Age: </div>  
-                        <Button> Edit: </Button>
+                        <div>Name: {name} </div>
+                        <div>Username:{username} </div>
+                        <div>Age: {age} </div>
+                        <div>Password:{password} </div>
+                        <div>Email: {email} </div>
+                        <div>Cellular Number: {cellNumber}</div>
+                        <div> Age: {age} </div>
+                        <Button> Edit </Button>
 
 
                     </div>

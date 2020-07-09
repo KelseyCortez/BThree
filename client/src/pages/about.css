@@ -1,0 +1,72 @@
+.AboutPage{ 
+    font-family: "Coda Caption"; 
+    height: 100vh;
+}   
+
+p{ 
+    font-size: 15px;
+    line-height: 200%; 
+    
+} 
+header{ 
+    border: 2px solid black; 
+    height: 15vh; 
+    text-align: center; 
+    font-family: "Coda Caption"; 
+    /* margin-bottom: 10px; */
+    
+}
+
+.SectionTitle{ 
+    border: 2px solid black; 
+    width: 80vw;
+    /* height: 7vh; */
+    font-size: 35px; 
+    text-align: center; 
+} 
+.flexColumn{ 
+    display: flex; 
+    flex-direction: column;
+} 
+ 
+.alignCenterItems{ 
+    align-items: center;
+}
+
+.alignCenter{ 
+    align-content: center;
+}
+.adjustCenter{
+    justify-content: center;
+    align-items: center;
+} 
+
+.quickLinks{ 
+    position: absolute; 
+    right: 0px; 
+    justify-content: flex-end; 
+    
+}  
+
+.flexRow{ 
+    display: flex; 
+    flex-direction: row;
+
+} 
+.AccountArea{ 
+    /* height: 50px;  */
+    width: 100px; 
+    text-align: center; 
+    
+}
+
+.FriendsArea{  
+
+    /* height: 50px;  */
+    width: 100px;
+    text-align: center;
+} 
+
+.spaceAround{ 
+justify-content: space-around;
+}

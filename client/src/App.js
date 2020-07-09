@@ -1,3 +1,5 @@
+
+import About from './pages/about';
 import MapContainer from './component/MapContainer';
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
@@ -55,11 +57,16 @@ function App() {
       <div className="App">
         <div>
           <h1>Welcome to the safety app.</h1>
-        </div>
-        <Route path="/register" component={Register} />
 
-        <Route path="/login" component={Login} />
-        <Route path="/feed" component={Feed} />
+        </div> 
+        
+        <Route path="/register" component={Register} /> 
+        <Route path="/login" component={Login} /> 
+        <Route path="/feed" component={Feed} /> 
+        <Route path="/account"  component={Account}/> 
+        <Route path="/about" component={About}/> 
+        </div>
+     
 
         <Route path="/map" component={MapContainer} />
         <Route path="/account" component={Account} />
