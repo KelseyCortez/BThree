@@ -18,7 +18,8 @@ module.exports = {
         type: Sequelize.TEXT
       },
       dob: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.DATEONLY
       },
       email: {
         type: Sequelize.TEXT

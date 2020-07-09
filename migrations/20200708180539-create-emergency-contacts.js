@@ -13,7 +13,7 @@ module.exports = {
       },
       
       phoneNumber: {
-        type: Sequelize.INTEGER
+        type: Sequelize.TEXT
       },
       relationship: {
         type: Sequelize.TEXT
