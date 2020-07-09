@@ -1,5 +1,6 @@
 let createError = require('http-errors');
 let express = require('express');
+let socket = require('socket.io')
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let apiRouter = require('./routes/api');
@@ -32,8 +33,17 @@ app.use(function(err, req, res, next) {
   res.json(err);
 });
 
-// app.listen(3002, () => {
-//     console.log('listening on 3002')
-// })
+
+io = socket();
+
+io.on('connection', (socket) => {
+  console.log(socket.id)
+
+  socket.on('SEND_MESSAGE', function(data) {
+    io.emit('RECEIVE_MESSAGE', data)
+  })
+})
+
+app.io = io
 
 module.exports = app;
