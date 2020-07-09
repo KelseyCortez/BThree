@@ -13,7 +13,7 @@ module.exports = {
       },
       
       phoneNumber: {
-        type: Sequelize.INTEGER
+        type: Sequelize.TEXT
       },
       relationship: {
         type: Sequelize.TEXT
@@ -26,7 +26,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      UserId: {
+      userId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
