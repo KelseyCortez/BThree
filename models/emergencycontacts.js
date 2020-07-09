@@ -10,12 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.EmergencyContact.belongsTo(models.User);
+      models.EmergencyContact.belongsTo(models.User, {foreignKey: 'userId'});
     }
   };
   EmergencyContact.init({
     phoneNumber: DataTypes.INTEGER,
-    relationship: DataTypes.TEXT
+    relationship: DataTypes.TEXT,
+    userId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'EmergencyContact',
