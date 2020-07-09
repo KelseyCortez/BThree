@@ -1,5 +1,6 @@
 
 import About from './pages/about';
+import MapContainer from './component/MapContainer';
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
@@ -48,9 +49,19 @@ function App() {
   };
 
   useEffect(() => {
-    // This function runs voicCommands function whenever the page loads.
+    // This function runs voiceCommands function whenever the page loads.
     voiceCommands();
   });
+
+    fetch('/api/v1/users')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+      })
+  }
+
+  ;
+
 
   return (
     <Router>
@@ -65,19 +76,25 @@ function App() {
         <Route path="/feed" component={Feed} /> 
         <Route path="/account"  component={Account}/> 
         <Route path="/about" component={About}/> 
+        </div>
+     
 
        
         <Route path="/register" component={Register} />
 
 
  
+        <Route path="/map" component={MapContainer} />
+        <Route path="/account" component={Account} />
+        <Route path="/chat" component={Chat} />
+
 
         <Switch>
           <Route path="/" />
         </Switch>
-      </div>
+      
     </Router>
   );
-}
+
 
 export default App;
