@@ -6,6 +6,7 @@ import Register from './pages/register'
 import Login from './pages/login';
 import Feed from './pages/feed'; 
 import Account from './pages/account'
+import About from './pages/about';
 
 // creates variables that allow chrome speech recognition
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -54,11 +55,12 @@ function App() {
         <div>
           <h1>Welcome to the safety app.</h1>
         </div> 
+        
         <Route path="/register" component={Register} /> 
- 
         <Route path="/login" component={Login} /> 
         <Route path="/feed" component={Feed} /> 
-        <Route path="/account"  component={Account}/>
+        <Route path="/account"  component={Account}/> 
+        <Route path="/about" component={About}/> 
 
         <Switch>
           <Route path="/"/>

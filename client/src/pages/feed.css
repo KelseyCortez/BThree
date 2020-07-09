@@ -72,8 +72,6 @@ header{
 .flexColumn{ 
     display: flex; 
     flex-direction: column;
-
-
 } 
 
 .quickLinks{ 
