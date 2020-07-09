@@ -1,10 +1,10 @@
 import React, { useState, useEffect} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Register from './pages/register'
 import Login from './pages/login';
 import Feed from './pages/feed';
+import MapContainer from './component/MapContainer';
 
 // creates variables that allow chrome speech recognition
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -42,7 +42,7 @@ function App() {
   }
 
   useEffect(() => {
-    // This function runs voicCommands function whenever the page loads.
+    // This function runs voiceCommands function whenever the page loads.
     voiceCommands();
   })
 
@@ -57,6 +57,7 @@ function App() {
  
         <Route path="/login" component={Login} /> 
         <Route path="/feed" component={Feed} />
+        <Route path="/map" component={MapContainer} />
 
         <Switch>
           <Route path="/"/>
