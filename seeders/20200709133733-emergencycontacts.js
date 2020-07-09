@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.bulkInsert('EmergencyContacts', [
       {
         name: 'Josh Doe',
-        phoneNumber: '345 - 456 - 6789',
+        phoneNumber: '345-456-6789',
         relationship: 'brother',
         userId: 5,
         createdAt: new Date(),
@@ -13,7 +13,7 @@ module.exports = {
       },
       {
         name: 'Jack',
-        phoneNumber: '345 - 456 - 6789',
+        phoneNumber: '345-456-6789',
         relationship: 'son',
         userId: 3,
         createdAt: new Date(),
@@ -21,7 +21,7 @@ module.exports = {
       },
       {
         name: 'Marsha ',
-        phoneNumber: '770 - 345 - 1234',
+        phoneNumber: '770-345-1234',
         relationship: 'mother',
         userId: 1,
         createdAt: new Date(),
@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         name: 'Ashley',
-        phoneNumber: '345 - 456 - 6789',
+        phoneNumber: '345-456-6789',
         relationship: 'sister',
         userId: 2,
         createdAt: new Date(),
@@ -37,7 +37,7 @@ module.exports = {
       },
       {
         name: 'Wes',
-        phoneNumber: '123 - 123 - 4567',
+        phoneNumber: '123-123-4567',
         relationship: 'DIR',
         userId: 4,
         createdAt: new Date(),
