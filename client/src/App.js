@@ -55,10 +55,7 @@ function App() {
     })
   })
 
-<<<<<<< HEAD
-=======
   
->>>>>>> 0f51bfd6dba9cdfdf2a945c214febaf8b86c07ed
   return (
     <Router>
       <div className="App">
