@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import About from "./pages/about";
 import MapContainer from "./component/MapContainer";
 import React, { useState, useEffect } from "react";
@@ -6,11 +7,22 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Register from "./pages/register";
 import Login from "./pages/login";
+=======
+import About from './pages/about';
+import MapContainer from './component/MapContainer';
+import React, { useState, useEffect } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Register from './pages/register'
+import Login from './pages/login';
+>>>>>>> 2ae83d443aa5123483aaab0b42e417b76ade36eb
 import Feed from "./pages/feed";
 import Account from "./pages/account";
 import Chat from "./component/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./LandingPage";
+
 
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
@@ -78,11 +90,14 @@ function App() {
         </div>
 
         <Route path="/map" component={MapContainer} />
-        <Route path="/account" component={Account} />
         <Route path="/chat" component={Chat} />
       </div>
+
     </Router>
   );
-}
+
+
+  
+} 
 
 export default App;
