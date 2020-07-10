@@ -19,8 +19,7 @@ recognition.start();
 
 function App() {
   
-  // Creates variables that act like state
-  let [phrase, setPhrase] = useState('')
+  let [userPhrase, setPhrase] = useState('')
 
   const voiceCommands = () => {
     recognition.onstart = () => {
@@ -36,26 +35,31 @@ function App() {
       console.log(transcript);
 
       if(!mobileRepeatBug) {
-        // checks transcript taken from voice command act performs logic based on that.
-        if(transcript === 'help' || transcript === ' help'){
-          setPhrase(phrase = 'yes');
-          console.log(phrase);
+        fetch('/api/v1/users')
+          .then(res => res.json())
+          .then(data => {
+            console.log(data)
+            const phrase = data[0].phrase.toLowerCase(); 
+            if(transcript === phrase || transcript === ` ${phrase}`){
+              setPhrase(userPhrase = 'yes');
+              console.log(userPhrase);
+              recognition.start();
+            } else {
+              recognition.start();
+            }
+          })
+          // checks transcript taken from voice command act performs logic based on that.
         }
-      }
+      }   
     }
-  }
-
-  useEffect(() => {
-    // This function runs voicCommands function whenever the page loads.
-    voiceCommands();
-    fetch('/api/v1/users')
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
+    
+    useEffect(() => {
+      // This function runs voiceCommands function whenever the page loads.
+      voiceCommands();
     })
-  })
-
-  
+    
+    
+   
   return (
     <Router>
       <div className="App">
