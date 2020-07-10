@@ -27,6 +27,16 @@ router.get('/users/:id/contacts', (req, res, next) => {
     })
 })
 
+router.post('/users/:id/contacts', (req, res, next) => {
+    db.User.findByPk(req.params.id)
+    .then(User => User.createEmergencyContact({
+        name: req.body.name,
+        phoneNumber: req.body.phoneNumber,
+        relationship: req.body.relationship,
+    }))
+    .then(data => res.json(data));
+})
+
 router.post('/users', function (req, res)  {
     const { userName, email, password, firstName, lastName, dob } = req.body
     if (!userName) { res.status(400).json({ error: 'user-name field is required' }); }
