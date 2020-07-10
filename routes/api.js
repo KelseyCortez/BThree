@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const db = require('../models');
-
+const bcrypt = require('bcrypt');
 
 router.get('/users/:id', function(req, res, next) {
     // res.send(req.params.id)
@@ -37,17 +37,19 @@ router.post('/users', function (req, res)  {
     if (!userName) { res.status(400).json({ error: 'user-name field is required' }); }
     if (!email) { res.status(400).json({ error: 'email field is required' }); }
     if (!password) { res.status(400).json({ error: 'password field is required' }); }
+    bcrypt.hash(password, 10, (err, hash) => {
 
-db.User.create({
-        firstName: firstName,
-        lastName: lastName,
-        userName: userName,
-        dob: dob,
-        password: password,    
-        email: email,
-    })
-    .then(user => {
-        res.status(201).json(user);
-    })
-})
+        db.User.create({
+                firstName: firstName,
+                lastName: lastName,
+                userName: userName,
+                dob: dob,
+                password: hash,    
+                email: email,
+            })
+            .then(user => {
+                res.status(201).json(user);
+            })
+        });
+});
 module.exports = router;
