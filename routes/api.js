@@ -2,12 +2,16 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
+const secret = "mysecretshhh"
 
-router.get('/users/:id', function(req, res, next) {
+
+router.get('/users/:id', function (req, res, next) {
     // res.send(req.params.id)
     db.User.findByPk(req.params.id).then((data) => {
         res.json(data);
-      }); 
+    });
+})
 router.get('/users', function (req, res, next) {
     // res.send(req.params.id)
     db.User.findAll().then((data) => {
@@ -43,6 +47,46 @@ router.post('/users/:id/contacts', (req, res, next) => {
 })
 
 router.post('/users', function (req, res)  {
+
+router.post('/login', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password; 
+    console.log(req)
+    db.User.findOne({ where: { userName: username } })
+        .then((User) => { 
+            console.log(User, username, password)
+            bcrypt.compare(password, User.password, (err, match) => { 
+                console.log(err, match)
+                if (err) {
+                    res.status(500)
+                    .json({error: 'Incorrect Password'})
+                } else if (!match) {
+                    res.status(401)
+                        .json({
+                            error: 'Incorret email or password'
+                        })
+                } else {
+                    const payload = { username }
+                    const token = jwt.sign(payload, secret, {
+                        expiresIn: '1h'
+                    })
+                    res.cookie('token', token, { httpOnly: true })
+                        .sendStatus(200)
+
+                    req.session.user = User;
+                    res.redirect('../account')
+
+                }
+            })
+        })
+        .catch(() => {
+            res.status(401)
+           .json({error: 'username not found'})
+        })
+
+})
+
+router.post('/users', function (req, res) {
     const { userName, email, password, firstName, lastName, dob } = req.body
     if (!userName) { res.status(400).json({ error: 'user-name field is required' }); }
     if (!email) { res.status(400).json({ error: 'email field is required' }); }
@@ -50,16 +94,16 @@ router.post('/users', function (req, res)  {
     bcrypt.hash(password, 10, (err, hash) => {
 
         db.User.create({
-                firstName: firstName,
-                lastName: lastName,
-                userName: userName,
-                dob: dob,
-                password: hash,    
-                email: email,
-            })
+            firstName: firstName,
+            lastName: lastName,
+            userName: userName,
+            dob: dob,
+            password: hash,
+            email: email,
+        })
             .then(user => {
                 res.status(201).json(user);
             })
-        });
+    });
 });
 module.exports = router;
