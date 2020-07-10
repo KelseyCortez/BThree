@@ -9,8 +9,8 @@ import Login from "./pages/login";
 import Feed from "./pages/feed";
 import Account from "./pages/account";
 import Chat from "./component/Chat";
-import {Nav} from 'react-bootstrap';
-import LandingPage from './LandingPage'
+import { Nav } from "react-bootstrap";
+import LandingPage from "./LandingPage";
 
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
@@ -21,8 +21,7 @@ const recognition = new SpeechRecognition();
 recognition.start();
 
 function App() {
-  
-  let [userPhrase, setPhrase] = useState('')
+  let [userPhrase, setPhrase] = useState("");
 
   const voiceCommands = () => {
     recognition.onstart = () => {
@@ -38,32 +37,30 @@ function App() {
         current === 1 && transcript === e.results[0][0].transcript;
       console.log(transcript);
 
-      if(!mobileRepeatBug) {
-        fetch('/api/v1/users')
-          .then(res => res.json())
-          .then(data => {
-            console.log(data)
-            const phrase = data[0].phrase.toLowerCase(); 
-            if(transcript === phrase || transcript === ` ${phrase}`){
-              setPhrase(userPhrase = 'yes');
+      if (!mobileRepeatBug) {
+        fetch("/api/v1/users")
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            const phrase = data[0].phrase.toLowerCase();
+            if (transcript === phrase || transcript === ` ${phrase}`) {
+              setPhrase((userPhrase = "yes"));
               console.log(userPhrase);
               recognition.start();
             } else {
               recognition.start();
             }
-          })
-          // checks transcript taken from voice command act performs logic based on that.
-        }
-      }   
-    }
-    
-    useEffect(() => {
-      // This function runs voiceCommands function whenever the page loads.
-      voiceCommands();
-    })
-    
-    
-   
+          });
+        // checks transcript taken from voice command act performs logic based on that.
+      }
+    };
+  };
+
+  useEffect(() => {
+    // This function runs voiceCommands function whenever the page loads.
+    voiceCommands();
+  });
+
   return (
     <Router>
       <div className="App">
@@ -83,7 +80,6 @@ function App() {
         <Route path="/map" component={MapContainer} />
         <Route path="/account" component={Account} />
         <Route path="/chat" component={Chat} />
-
       </div>
     </Router>
   );
