@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   EmergencyContact.init({
+    name: DataTypes.TEXT,
     phoneNumber: DataTypes.INTEGER,
     relationship: DataTypes.TEXT,
     userId: DataTypes.INTEGER
