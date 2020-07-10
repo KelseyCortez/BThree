@@ -1,6 +1,7 @@
 import React, { Component } from 'react' 
 import Button from 'react-bootstrap/Button' 
-
+import {formik} from 'formik' 
+import * as Yup from "yup"
 
 class Login extends Component {
     constructor(props) {
@@ -13,18 +14,11 @@ class Login extends Component {
     } 
     authorizeLogin = (e) => { 
         e.preventDefault() ;
-        fetch('/api/v1/login', 
+        fetch('/api/v1/users', 
         { 
             method: 'POST', 
-            body: JSON.stringify(this.state), 
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8'
-              },
+            body: JSON.stringify(this.state),
 
-            }) 
-            .catch(err => { 
-                console.log(err); 
-                alert('Error logging in please try again')
             })
 
         } 
@@ -32,8 +26,8 @@ class Login extends Component {
    
     myChangeHandler = (event) => { 
         this.setState({ 
-            [event.target.name]: event.target.value ,
-           
+            username: event.target.username,
+            password: event.target.password
         })
     }
     render() { 
@@ -46,20 +40,20 @@ class Login extends Component {
                     {/* <!-- input field for Username --> */}
                     <label>
                         Username:
-                         <input name="username" type="text" onChange={this.myChangeHandler} value={this.state.username} />
+                         <input name="username" type="text" onChange={this.myChangeHandler} />
                     </label> <br />
 
                     {/* <!-- input field for Password --> */}
                     <label>
                         Password:
-                        <input name="password" type="password" onChange={this.myChangeHandler} value={this.state.password} />
+                        <input name="password" type="password" onChange={this.myChangeHandler} />
                     </label> <br />
 
 
                     {/* <!-- forgot password link --> */}
                     <a href="/">Forgot Password? </a>
 
-                    <Button  onSubmit={this.authorizeLogin} type="submit" > Login</Button>
+                    <Button  type="submit" > Login</Button>
 
 
 
