@@ -47,11 +47,6 @@ function App() {
 
   useEffect(() => {
     // This function runs voicCommands function whenever the page loads.
-    fetch(`/api/v1/users`)
-    .then(res => res.json())
-    .then(data => {
-     console.log('hello');
-    })
     voiceCommands();
     fetch('/api/v1/users')
     .then(res => res.json())
