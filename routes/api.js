@@ -46,8 +46,6 @@ router.post('/users/:id/contacts', (req, res, next) => {
     .then(data => res.json(data));
 })
 
-router.post('/users', function (req, res)  {
-
 router.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password; 
