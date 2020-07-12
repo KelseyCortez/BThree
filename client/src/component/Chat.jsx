@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
+import { Nav, Navbar } from 'react-bootstrap'
 
 export default class Chat extends Component {
     constructor(props) {
@@ -37,6 +38,25 @@ export default class Chat extends Component {
 
     render() {
         return (
+            <div>
+                <Navbar>
+                    <Navbar.Brand style={{ fontSize: '55px', color: 'white' }}>BThree</Navbar.Brand>
+                    <Nav className="justify-content-end ml-auto" activeKey="/home">
+                        <Nav.Item>
+                            <Nav.Link style={{ color: 'white' }} href="/feed">Home</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link style={{ color: 'white' }} href='/chat'>Messages</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link style={{ color: 'white' }} href="/account">Account</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link style={{ color: 'white' }} href='/'>Log Out</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </Navbar>
+
             <div className='container'>
                 <div className='card-body'>
                     <div>{this.state.name}</div>
@@ -68,6 +88,7 @@ export default class Chat extends Component {
                     </div>
                 </div>
             </div>
+        </div>
         );
     }
 }
