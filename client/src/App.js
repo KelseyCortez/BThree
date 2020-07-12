@@ -1,27 +1,16 @@
-<<<<<<< HEAD
-import About from "./pages/about";
+import About from "./pages/About";
 import MapContainer from "./component/MapContainer";
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Register from "./pages/register";
-import Login from "./pages/login";
-=======
-import About from './pages/about';
-import MapContainer from './component/MapContainer';
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Register from './pages/register'
-import Login from './pages/login';
->>>>>>> 2ae83d443aa5123483aaab0b42e417b76ade36eb
-import Feed from "./pages/feed";
-import Account from "./pages/account";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Feed from "./pages/Feed";
+import Account from "./pages/Account";
 import Chat from "./component/Chat";
 import { Nav } from "react-bootstrap";
-import LandingPage from "./LandingPage";
+import LandingPage from "./component/LandingPage";
 
 
 // creates variables that allow chrome speech recognition
@@ -77,9 +66,8 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/" exact />
+          <Route path="/" exact component={LandingPage} />
         </Switch>
-        <LandingPage />
 
         <div>
           <Route path="/register" component={Register} />
