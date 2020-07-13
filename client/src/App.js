@@ -1,13 +1,13 @@
-import About from "./pages/About";
+import About from "./pages/about";
 import MapContainer from "./component/MapContainer";
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Feed from "./pages/Feed";
-import Account from "./pages/Account";
+import Register from "./pages/register";
+import Login from "./pages/login";
+import Feed from "./pages/feed";
+import Account from "./pages/account";
 import Chat from "./component/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";

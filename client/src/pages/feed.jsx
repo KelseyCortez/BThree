@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Feed.css'
+import './feed.css'
 import { Link } from 'react-router-dom';
 import Friends from '../component/Friends';
 import Chat from '../component/Chat'

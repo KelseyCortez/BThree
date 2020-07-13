@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
-import Register from './Register'
+import Register from './register'
 
 
 class Login extends Component {

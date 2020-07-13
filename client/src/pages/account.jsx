@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Account.css'
+import './account.css'
 import {Button, Nav, Navbar } from 'react-bootstrap'
 
 class Account extends Component {
