@@ -1,4 +1,3 @@
-
 import About from "./pages/about";
 import MapContainer from "./component/MapContainer";
 import React, { useState, useEffect } from "react";
@@ -11,6 +10,8 @@ import Account from "./pages/account";
 import Chat from "./component/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
+
+
 
 
 
@@ -72,6 +73,7 @@ function App() {
     return () => clearInterval(interval);
   });
 
+ 
   return (
     <Router>
       <div className="App">
@@ -83,15 +85,16 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/feed" component={Feed} />
-          <Route path="/account" component={Account} />
+          <Route path="/account/:id" component={Account} />
           <Route path="/about" component={About} />
         </div>
+
+        <Route path="/map" component={MapContainer} />
         <Route path="/chat" component={Chat} />
       </div>
 
     </Router>
   );
-
 
   
 } 
