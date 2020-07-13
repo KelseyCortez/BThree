@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Register extends Component {
     constructor(props) {
@@ -6,60 +7,46 @@ class Register extends Component {
         this.state = {  }
     }
     render() { 
-        return ( 
-            <div className="RegisterPage"> 
+        return (
+            <form style={{width: '30%', margin: '40px auto'}}>
+                <h3 style={registerColor}>Sign Up</h3>
 
-            <h1> Create an Account </h1> 
-
-
-           {/* form for user registration   */}
-                <form>
-            
-            {/* input field for Name   */}
-                    <label>
-                        Name:
-                        <input type="text" />
-                    </label> <br/> 
-            
-            {/* <!-- input field for Username --> */}
-                    <label>
-                        Username:
-                        <input type="text" />
-                    </label> <br/> 
-            
-            {/* <!-- input field for Password --> */}
-                    <label>
-                        Password:
-                        <input type="password" />
-                    </label> <br/>  
-            
-            
-            {/* <!-- input field for Email --> */}
-                    <label>
-                        Email:
-                        <input type="email" />
-                    </label> <br/> 
-            
-            
-            {/* <!-- input field for Cell Phone Number --> */}
-                    <label>
-                        Telephone Number:
-                        <input type="number" />
-                    </label> <br/> 
-            
-            
-            
-            
-            
-            
-            
-                </form> 
-
+                <div className="form-group" style={registerColor}>
+                    <label>Name</label>
+                    <input type="text" className="form-control" placeholder="First name" />
                 </div>
-            
 
-          );
+                <div className="form-group" style={registerColor}>
+                    <label>Username</label>
+                    <input type="text" className="form-control" placeholder="Username" />
+                </div>
+
+                <div className="form-group" style={registerColor}>
+                    <label>Email address</label>
+                    <input type="email" className="form-control" placeholder="Enter email" />
+                </div>
+
+                <div className="form-group" style={registerColor}>
+                    <label>Password</label>
+                    <input type="password" className="form-control" placeholder="Enter password" />
+                </div>
+
+                <div className="form-group" style={registerColor}>
+                    <label>Telephone Number</label>
+                    <input type="password" className="form-control" placeholder="Enter password" />
+                </div>
+
+                <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                <p className="forgot-password text-right" style={registerColor}>
+                    Already registered? <Link to={'/login'}>Sign in</Link>
+                </p>
+            </form>
+        );
     }
 }
- 
+
 export default Register;
+
+const registerColor = {
+    color: 'white'
+}

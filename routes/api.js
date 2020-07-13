@@ -12,6 +12,7 @@ router.get('/users/:id', function (req, res, next) {
         res.json(data);
     });
 })
+
 router.get('/users', function (req, res, next) {
     // res.send(req.params.id)
     db.User.findAll().then((data) => {
@@ -46,6 +47,8 @@ router.post('/users/:id/contacts', (req, res, next) => {
     .then(data => res.json(data));
 })
 
+
+
 router.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password; 
@@ -79,7 +82,7 @@ router.post('/login', (req, res) => {
         })
         .catch(() => {
             res.status(401)
-           .json({error: 'username not found'})
+                .json({error: 'username not found'})
         })
 
 })
@@ -104,4 +107,5 @@ router.post('/users', function (req, res) {
             })
     });
 });
+
 module.exports = router;
