@@ -23,7 +23,7 @@ class Register extends Component {
         e.preventDefault(); 
         console.log("blue") 
         console.log(this.state)
-        fetch('/api/v1/register', 
+        fetch('/api/v1/users', 
         {
             method: 'POST',
             body: JSON.stringify(this.state),
