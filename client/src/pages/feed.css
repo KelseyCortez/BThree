@@ -4,29 +4,18 @@
 
 
 header{ 
-    border: 2px solid black; 
+    border: 2px solid white; 
     height: 15%; 
     text-align: center; 
     font-family: "Coda Caption";
     
 }
 
-
-.TimelineArea{ 
-
-    height: 75vh;
-    width: 25%;
-    text-align: center; 
-    border: 2px solid black; 
-    justify-content: center;
-    align-items: center; 
-
-}  
 .TextArea{ 
     width: 80% ; 
     height: 90% ; 
     background-color: black;
-    border: 2px solid black;
+    border: 2px solid white;
 }
 
 .AccountArea{ 
@@ -37,41 +26,24 @@ header{
 }
 
 .FriendsArea{  
-
-    height: 50px; 
-    width: 100px;
-    text-align: center;
-} 
-
-.LocationArea{  
-
-    height: 60vh; 
-    width: 55%; 
     text-align: center; 
-    border: 2px solid black;
+    border: 2px solid white;
+    margin: 15px;
+    padding: 10px;
+    width: 25%;
+    color: white;
+    height: 85vh;
+}
 
-} 
-
-.ChatArea{  
-
-    height: 60vh; 
-    width: 15%; 
+.LocationArea{   
     text-align: center; 
-    border: 2px solid black;  
-    justify-content: center;
-    align-items: center; 
+    border: 2px solid white;
+    margin: 15px;
+    padding: 10px;
+    width: 75%;
+    color: white;
+    height: 80vh;
 
-} 
-
-.flexRow{ 
-    display: flex; 
-    flex-direction: row;
-
-} 
-
-.flexColumn{ 
-    display: flex; 
-    flex-direction: column;
 } 
 
 .quickLinks{ 
@@ -88,4 +60,4 @@ header{
 
 .end{ 
     align-items: flex-end;
-}
+} 

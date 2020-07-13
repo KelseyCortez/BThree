@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './account.css'
-import Button from 'react-bootstrap/Button' 
+import {Button, Nav, Navbar } from 'react-bootstrap'
 
 class Account extends Component {
     constructor(props) {
@@ -17,87 +17,109 @@ class Account extends Component {
 
 
         }
-    } 
+    }
 
-    getAccountInfo(){ 
-        fetch(`/api/v1/users/${this.props.match.params.id}`) 
-            .then(res => 
+    getAccountInfo() {
+        fetch(`/api/v1/users/${this.props.match.params.id}`)
+            .then(res =>
 
                 res.json()
-            ) 
-            .then(data => { 
-                console.log(data) 
-                this.setState({ 
-                    Name: (data.firstName +" "+ data.lastName),
+            )
+            .then(data => {
+                console.log(data)
+                this.setState({
+                    Name: (data.firstName + " " + data.lastName),
                     Username: data.userName,
                     Password: data.password,
                     Email: data.email,
                     // CellNumber: 
                     Age: data.dob
                     // FriendList: 
-                } )
+                })
             })
-            .catch(err => err)  
+            .catch(err => err)
 
-         
+
 
     }
 
-    makeAccountChanges = (e) => { 
+    makeAccountChanges = (e) => {
         fetch()
 
-    } 
+    }
 
-    componentDidMount(){ 
+    componentDidMount() {
         this.getAccountInfo()
     }
-    render() {  
+    render() { 
+        // console.log(this.props)
         let currentTime = new Date()
-        let month = currentTime.getMonth() 
+        let month = currentTime.getMonth()
         let year = currentTime.getFullYear()
-        let day = currentTime.getDate() 
+        let day = currentTime.getDate()
         let today = (month + "/" + day + "/" + year)
-        
+
         console.log(today)
         let name = this.state.Name
         let username = this.state.Username
         let password = this.state.Password
         let email = this.state.Email
         let cellNumber = this.state.cellNumber
-        let age = this.state.Age 
+        let age = this.state.Age
         console.log(age)
-        age = today - age 
+        age = today - age
         console.log(age)
-        let FriendList = this.state.FriendList 
+        let FriendList = this.state.FriendList
 
         return (
-            <div className="AccountPage">
+            <div>
+                <Navbar>
+                    <Navbar.Brand style={{ fontSize: '55px', color: 'white' }}>BThree</Navbar.Brand>
+                    <Nav className="justify-content-end ml-auto" activeKey="/home">
+                        <Nav.Item>
+                            <Nav.Link style={{ color: 'white' }} href="/feed">Home</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link style={{ color: 'white' }} href='/chat'>Messages</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link style={{ color: 'white' }} href="/account">Account</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link style={{ color: 'white' }} href='/'>Log Out</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </Navbar>
 
-                <header> Account Information </header>
 
-                <div className="Info flexRow">
+                <div className="AccountPage">
 
-                    <div className="TextArea">
+                    <header> Account Information </header>
 
-                        <div>Name: {name} </div>
-                        <div>Username: {username} </div>
-                        {/* <div>Age: {age} </div> */}
-                        <div>Password: {password} </div>
-                        <div>Email: {email} </div>
-                        <div>Cellular Number: {cellNumber}</div>
-                        <Button> Edit </Button>
+                    <div className="Info flexRow">
+
+                        <div className="TextArea">
+
+                            <div>Name: {name} </div>
+                            <div>Username: {username} </div>
+                            {/* <div>Age: {age} </div> */}
+                            <div>Password: {password} </div>
+                            <div>Email: {email} </div>
+                            <div>Cellular Number: {cellNumber}</div>
+                            <Button> Edit </Button>
+
+
+                        </div>
 
 
                     </div>
 
 
+
+
+
+
                 </div>
-
-
-
-
-
-
             </div>
         );
     }

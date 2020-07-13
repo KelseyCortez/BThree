@@ -1,96 +1,102 @@
-import React, { Component } from 'react' 
-import Button from 'react-bootstrap/Button' 
-import axios from 'axios'  
-import {Redirect} from 'react-router-dom'
-
+import React, { Component } from 'react'
+import Button from 'react-bootstrap/Button'
+import axios from 'axios'
+import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "", 
-            password: "", 
+            username: "",
+            password: "",
             redirect: ""
-        } 
-        this.authorizeLogin = this.authorizeLogin.bind(this) 
-       
-    } 
-    authorizeLogin = (e) => {  
-        e.preventDefault() ; 
-        axios.post('/api/v1/login', { 
+        }
+        this.authorizeLogin = this.authorizeLogin.bind(this)
+
+    }
+
+    myChangeHandler = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value,
+
+        })
+    }
+    authorizeLogin = (e) => {
+        e.preventDefault();
+        axios.post('/api/v1/login', {
             ...this.state
-        }) 
+        })
 
 
-        // the axios comparison of the line above 
-        
-        // fetch('/api/v1/login', 
-        // { 
-        //     method: 'POST', 
-        //     body: JSON.stringify(this.state), 
-        //     headers: {
-        //         'Content-Type': 'application/json;charset=UTF-8'
-        //       },
+            // the axios comparison of the line above
+            // fetch('/api/v1/login', 
+            // { 
+            //     method: 'POST', 
+            //     body: JSON.stringify(this.state), 
+            //     headers: {
+            //         'Content-Type': 'application/json;charset=UTF-8'
+            //       },
+            //     }) 
 
-        //     }) 
-
-            .then((response)=>  { 
-               this.setState({redirect: `/users/${response.data.id}`})})
-            .catch(err => { 
-                console.log(err); 
+            .then((response) => { 
+                
+                console.log(response)
+                this.setState({ redirect: `/account/${response.data.id}` })
+            })
+            .catch(err => {
+                console.log(err);
                 alert('Error logging in please try again')
             })
 
-        } 
-   
-   
-    myChangeHandler = (event) => { 
-        this.setState({ 
-            [event.target.name]: event.target.value ,
-           
-        })
     }
-    render() { 
+    render() {
         return (
-            <div className="LoginPage"> 
-            {this.state.redirect && <Redirect to={this.state.redirect} /> }
-                <h1> Login </h1>
+            <div className="LoginPage">
+                {this.state.redirect && <Redirect to={this.state.redirect} />}
+                <h3 style={loginColor}>Sign In</h3>
                 {/* <!-- form for user login  --> */}
-                <form  >
+                <form onSubmit={this.authorizeLogin} style={{ width: '30%', margin: '40px auto' }} >
 
                     {/* <!-- input field for Username --> */}
-                    <label>
-                        Username:
+                    <div className="form-group" style={loginColor}>
+                        <label>
+                            Username:
                          <input name="username" type="text" onChange={this.myChangeHandler} value={this.state.username} />
-                    </label> <br />
-
+                        </label> <br />
+                    </div>
                     {/* <!-- input field for Password --> */}
-                    <label>
-                        Password:
+                    <div className="form-group" style={loginColor}>
+                        <label>
+                            Password:
                         <input name="password" type="password" onChange={this.myChangeHandler} value={this.state.password} />
-                    </label> <br />
+                        </label> <br />
+                    </div>
 
+
+
+                    <Button className="btn btn-primary btn-block" onClick={this.authorizeLogin}  > Login</Button>
 
                     {/* <!-- forgot password link --> */}
-                    <a href="/">Forgot Password? </a>
-
-                    <Button onClick={this.authorizeLogin}  > Login</Button>
-
+                    <p className="forgot-password text-right">
+                        <a href="/">Forgot Password? </a>
+                    </p>
+                    <p style={loginColor}><Link to={'/register'}>Not signed up? Register here</Link></p>
 
 
 
 
 
                 </form>
-
-
-
             </div>
-
-
         );
     }
 }
 
 export default Login;
+
+
+const loginColor = {
+    color: 'white'
+}
