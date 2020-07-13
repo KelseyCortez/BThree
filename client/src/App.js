@@ -19,17 +19,20 @@ const SpeechRecognition =
 
 const recognition = new SpeechRecognition();
 
-recognition.start();
 
 function App() {
   let [userPhrase, setPhrase] = useState("");
+  let [listening, setListening] = useState(false);
 
   const voiceCommands = () => {
+    setListening((listening = false))
+    recognition.start();
     recognition.onstart = () => {
       console.log("Listening");
     };
 
     recognition.onresult = (e) => {
+      setListening((listening = true))
       // If voice is recognized this function runs.
       let current = e.resultIndex;
 
@@ -47,10 +50,7 @@ function App() {
             if (transcript === phrase || transcript === ` ${phrase}`) {
               setPhrase((userPhrase = "yes"));
               console.log(userPhrase);
-              recognition.start();
-            } else {
-              recognition.start();
-            }
+            } 
           });
         // checks transcript taken from voice command act performs logic based on that.
       }
@@ -59,8 +59,16 @@ function App() {
 
   useEffect(() => {
     // This function runs voiceCommands function whenever the page loads.
-    voiceCommands();
-  });
+    const interval = setInterval(() => {
+      if(listening === true){
+        console.log('already listening')
+        setListening((listening = false));
+      } else if(listening === false) {
+        voiceCommands();
+      }
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Router>
