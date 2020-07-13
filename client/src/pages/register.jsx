@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
+
 import Button from 'react-bootstrap/Button'
+
+import { Link } from 'react-router-dom'
+
 
 class Register extends Component {
     constructor(props) {
@@ -14,6 +18,7 @@ class Register extends Component {
         } 
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
     }
+
     handleFormSubmit = (e) => {
         e.preventDefault(); 
         console.log("blue") 
@@ -101,8 +106,14 @@ class Register extends Component {
             </div>
 
 
+
         );
     }
 }
 
 export default Register;
+
+const registerColor = {
+    color: 'white'
+}
+
