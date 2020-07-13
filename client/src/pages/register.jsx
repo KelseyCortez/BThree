@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
 
+import Button from 'react-bootstrap/Button'
+
+import { Link } from 'react-router-dom'
+
+
 class Register extends Component {
     constructor(props) {
         super(props);
@@ -12,6 +17,7 @@ class Register extends Component {
             password: "",
             email: "",
             dob: ""
+
         }
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
     }
@@ -39,9 +45,11 @@ class Register extends Component {
             [event.target.name]: event.target.value,
         });
     }
+
     render() {
         return (
             <div className="RegisterPage">
+
 
                 <h3 style={registerColor}>Sign Up</h3>
                 {/*  start of form for user registration   */}
@@ -102,6 +110,7 @@ class Register extends Component {
 
 
 
+
                     <Button className="btn btn-primary btn-block" onSubmit={this.handleFormSubmit} type="submit"> Sign Up</Button>
 
                     {/* end of registration form */}
@@ -118,7 +127,9 @@ class Register extends Component {
 }
 
 
+
 export default Register;
+
 
 
 const registerColor = {

@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 const mapStyles = {
+
   map: { height: 620, 
     width: '100%', 
     display: 'flex', 
     flexFlow: 'row nowrap', 
     justifyContent: 'center', 
     padding: 0 }
+
   // map: {
   //   position: "absolute",
   //   width: "100%",
@@ -77,7 +79,9 @@ export class CurrentLocation extends React.Component {
   }
 
   componentDidMount() {
+
     console.log("whatup");
+
     if (this.props.centerAroundCurrentLocation) {
       if (navigator && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((pos) => {

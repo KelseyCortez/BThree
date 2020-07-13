@@ -1,8 +1,10 @@
+
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+
 
 
 class Login extends Component {
@@ -49,7 +51,6 @@ class Login extends Component {
                 console.log(err);
                 alert('Error logging in please try again')
             })
-
     }
     render() {
         return (
@@ -76,6 +77,7 @@ class Login extends Component {
 
 
 
+
                     <Button className="btn btn-primary btn-block" onClick={this.authorizeLogin}  > Login</Button>
 
                     {/* <!-- forgot password link --> */}
@@ -90,6 +92,7 @@ class Login extends Component {
 
                 </form>
             </div>
+
         );
     }
 }
