@@ -14,6 +14,7 @@ import LandingPage from "./component/LandingPage";
 
 
 
+
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -72,6 +73,7 @@ function App() {
     return () => clearInterval(interval);
   });
 
+ 
   return (
     <Router>
       <div className="App">
