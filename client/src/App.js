@@ -22,53 +22,54 @@ const recognition = new SpeechRecognition();
 
 function App() {
   let [userPhrase, setPhrase] = useState("");
-  let [listening, setListening] = useState(false);
+  // let [listening, setListening] = useState(false);
 
   const voiceCommands = () => {
-    setListening((listening = false))
+    //setListening((listening = false))
     recognition.start();
     recognition.onstart = () => {
       console.log("Listening");
     };
-
+    setTimeout(() => {
+      recognition.stop();
+      console.log('stop');
+    }, 5000)
+    
     recognition.onresult = (e) => {
-      setListening((listening = true))
+      
+      // setListening((listening = true))
       // If voice is recognized this function runs.
       let current = e.resultIndex;
-
+      
       let transcript = e.results[current][0].transcript;
       let mobileRepeatBug =
-        current === 1 && transcript === e.results[0][0].transcript;
+      current === 1 && transcript === e.results[0][0].transcript;
       console.log(transcript);
-
+      
       if (!mobileRepeatBug) {
         fetch("/api/v1/users")
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            const phrase = data[0].phrase.toLowerCase();
-            if (transcript === phrase || transcript === ` ${phrase}`) {
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          const phrase = data[0].phrase.toLowerCase();
+          if (transcript === phrase || transcript === ` ${phrase}`) {
               setPhrase((userPhrase = "yes"));
               console.log(userPhrase);
+              recognition.stop();
             } 
           });
-        // checks transcript taken from voice command act performs logic based on that.
-      }
-    };
+          // checks transcript taken from voice command act performs logic based on that.
+        }
+      };
   };
 
   useEffect(() => {
-    // This function runs voiceCommands function whenever the page loads.
+    //This function runs voiceCommands function whenever the page loads.
     const interval = setInterval(() => {
-      if(listening === true){
-        console.log('already listening')
-        setListening((listening = false));
-      } else if(listening === false) {
-        voiceCommands();
-      }
-    }, 10000);
+        voiceCommands()
+    }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  });
 
   return (
     <Router>
