@@ -72,10 +72,11 @@ router.post('/login', (req, res) => {
                         expiresIn: '1h'
                     })
                     res.cookie('token', token, { httpOnly: true })
-                        .sendStatus(200)
+                        .status(200)
 
-                    req.session.user = User;
-                    res.redirect('../account')
+                    // req.session.user = User; 
+                    
+                    res.json(User)
 
                 }
             })
@@ -85,9 +86,11 @@ router.post('/login', (req, res) => {
                 .json({error: 'username not found'})
         })
 
-})
+}) 
 
-router.post('/users', function (req, res) {
+
+router.post('/register', function (req, res) { 
+    console.log(req.body)
     const { userName, email, password, firstName, lastName, dob } = req.body
     if (!userName) { res.status(400).json({ error: 'user-name field is required' }); }
     if (!email) { res.status(400).json({ error: 'email field is required' }); }
