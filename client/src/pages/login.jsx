@@ -1,5 +1,8 @@
 import React, { Component } from 'react' 
 import Button from 'react-bootstrap/Button' 
+import axios from 'axios'  
+import {Redirect} from 'react-router-dom'
+
 
 
 class Login extends Component {
@@ -7,21 +10,33 @@ class Login extends Component {
         super(props);
         this.state = {
             username: "", 
-            password: "",
+            password: "", 
+            redirect: ""
         } 
-        this.authorizeLogin = this.authorizeLogin.bind(this)
+        this.authorizeLogin = this.authorizeLogin.bind(this) 
+       
     } 
-    authorizeLogin = (e) => { 
-        e.preventDefault() ;
-        fetch('/api/v1/login', 
-        { 
-            method: 'POST', 
-            body: JSON.stringify(this.state), 
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8'
-              },
+    authorizeLogin = (e) => {  
+        e.preventDefault() ; 
+        axios.post('/api/v1/login', { 
+            ...this.state
+        }) 
 
-            }) 
+
+        // the axios comparison of the line above 
+        
+        // fetch('/api/v1/login', 
+        // { 
+        //     method: 'POST', 
+        //     body: JSON.stringify(this.state), 
+        //     headers: {
+        //         'Content-Type': 'application/json;charset=UTF-8'
+        //       },
+
+        //     }) 
+
+            .then((response)=>  { 
+               this.setState({redirect: `/users/${response.data.id}`})})
             .catch(err => { 
                 console.log(err); 
                 alert('Error logging in please try again')
@@ -38,10 +53,11 @@ class Login extends Component {
     }
     render() { 
         return (
-            <div className="LoginPage">
+            <div className="LoginPage"> 
+            {this.state.redirect && <Redirect to={this.state.redirect} /> }
                 <h1> Login </h1>
                 {/* <!-- form for user login  --> */}
-                <form method="POST" onSubmit ={this.authorizeLogin} >
+                <form  >
 
                     {/* <!-- input field for Username --> */}
                     <label>
@@ -59,7 +75,7 @@ class Login extends Component {
                     {/* <!-- forgot password link --> */}
                     <a href="/">Forgot Password? </a>
 
-                    <Button  onSubmit={this.authorizeLogin} type="submit" > Login</Button>
+                    <Button onClick={this.authorizeLogin}  > Login</Button>
 
 
 
