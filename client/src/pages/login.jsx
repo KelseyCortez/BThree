@@ -47,7 +47,12 @@ class Login extends Component {
             })
 
     }
+    myChangeHandler = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value,
 
+        })
+    }
     render() { 
         return (
             <div className="LoginPage"> 
@@ -73,19 +78,10 @@ class Login extends Component {
                     <a href="/">Forgot Password? </a>
 
                     <Button onClick={this.authorizeLogin}  > Login</Button>
+                </form>
+            </div>
 
-
-
-
-
-
-    myChangeHandler = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value,
-
-        })
-    }
-    render() {
+    /* render() {
         
         return (
             <form method="POST" onSubmit={this.authorizeLogin} style={{width: '30%', margin: '40px auto'}}>
@@ -106,7 +102,7 @@ class Login extends Component {
                 </p>
 
                 <p style={loginColor}><Link to={'/register'}>Not signed up? Register here</Link></p>
-            </form>
+            </form> */
         );
     }
 }
