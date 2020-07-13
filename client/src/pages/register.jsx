@@ -13,7 +13,7 @@ class Register extends Component {
 
                 <div className="form-group" style={registerColor}>
                     <label>Name</label>
-                    <input type="text" className="form-control" placeholder="First name" />
+                    <input type="text" className="form-control" placeholder="Name" />
                 </div>
 
                 <div className="form-group" style={registerColor}>
@@ -33,7 +33,7 @@ class Register extends Component {
 
                 <div className="form-group" style={registerColor}>
                     <label>Telephone Number</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
+                    <input type="text" className="form-control" placeholder="Phone Number" />
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
