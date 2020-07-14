@@ -25,6 +25,7 @@ const recognition = new SpeechRecognition();
 
 function App() {
   let [userPhrase, setPhrase] = useState("");
+  let [runVoice, setRun] = useState(true);
   // let [listening, setListening] = useState(false);
 
   const voiceCommands = () => {
@@ -36,7 +37,7 @@ function App() {
     setTimeout(() => {
       recognition.stop();
       console.log('stop');
-    }, 5000)
+    }, 4000)
     
     recognition.onresult = (e) => {
       
@@ -59,6 +60,7 @@ function App() {
               setPhrase((userPhrase = "yes"));
               console.log(userPhrase);
               recognition.stop();
+              setRun((runVoice = false));
             } 
           });
           // checks transcript taken from voice command act performs logic based on that.
@@ -69,8 +71,12 @@ function App() {
   useEffect(() => {
     //This function runs voiceCommands function whenever the page loads.
     const interval = setInterval(() => {
+      if(runVoice === false){
+        console.log('done Running')
+      } else {
         voiceCommands()
-    }, 6000);
+      }
+      }, 6000);
     return () => clearInterval(interval);
   });
 
@@ -97,8 +103,6 @@ function App() {
 
     </Router>
   );
-
-  
 } 
 
 export default App;
