@@ -10,9 +10,11 @@ class Account extends Component {
             Username: "",
             Password: "",
             Email: "",
-            CellNumber: "",
+            // CellNumber: "",
             Age: "",
-            FriendList: []
+            FriendList: [],
+            EmergencyContacts: [],
+            
 
 
 
@@ -43,16 +45,36 @@ class Account extends Component {
 
     }
 
+    getEmergencyContacts() {
+        fetch(`/api/v1/users/${this.props.match.params.id}/contacts`)
+        .then(res => res.json())
+        .then(contacts => {
+            console.log(contacts)
+            this.setState({
+              EmergencyContacts : contacts 
+            })
+        })
+    }
+
     makeAccountChanges = (e) => {
         fetch()
 
     }
 
     componentDidMount() {
-        this.getAccountInfo()
+        this.getAccountInfo();
+        this.getEmergencyContacts();
     }
 
     render() { 
+        let EmergencyContacts = this.state.EmergencyContacts;
+        EmergencyContacts = EmergencyContacts.map((contacts, index) => {
+            let name
+            return( 
+                name = contacts.name
+
+                )
+        })
 
         let currentTime = new Date()
         let month = currentTime.getMonth()
@@ -69,7 +91,6 @@ class Account extends Component {
         let age = this.state.Age
         console.log(age)
         age = today - age
-        console.log(age)
         let FriendList = this.state.FriendList
 
         return (
@@ -107,6 +128,8 @@ class Account extends Component {
                             <div>Password: {password} </div>
                             <div>Email: {email} </div>
                             <div>Cellular Number: {cellNumber}</div>
+                            <div>Emergency Contacts: {EmergencyContacts} </div>
+                        
                             <Button> Edit </Button>
 
 
