@@ -17,7 +17,7 @@ export default class Chat extends Component {
     }
 
     componentDidMount() {
-        this.socket.on("RECEIVE_MESSAGE", (data) => {
+        this.socket.on("receive_private", (data) => {
             this.addMessage(data);
         });
     }
@@ -30,7 +30,7 @@ export default class Chat extends Component {
     };
     sendMessage = (e) => {
         e.preventDefault();
-        this.socket.emit("SEND_MESSAGE", {
+        this.socket.emit("send_private", {
             author: this.state.name,
             message: this.state.message,
         });

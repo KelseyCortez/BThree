@@ -78,8 +78,11 @@ io = socket();
 io.on('connection', (socket) => {
   console.log(socket.id)
 
-  socket.on('SEND_MESSAGE', function (data) {
-    io.emit('RECEIVE_MESSAGE', data)
+  socket.on('send_private', function (data) {
+    console.log(socket.id)
+    console.log(data.id)
+    console.log(data.message)
+    io.to(socket.id).emit('receive_private', data)
   })
 })
 

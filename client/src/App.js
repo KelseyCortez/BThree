@@ -7,14 +7,10 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 import Feed from "./pages/feed";
 import Account from "./pages/account";
-import Chat from "./component/Chat";
+import Chat from "./component/Chat/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
-
-
-
-
 
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
@@ -53,19 +49,19 @@ function App() {
       // console.log(transcript);
       
 
-      if (!mobileRepeatBug) {
-        fetch("/api/v1/users")
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          const phrase = data[0].phrase.toLowerCase();
-          if (transcript === phrase || transcript === ` ${phrase}`) {
-              setPhrase((userPhrase = "yes"));
-              console.log(userPhrase);
-              recognition.stop();
-              setRun((runVoice = false));
-            } 
-          });
+      // if (!mobileRepeatBug) {
+      //   fetch("/api/v1/users")
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //     const phrase = data[0].phrase.toLowerCase();
+      //     if (transcript === phrase || transcript === ` ${phrase}`) {
+      //         setPhrase((userPhrase = "yes"));
+      //         console.log(userPhrase);
+      //         recognition.stop();
+      //         setRun((runVoice = false));
+      //       } 
+      //     });
 
           // checks transcript taken from voice command act performs logic based on that.
   //       }
@@ -83,7 +79,7 @@ function App() {
       }
       }, 6000);
     return () => clearInterval(interval);
-  });
+  };
 
 
  
@@ -109,7 +105,7 @@ function App() {
 
     </Router>
   );
-} 
+}
 
 export default App;
 
