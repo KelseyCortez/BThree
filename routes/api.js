@@ -39,32 +39,32 @@ router.get('/users/:id/contacts', (req, res, next) => {
 
 router.post('/users/:id/contacts', (req, res, next) => {
     db.User.findByPk(req.params.id)
-    .then(User => User.createEmergencyContact({
-        name: req.body.name,
-        phoneNumber: req.body.phoneNumber,
-        relationship: req.body.relationship,
-    }))
-    .then(data => res.json(data));
+        .then(User => User.createEmergencyContact({
+            name: req.body.name,
+            phoneNumber: req.body.phoneNumber,
+            relationship: req.body.relationship,
+        }))
+        .then(data => res.json(data));
 })
 
 
 
 router.post('/login', (req, res) => {
     const username = req.body.username;
-    const password = req.body.password; 
+    const password = req.body.password;
     console.log(req)
     db.User.findOne({ where: { userName: username } })
-        .then((User) => { 
+        .then((User) => {
             console.log(User, username, password)
-            bcrypt.compare(password, User.password, (err, match) => { 
+            bcrypt.compare(password, User.password, (err, match) => {
                 console.log(err, match)
                 if (err) {
                     res.status(500)
-                    .json({error: 'Incorrect Password'})
+                        .json({ error: 'Incorrect Password' })
                 } else if (!match) {
                     res.status(401)
                         .json({
-                            error: 'Incorret email or password'
+                            error: 'Incorrect email or password'
                         })
                 } else {
                     const payload = { username }
@@ -83,7 +83,7 @@ router.post('/login', (req, res) => {
         })
         .catch(() => {
             res.status(401)
-                .json({error: 'username not found'})
+                .json({ error: 'username not found' })
         })
 
 }) 
@@ -110,5 +110,50 @@ router.post('/register', function (req, res) {
             })
     });
 });
+
+//deletes a user works and also deletes associated contacts
+router.delete('/users/:id', (req, res) => {
+    db.User.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then((user) => {
+            res.redirect('/');
+        }).catch((err) => {
+            res.json({ error: 'Could not delete user' });
+        });
+});
+
+//deletes an emergency contact
+router.delete('/contacts/:id', (req, res) => {
+    db.EmergencyContact.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then((contact) => {
+        res.json(contact);
+    }).catch((err)=>{
+        res.json({error: 'Could not delete contact'});
+    })
+})
+
+//updates emergency contacts
+router.put('/contacts/:id', (req, res, next)=> {
+    db.EmergencyContact.findByPk(parseInt(req.params.id))
+    .then((contact) => {
+        contact.name = req.body.name;
+        contact.phoneNumber = req.body.phoneNumber;
+        contact.relationship = req.body.relationship;
+        contact.save().then((result)=>{
+            res.json(result);
+        })
+
+    })
+})
+
+
+
 
 module.exports = router;
