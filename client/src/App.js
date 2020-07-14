@@ -11,7 +11,6 @@ import Chat from "./component/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
-import axios from 'axios';
 
 
 
@@ -27,67 +26,73 @@ const recognition = new SpeechRecognition();
 function App() {
   let [userPhrase, setPhrase] = useState("");
   let [runVoice, setRun] = useState(true);
-  // let [listening, setListening] = useState(false);
+  let [listening, setListening] = useState(false);
+
 
   const voiceCommands = () => {
     //setListening((listening = false))
     recognition.start();
     recognition.onstart = () => {
-      console.log("Listening");
+      // console.log("Listening");
     };
     setTimeout(() => {
       recognition.stop();
-      console.log('stop');
+      // console.log('stop');
     }, 4000)
 
+    
     recognition.onresult = (e) => {
-
-      // setListening((listening = true))
+      
+      setListening((listening = true))
       // If voice is recognized this function runs.
       let current = e.resultIndex;
-
+      
       let transcript = e.results[current][0].transcript;
       let mobileRepeatBug =
-        current === 1 && transcript === e.results[0][0].transcript;
-      console.log(transcript);
+      current === 1 && transcript === e.results[0][0].transcript;
+      // console.log(transcript);
+      
 
       if (!mobileRepeatBug) {
         fetch("/api/v1/users")
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            const phrase = data[0].phrase.toLowerCase();
-            if (transcript === phrase || transcript === ` ${phrase}`) {
-              axios.post('/api/v1/sms/alert', {})
-                .then(data => { console.log(data) })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          const phrase = data[0].phrase.toLowerCase();
+          if (transcript === phrase || transcript === ` ${phrase}`) {
+              setPhrase((userPhrase = "yes"));
+              console.log(userPhrase);
               recognition.stop();
               setRun((runVoice = false));
-            }
+            } 
           });
-        // checks transcript taken from voice command act performs logic based on that.
-      }
-    };
+
+          //checks transcript taken from voice command act performs logic based on that.
+        }
+      };
   };
 
   useEffect(() => {
     //This function runs voiceCommands function whenever the page loads.
+
     const interval = setInterval(() => {
-      if (runVoice === false) {
+      if(runVoice === false){
         console.log('done Running')
       } else {
         voiceCommands()
       }
-    }, 6000);
+      }, 6000);
     return () => clearInterval(interval);
   });
 
 
+ 
   return (
     <Router>
       <div className="App">
         <Switch>
           <Route path="/" exact component={LandingPage} />
-          <PanicButton />
+          <PanicButton/>
         </Switch>
 
         <div>
@@ -104,7 +109,9 @@ function App() {
 
     </Router>
   );
-}
+} 
 
 export default App;
+
+
 
