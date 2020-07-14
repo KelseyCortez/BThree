@@ -57,7 +57,7 @@ function App() {
         fetch("/api/v1/users")
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           const phrase = data[0].phrase.toLowerCase();
           if (transcript === phrase || transcript === ` ${phrase}`) {
               setPhrase((userPhrase = "yes"));
