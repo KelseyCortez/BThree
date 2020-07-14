@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './account.css'
-import {Button, Nav, Navbar } from 'react-bootstrap'
+import {Button, Nav, Navbar } from 'react-bootstrap' 
+import EmergencyContacts1 from '../component/emergencyContacts'
 
 class Account extends Component {
     constructor(props) {
@@ -51,7 +52,7 @@ class Account extends Component {
         .then(contacts => {
             console.log(contacts)
             this.setState({
-              EmergencyContacts : contacts 
+              EmergencyContacts : contacts
             })
         })
     }
@@ -68,12 +69,15 @@ class Account extends Component {
 
     render() { 
         let EmergencyContacts = this.state.EmergencyContacts;
-        EmergencyContacts = EmergencyContacts.map((contacts, index) => {
+        EmergencyContacts = EmergencyContacts.map((contact, index) => {
             let name
-            return( 
-                name = contacts.name
-
-                )
+           return <EmergencyContacts1 
+           name = {contact.name} 
+           phoneNumber = {contact.phoneNumber} 
+           relationship = {contact.relationship} 
+           key = {index}
+           
+           />
         })
 
         let currentTime = new Date()
@@ -128,7 +132,11 @@ class Account extends Component {
                             <div>Password: {password} </div>
                             <div>Email: {email} </div>
                             <div>Cellular Number: {cellNumber}</div>
-                            <div>Emergency Contacts: {EmergencyContacts} </div>
+                            <div className="flexColumn"> 
+                                Emergency Contacts  
+                                {EmergencyContacts}  
+                                
+                                </div>
                         
                             <Button> Edit </Button>
 
