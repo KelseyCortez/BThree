@@ -10,6 +10,7 @@ import Account from "./pages/account";
 import Chat from "./component/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
+import PanicButton from './component/PanicButton';
 
 
 
@@ -75,6 +76,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/" exact component={LandingPage} />
+          <PanicButton/>
         </Switch>
 
         <div>
