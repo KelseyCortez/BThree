@@ -28,6 +28,7 @@ function App() {
   let [runVoice, setRun] = useState(true);
   // let [listening, setListening] = useState(false);
 
+
   const voiceCommands = () => {
     //setListening((listening = false))
     recognition.start();
@@ -38,18 +39,20 @@ function App() {
       recognition.stop();
       console.log('stop');
     }, 4000)
+
     
-    recognition.onresult = (e) => {
+  //   recognition.onresult = (e) => {
       
       // setListening((listening = true))
       // If voice is recognized this function runs.
-      let current = e.resultIndex;
+      // let current = e.resultIndex;
       
-      let transcript = e.results[current][0].transcript;
-      let mobileRepeatBug =
-      current === 1 && transcript === e.results[0][0].transcript;
-      console.log(transcript);
+      // let transcript = e.results[current][0].transcript;
+      // let mobileRepeatBug =
+      // current === 1 && transcript === e.results[0][0].transcript;
+      // console.log(transcript);
       
+
       if (!mobileRepeatBug) {
         fetch("/api/v1/users")
         .then((res) => res.json())
@@ -63,13 +66,15 @@ function App() {
               setRun((runVoice = false));
             } 
           });
-          // checks transcript taken from voice command act performs logic based on that.
-        }
-      };
-  };
 
-  useEffect(() => {
+          // checks transcript taken from voice command act performs logic based on that.
+  //       }
+  //     };
+  // };
+
+  // useEffect(() => {
     //This function runs voiceCommands function whenever the page loads.
+
     const interval = setInterval(() => {
       if(runVoice === false){
         console.log('done Running')
@@ -79,6 +84,7 @@ function App() {
       }, 6000);
     return () => clearInterval(interval);
   });
+
 
  
   return (
