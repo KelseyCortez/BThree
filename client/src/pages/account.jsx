@@ -51,7 +51,9 @@ class Account extends Component {
     componentDidMount() {
         this.getAccountInfo()
     }
-    render() {
+
+    render() { 
+
         let currentTime = new Date()
         let month = currentTime.getMonth()
         let year = currentTime.getFullYear()

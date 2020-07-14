@@ -48,7 +48,8 @@ class Feed extends Component {
                     </div>
 
                     {/* Users can see their location and have the option to have it turned on or off */}
-                    <div className="LocationArea"> Location <hr />
+
+                    <div className="LocationArea"> Location <hr/>
                         <MapContainer />
                     </div>
                 </div>
