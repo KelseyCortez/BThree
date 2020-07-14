@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import { Nav, Navbar } from 'react-bootstrap'
+import './Chat.css'
 
 export default class Chat extends Component {
     constructor(props) {
@@ -9,7 +10,7 @@ export default class Chat extends Component {
         this.state = {
             message: "",
             messages: [],
-            name: "Zahria",
+            name: "",
         };
 
         this.socket = io("localhost:3001");
@@ -59,9 +60,9 @@ export default class Chat extends Component {
 
             <div className='container'>
                 <div className='card-body'>
-                    <div>{this.state.name}</div>
+                    <div style={{color: 'white'}}>{this.state.name}</div>
                     <hr />
-                    <div className="messages">
+                    <div className="messages" style={{color: 'white'}} >
                         {this.state.messages.map((message, index) => {
                             return (
                                 <div key={index}>
