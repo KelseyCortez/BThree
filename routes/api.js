@@ -137,7 +137,7 @@ router.delete('/contacts/:id', (req, res) => {
 })
 
 //updates emergency contacts
-router.put('contacts/:id', (req, res)=> {
+router.put('/contacts/:id', (req, res, next)=> {
     db.EmergencyContact.findByPk(parseInt(req.params.id))
     .then((contact) => {
         contact.name = req.body.name;
