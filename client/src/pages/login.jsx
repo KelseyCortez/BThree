@@ -17,7 +17,9 @@ class Login extends Component {
         }
         this.authorizeLogin = this.authorizeLogin.bind(this)
 
+
     }
+
 
     myChangeHandler = (event) => {
         this.setState({
@@ -76,8 +78,6 @@ class Login extends Component {
                     </div>
 
 
-
-
                     <Button className="btn btn-primary btn-block" onClick={this.authorizeLogin}  > Login</Button>
 
                     {/* <!-- forgot password link --> */}
@@ -85,11 +85,6 @@ class Login extends Component {
                         <a href="/">Forgot Password? </a>
                     </p>
                     <p style={loginColor}><Link to={'/register'}>Not signed up? Register here</Link></p>
-
-
-
-
-
                 </form>
             </div>
 
