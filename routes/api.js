@@ -4,7 +4,7 @@ const db = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const secret = "mysecretshhh"
-
+const Op = db.Sequelize.Op
 
 router.get('/users/:id', function (req, res, next) {
     // res.send(req.params.id)
@@ -164,6 +164,47 @@ router.get('/logout', (req, res) => {
             }
         })
     }
+})
+
+router.get('/messages/:id', (req, res) => {
+    const A = parseInt(req.params.id)
+    const B = req.session.user.id
+    db.Message.findAll({
+        where: {
+            [    
+                {
+                    RecipientId: A,      
+                    SenderId: B    
+                },    
+                {      
+                    RecipientId: B,      
+                    SenderId: A    
+                }  
+            ]
+        },
+        order: [
+            ['createdAt']
+        ],
+        include: {
+            model: db.User,
+            as: 'Sender'
+        }
+
+    }).then((messages) => {
+        if (messages) {
+            const formattedMessages = messages.map(message => {
+                return {
+                    authorId: message.SenderId,
+                    author: message.Sender.firstName,
+                    message: message.content,
+                    time: message.createdAt
+                }
+            })
+            res.json(formattedMessages)
+        } else {
+            res.json([])
+        }
+    })
 })
 
 

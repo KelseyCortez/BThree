@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
-import './Chat.css'
 import TextField from '@material-ui/core/TextField';
 import MessageList from './MessageList'
+import './Chat.css'
 
-import { Button} from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+import { Input } from "@material-ui/core";
 export default class Chat extends Component {
     constructor(props) {
         super(props);
@@ -13,13 +14,19 @@ export default class Chat extends Component {
             message: "",
             messages: [],
             name: "",
-            fromMe: false
         };
 
         this.socket = io("localhost:3001");
     }
 
     componentDidMount() {
+        fetch(`/api/v1/messages/${this.props.match.params.id}`)
+        .then(res => res.json())
+        .then(messages => {
+            this.setState({
+                messages: messages
+            })
+        })
         this.socket.on("receive_private", (data) => {
             console.log(data)
             if (this.props.match.params.id == data.authorId) {
@@ -52,55 +59,36 @@ export default class Chat extends Component {
     };
 
     render() {
-        const fromMe = this.state.fromMe ? 'from-me' : ''
         return (
             <div className='container'>
+                <div className='messageList'>
 
-                <div className='MessageList'>
-                    <MessageList />
                 </div>
-                <div className='container'>
-
-                    <div className={`message ${fromMe}`}>
-                        <div className='username'>
-                            {message.author}
-                        </div>
-                        <div className='message-body'>
-                            {message.message}
-                        </div>
-                    </div>
-
-                    <div className='messages'>
-                        <div>{this.state.name}</div>
-                        <hr />
-                        <div className="messages">
-                            {this.state.messages.map((message, index) => {
-                                return (
-                                    <div key={index}>
-                                        {" "}
-                                        {message.author}: {message.message}
-                                    </div>
-                                );
-                            })}
-                        </div>
-
-                        <div>
-                            <form>
-                                <TextField className='chat-input'
-                                    type="text"
-                                    placeholder="Send Message"
-                                    value={this.state.message}
-                                    onChange={(e) =>
-                                        this.setState({
-                                            message: e.target.value,
-                                        })
-                                    }
-                                />
-                                <br />
-                                <Button type='button' class='btn btn-secondary' onClick={this.sendMessage}>Send </Button>
-                            </form>
-
-                        </div>
+                <div className="messages">
+                    {this.state.messages.map((message, index) => {
+                        return (
+                            <div key={index}>
+                                {" "}
+                                <span>{message.author}: </span>
+                                {message.message}
+                                <hr />
+                            </div>
+                        );
+                    })}
+                    <div>
+                    <form className='chat-input'>
+                        <input
+                            type="text"
+                            placeholder="Send Message"
+                            value={this.state.message}
+                            onChange={(e) =>
+                                this.setState({
+                                    message: e.target.value,
+                                })
+                            }
+                        />
+                    <Button style={{ margin: '20' }} type='button' class='btn btn-secondary' onClick={this.sendMessage}>Send </Button>
+                    </form>
                     </div>
                 </div>
             </div>

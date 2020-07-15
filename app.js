@@ -8,7 +8,8 @@ let apiRouter = require('./routes/api');
 let logger = require('morgan');
 let smsRouter = require('./routes/sms');
 let session = require('express-session');
-let withAuth = require('./middleware')
+let withAuth = require('./middleware');
+const db = require('./models');
 
 
 
@@ -64,16 +65,16 @@ app.get('/checkToken', withAuth, function (req, res) {
 
 
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// // error handler
+// app.use(function (err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.json(err);
-});
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.json(err);
+// });
 
 
 io = socket();
@@ -95,6 +96,11 @@ io.on('connection', (socket) => {
       author: socket.request.session.user.firstName,
       authorId: socket.request.session.user.id
     }
+    db.Message.create({
+      content: data.message,
+      SenderId: socket.request.session.user.id,
+      RecipientId: data.userId
+    })
     if (userSocket) {
       io.to(userSocket).emit('receive_private', newMessage)
     }
