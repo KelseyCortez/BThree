@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
-import './Chat.css'
 import TextField from '@material-ui/core/TextField';
-import { Button} from 'react-bootstrap'
+import MessageList from './MessageList'
+import './Chat.css'
+
+import { Button } from 'react-bootstrap'
+import { Input } from "@material-ui/core";
 export default class Chat extends Component {
     constructor(props) {
         super(props);
@@ -17,11 +20,18 @@ export default class Chat extends Component {
     }
 
     componentDidMount() {
+        fetch(`/api/v1/messages/${this.props.match.params.id}`)
+        .then(res => res.json())
+        .then(messages => {
+            this.setState({
+                messages: messages
+            })
+        })
         this.socket.on("receive_private", (data) => {
             console.log(data)
             if (this.props.match.params.id == data.authorId) {
                 this.addMessage(data);
-            } 
+            }
         });
         this.socket.on("receive_own_private", (data) => {
             console.log(data)
@@ -42,35 +52,32 @@ export default class Chat extends Component {
             userId: this.props.match.params.id,
             message: this.state.message,
         });
-        this.setState({ message: "" });
+        this.setState({
+            message: "",
+            fromMe: true
+        });
     };
 
     render() {
         return (
-            <div>
             <div className='container'>
+                <div className='messageList'>
 
-                <div className='MessageList'>
-                    {/* messages list */}
                 </div>
-
-
-                <div className='Messages'>
-                    <div>{this.state.name}</div>
-                    <hr />
-                    <div className="messages">
-                        {this.state.messages.map((message, index) => {
-                            return (
-                                <div key={index}>
-                                    {" "}
-                                    {message.author}: {message.message}
-                                </div>
-                            );
-                        })}
-                    </div>
-
+                <div className="messages">
+                    {this.state.messages.map((message, index) => {
+                        return (
+                            <div key={index}>
+                                {" "}
+                                <span>{message.author}: </span>
+                                {message.message}
+                                <hr />
+                            </div>
+                        );
+                    })}
                     <div>
-                        <TextField id='outlined-basic' fullWidth
+                    <form className='chat-input'>
+                        <input
                             type="text"
                             placeholder="Send Message"
                             value={this.state.message}
@@ -80,12 +87,11 @@ export default class Chat extends Component {
                                 })
                             }
                         />
-                        <br />
-                        <Button type='button' class='btn btn-secondary' onClick={this.sendMessage}>Send </Button>
+                    <Button style={{ margin: '20' }} type='button' class='btn btn-secondary' onClick={this.sendMessage}>Send </Button>
+                    </form>
                     </div>
                 </div>
             </div>
-        </div>
         );
     }
 }

@@ -15,7 +15,6 @@ class Feed extends Component {
     render() {
         return (
             <div className="FeedPage">
-
                 <header>
                     <div className="flexRow">
                         <h1 style={{margin: '10px auto', width: '100px', color: 'white'}}> Feed </h1>
