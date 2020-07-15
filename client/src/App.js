@@ -20,60 +20,59 @@ const recognition = new SpeechRecognition();
 
 
 function App() {
-  let [userPhrase, setPhrase] = useState("");
-  let [runVoice, setRun] = useState(true);
-  let [listening, setListening] = useState(false);
+  // let [userPhrase, setPhrase] = useState("");
+  // let [runVoice, setRun] = useState(true);
+  // let [listening, setListening] = useState(false);
 
 
-  const voiceCommands = () => {
-    //setListening((listening = false))
-    recognition.start();
-    recognition.onstart = () => {
-      // console.log("Listening");
-    };
-    setTimeout(() => {
-      recognition.stop();
-      // console.log('stop');
-    }, 4000)
+  // const voiceCommands = () => {
+  //   //setListening((listening = false))
+  //   recognition.start();
+  //   recognition.onstart = () => {
+  //     // console.log("Listening");
+  //   };
+  //   setTimeout(() => {
+  //     recognition.stop();
+  //     // console.log('stop');
+  //   }, 4000)
 
-    recognition.onresult = (e) => {     
-      setListening((listening = true))
-      // If voice is recognized this function runs.
-      let current = e.resultIndex;
+  //   recognition.onresult = (e) => {     
+  //     setListening((listening = true))
+  //     // If voice is recognized this function runs.
+  //     let current = e.resultIndex;
       
-      let transcript = e.results[current][0].transcript;
-      let mobileRepeatBug =
-      current === 1 && transcript === e.results[0][0].transcript;
-      if (!mobileRepeatBug) {
-        fetch("/api/v1/users")
-        .then((res) => res.json())
-        .then((data) => {
-          const phrase = data[0].phrase.toLowerCase();
-          if (transcript === phrase || transcript === ` ${phrase}`) {
-              setPhrase((userPhrase = "yes"));
-              console.log(userPhrase);
-              recognition.stop();
-              setRun((runVoice = false));
-            } 
-          });
-        }
-      };
-  };
+  //     let transcript = e.results[current][0].transcript;
+  //     let mobileRepeatBug =
+  //     current === 1 && transcript === e.results[0][0].transcript;
+  //     if (!mobileRepeatBug) {
+  //       fetch("/api/v1/users")
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         const phrase = data[0].phrase.toLowerCase();
+  //         if (transcript === phrase || transcript === ` ${phrase}`) {
+  //             setPhrase((userPhrase = "yes"));
+  //             console.log(userPhrase);
+  //             recognition.stop();
+  //             setRun((runVoice = false));
+  //           } 
+  //         });
+  //       }
+  //     };
+  // };
 
-  useEffect(() => {
-    //This function runs voiceCommands function whenever the page loads.
+  // useEffect(() => {
+  //   //This function runs voiceCommands function whenever the page loads.
 
-    const interval = setInterval(() => {
-      if(runVoice === false){
-        console.log('done Running')
-      } else {
-        voiceCommands()
-      }
-      }, 6000);
-    return () => clearInterval(interval);
-  });
+  //   const interval = setInterval(() => {
+  //     if(runVoice === false){
+  //       console.log('done Running')
+  //     } else {
+  //       voiceCommands()
+  //     }
+  //     }, 6000);
+  //   return () => clearInterval(interval);
+  // });
 
- 
   return (
     <Router>
       <div className="App">

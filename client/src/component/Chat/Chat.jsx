@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import { Nav, Navbar, Button } from 'react-bootstrap'
 import './Chat.css'
 import TextField from '@material-ui/core/TextField';
+import MessageList from './MessageList'
 
 export default class Chat extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ export default class Chat extends Component {
             message: "",
             messages: [],
             name: "",
+            fromMe: false
         };
 
         this.socket = io("localhost:3001");
@@ -22,7 +24,7 @@ export default class Chat extends Component {
             console.log(data)
             if (this.props.match.params.id == data.authorId) {
                 this.addMessage(data);
-            } 
+            }
         });
         this.socket.on("receive_own_private", (data) => {
             console.log(data)
@@ -43,10 +45,14 @@ export default class Chat extends Component {
             userId: this.props.match.params.id,
             message: this.state.message,
         });
-        this.setState({ message: "" });
+        this.setState({
+            message: "",
+            fromMe: true
+        });
     };
 
     render() {
+    const fromMe = this.state.fromMe ? 'from-me' : '',
         return (
             <div>
                 <Navbar>
@@ -67,44 +73,55 @@ export default class Chat extends Component {
                     </Nav>
                 </Navbar>
 
-            <div className='container'>
-
-                <div className='MessageList'>
-                    {/* messages list */}
-                </div>
-
-
-                <div className='Messages'>
-                    <div>{this.state.name}</div>
-                    <hr />
-                    <div className="messages">
-                        {this.state.messages.map((message, index) => {
-                            return (
-                                <div key={index}>
-                                    {" "}
-                                    {message.author}: {message.message}
-                                </div>
-                            );
-                        })}
+                <div className='container'>
+                    
+                    <div className='MessageList'>
+                        <MessageList />
                     </div>
 
-                    <div>
-                        <TextField id='outlined-basic' fullWidth
-                            type="text"
-                            placeholder="Send Message"
-                            value={this.state.message}
-                            onChange={(e) =>
-                                this.setState({
-                                    message: e.target.value,
-                                })
-                            }
-                        />
-                        <br />
-                        <Button type='button' class='btn btn-secondary' onClick={this.sendMessage}>Send </Button>
+                    <div className={`message ${fromMe}`}>
+                        <div className='username'>
+                            {message.author}
+                        </div>
+                        <div className='message-body'>
+                            {message.message}
+                        </div>
+                    </div>
+
+                    <div className='messages'>
+                        <div>{this.state.name}</div>
+                        <hr />
+                        <div className="messages">
+                            {this.state.messages.map((message, index) => {
+                                return (
+                                    <div key={index}>
+                                        {" "}
+                                        {message.author}: {message.message}
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        <div>
+                            <form>
+                                <TextField className='chat-input'
+                                    type="text"
+                                    placeholder="Send Message"
+                                    value={this.state.message}
+                                    onChange={(e) =>
+                                        this.setState({
+                                            message: e.target.value,
+                                        })
+                                    }
+                                />
+                                <br />
+                                <Button type='button' class='btn btn-secondary' onClick={this.sendMessage}>Send </Button>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         );
     }
 }

@@ -22,7 +22,7 @@ class Feed extends Component {
                         <Nav.Link style={{color: 'white'}} href="/feed">Home</Nav.Link>
                     </Nav.Item> 
                     <Nav.Item>
-                        <Nav.Link style={{color: 'white'}} href='/chat'>Messages</Nav.Link>
+                        <Nav.Link style={{color: 'white'}} href='/chat/:id'>Messages</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link style={{color: 'white'}} href="/account">Account</Nav.Link>
