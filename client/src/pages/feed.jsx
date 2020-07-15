@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './feed.css'
 import { Link } from 'react-router-dom';
 import Friends from '../component/Friends';
-import Chat from '../component/Chat'
+import Chat from '../component/Chat/Chat'
 import { Navbar, Nav } from 'react-bootstrap'
 import MapContainer from '../component/MapContainer'
 

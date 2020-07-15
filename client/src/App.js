@@ -7,14 +7,11 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 import Feed from "./pages/feed";
 import Account from "./pages/account";
-import Chat from "./component/Chat";
+import Chat from "./component/Chat/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
-
-
-
-
+import ChatPage from "./component/Chat/ChatPage";
 
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
@@ -33,16 +30,14 @@ function App() {
     //setListening((listening = false))
     recognition.start();
     recognition.onstart = () => {
-      console.log("Listening");
+      // console.log("Listening");
     };
     setTimeout(() => {
       recognition.stop();
-      console.log('stop');
+      // console.log('stop');
     }, 4000)
 
-    
-    recognition.onresult = (e) => {
-      
+    recognition.onresult = (e) => {     
       setListening((listening = true))
       // If voice is recognized this function runs.
       let current = e.resultIndex;
@@ -50,14 +45,10 @@ function App() {
       let transcript = e.results[current][0].transcript;
       let mobileRepeatBug =
       current === 1 && transcript === e.results[0][0].transcript;
-      console.log(transcript);
-      
-
       if (!mobileRepeatBug) {
         fetch("/api/v1/users")
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           const phrase = data[0].phrase.toLowerCase();
           if (transcript === phrase || transcript === ` ${phrase}`) {
               setPhrase((userPhrase = "yes"));
@@ -66,8 +57,6 @@ function App() {
               setRun((runVoice = false));
             } 
           });
-
-          // checks transcript taken from voice command act performs logic based on that.
         }
       };
   };
@@ -84,7 +73,6 @@ function App() {
       }, 6000);
     return () => clearInterval(interval);
   });
-
 
  
   return (
@@ -104,12 +92,14 @@ function App() {
         </div>
 
         <Route path="/map" component={MapContainer} />
-        <Route path="/chat" component={Chat} />
+        <Route path="/chat/:id" component={Chat} />
       </div>
 
     </Router>
   );
-} 
+}
 
 export default App;
+
+
 
