@@ -14,6 +14,14 @@ export default class Chat extends Component {
             message: "",
             messages: [],
             name: "",
+            users: [
+                {
+                    name: 'Jack'
+                },
+                {
+                    name: 'Me'
+                }
+            ]
         };
 
         this.socket = io("localhost:3001");
@@ -39,6 +47,7 @@ export default class Chat extends Component {
         });
     }
 
+
     addMessage = (data) => {
         console.log(data);
         this.setState({
@@ -54,14 +63,20 @@ export default class Chat extends Component {
         });
         this.setState({
             message: "",
-            fromMe: true
         });
     };
 
     render() {
         return (
             <div className='container'>
-                <div className='messageList'>
+                <div className='usersList'>
+                    {this.state.users.map((user, index) => {
+                        return (
+                            <div key={index}>
+                                {user.name}
+                            </div>
+                        )
+                    })}
 
                 </div>
                 <div className="messages">

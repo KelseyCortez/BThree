@@ -169,9 +169,9 @@ router.get('/messages/:id', (req, res) => {
                 }
             ]
         },
-        // order: {
-        //     ['createdAt', 'DESC']
-        // }, 
+        order: [
+            ['createdAt', 'DESC']
+        ], 
         include: {
             model: db.User,
             as: 'Sender'
