@@ -18,9 +18,17 @@ export default class Chat extends Component {
 
     componentDidMount() {
         this.socket.on("receive_private", (data) => {
+            console.log(data)
+            if (this.props.match.params.id == data.authorId) {
+                this.addMessage(data);
+            } 
+        });
+        this.socket.on("receive_own_private", (data) => {
+            console.log(data)
             this.addMessage(data);
         });
     }
+
     addMessage = (data) => {
         console.log(data);
         this.setState({
@@ -31,7 +39,7 @@ export default class Chat extends Component {
     sendMessage = (e) => {
         e.preventDefault();
         this.socket.emit("send_private", {
-            author: this.state.name,
+            userId: this.props.match.params.id,
             message: this.state.message,
         });
         this.setState({ message: "" });
@@ -74,7 +82,7 @@ export default class Chat extends Component {
                     </div>
 
                     <div>
-                        <input
+                        <textarea
                             type="text"
                             placeholder="Message"
                             value={this.state.message}

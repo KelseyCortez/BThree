@@ -23,20 +23,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+const sessionData = session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 600000000
+  }
+})
+
+
+app.use(
+  sessionData
+)
 
 
 app.use('/api/v1/', apiRouter);
 app.use('/api/v1/sms', smsRouter);
-app.use(
-  session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 600000000
-    }
-  })
-)
 
 // function checkAuthentication(req, res, next) {
 //   if (req.session.user) {
@@ -74,15 +77,28 @@ app.use(function (err, req, res, next) {
 
 
 io = socket();
+io.use((socket, next) => {
+  sessionData(socket.request, socket.request.res || {}, next);
+});
+
+const sockets = {}
 
 io.on('connection', (socket) => {
-  console.log(socket.id)
+  if (socket.request.session.user) {
+    sockets[socket.request.session.user.id] = socket.id
+  }
 
   socket.on('send_private', function (data) {
-    console.log(socket.id)
-    console.log(data.id)
-    console.log(data.message)
-    io.to(socket.id).emit('receive_private', data)
+    const userSocket = sockets[data.userId]
+    const newMessage = {
+      message: data.message,
+      author: socket.request.session.user.firstName,
+      authorId: socket.request.session.user.id
+    }
+    if (userSocket) {
+      io.to(userSocket).emit('receive_private', newMessage)
+    }
+    io.to(socket.id).emit('receive_own_private', newMessage)
   })
 })
 

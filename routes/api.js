@@ -74,7 +74,7 @@ router.post('/login', (req, res) => {
                     res.cookie('token', token, { httpOnly: true })
                         .status(200)
 
-                    // req.session.user = User; 
+                    req.session.user = User; 
                     
                     res.json(User)
 
