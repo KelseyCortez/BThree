@@ -6,7 +6,7 @@ const twilio = require('../module/twilio')
 
 router.post('/alert', function (req, res, next) {
     // const tempEmergencyNumbers = ['+14077098738', '+14236195332', '+16786343529']
-    db.User.findByPk(6, {
+    db.User.findByPk(6, { //change 6 to user number from session. This is hardcoded user 6
         include: [{
             model: db.EmergencyContact
         }]
