@@ -11,7 +11,7 @@ class MyNavbar extends Component {
         return (
             <div>
                 <Navbar>
-                    <Navbar.Brand style={{ fontSize: '55px', color: 'white' }}>BThree</Navbar.Brand>
+                    <Navbar.Brand style={{ fontSize: '55px', color: 'white', fontFamily: "Bungee Inline" }}>BThree</Navbar.Brand>
                     <Nav className="justify-content-end ml-auto" activeKey="/home">
                         <Nav.Item>
                             <Nav.Link style={{ color: 'white' }} href="/feed">Home</Nav.Link>
@@ -34,4 +34,4 @@ class MyNavbar extends Component {
     }
 }
 
-export default Navbar;
+export default MyNavbar;

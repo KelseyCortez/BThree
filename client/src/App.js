@@ -11,7 +11,6 @@ import Chat from "./component/Chat/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
-import ChatPage from "./component/Chat/ChatPage";
 import MyNavbar from './component/navbar'
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
@@ -37,52 +36,54 @@ function App() {
       // console.log('stop');
     }, 4000)
 
-    recognition.onresult = (e) => {     
+    recognition.onresult = (e) => {
       setListening((listening = true))
       // If voice is recognized this function runs.
       let current = e.resultIndex;
-      
+
       let transcript = e.results[current][0].transcript;
       let mobileRepeatBug =
-      current === 1 && transcript === e.results[0][0].transcript;
+        current === 1 && transcript === e.results[0][0].transcript;
       if (!mobileRepeatBug) {
         fetch("/api/v1/users")
-        .then((res) => res.json())
-        .then((data) => {
-          const phrase = data[0].phrase.toLowerCase();
-          if (transcript === phrase || transcript === ` ${phrase}`) {
+          .then((res) => res.json())
+          .then((data) => {
+            const phrase = data[0].phrase.toLowerCase();
+            if (transcript === phrase || transcript === ` ${phrase}`) {
               setPhrase((userPhrase = "yes"));
               console.log(userPhrase);
               recognition.stop();
               setRun((runVoice = false));
-            } 
+            }
           });
-        }
-      };
+      }
+    };
   };
 
   useEffect(() => {
     //This function runs voiceCommands function whenever the page loads.
 
     const interval = setInterval(() => {
-      if(runVoice === false){
+      if (runVoice === false) {
         console.log('done Running')
       } else {
         voiceCommands()
       }
-      }, 6000);
+    }, 6000);
     return () => clearInterval(interval);
   });
 
- 
+
   return (
     <Router>
       <div className="App"> 
       <MyNavbar />
+        <PanicButton />
+
         <Switch>
           <Route path="/" exact component={LandingPage} />
         </Switch>
-          <PanicButton/>
+     
 
         <div>
           <Route path="/register" component={Register} />
@@ -96,8 +97,8 @@ function App() {
         <Route path="/chat/:id" component={Chat} />
       </div>
 
-  </Router>
-);
+    </Router>
+  );
 }
 
 export default App;

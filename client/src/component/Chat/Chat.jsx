@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import io from "socket.io-client";
 import './Chat.css'
 import TextField from '@material-ui/core/TextField';
-
+import { Button} from 'react-bootstrap'
 export default class Chat extends Component {
     constructor(props) {
         super(props);
