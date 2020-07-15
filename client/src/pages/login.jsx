@@ -47,7 +47,7 @@ class Login extends Component {
             .then((response) => { 
                 
                 console.log(response)
-                this.setState({ redirect: `/account/${response.data.id}` })
+                this.setState({ redirect: `/account` })
             })
             .catch(err => {
                 console.log(err);

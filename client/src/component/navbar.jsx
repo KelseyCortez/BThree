@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar, Nav, Button } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
+import axios from 'axios'
 
 
-class MyNavbar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
+function MyNavbar() {
+    const onClick = (e)=>{
+        axios.get('/api/v1/logout')
+        // .then(res => res.json())
+        .then(data => {console.log(data)})
     }
-    render() {
         return (
             <div>
                 <Navbar>
@@ -23,7 +25,7 @@ class MyNavbar extends Component {
                             <Nav.Link style={{ color: 'white' }} href="/account">Account</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href='/'>Log Out</Nav.Link>
+                            <Nav.Link href="/"><Button style={{ color: 'white' }} onClick={onClick} >Log Out</Button></Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar>
@@ -32,6 +34,6 @@ class MyNavbar extends Component {
 
         );
     }
-}
+
 
 export default MyNavbar;
