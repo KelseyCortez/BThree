@@ -74,7 +74,6 @@ function App() {
     return () => clearInterval(interval);
   });
 
-
   return (
     <Router>
       <div className="App"> 
@@ -91,7 +90,7 @@ function App() {
           <Route path="/contacts" component={Contacts} />
           <Route path="/login" component={Login} />
           <Route path="/feed" component={Feed} />
-          <Route path="/account/:id" component={Account} />
+          <Route path="/account" component={Account} />
           <Route path="/about" component={About} />
         </div>
 
