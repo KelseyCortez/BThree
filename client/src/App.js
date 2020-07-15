@@ -11,7 +11,7 @@ import Chat from "./component/Chat/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
-
+import MyNavbar from './component/navbar'
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -20,66 +20,70 @@ const recognition = new SpeechRecognition();
 
 
 function App() {
-  // let [userPhrase, setPhrase] = useState("");
-  // let [runVoice, setRun] = useState(true);
-  // let [listening, setListening] = useState(false);
+  let [userPhrase, setPhrase] = useState("");
+  let [runVoice, setRun] = useState(true);
+  let [listening, setListening] = useState(false);
 
 
-  // const voiceCommands = () => {
-  //   //setListening((listening = false))
-  //   recognition.start();
-  //   recognition.onstart = () => {
-  //     // console.log("Listening");
-  //   };
-  //   setTimeout(() => {
-  //     recognition.stop();
-  //     // console.log('stop');
-  //   }, 4000)
+  const voiceCommands = () => {
+    //setListening((listening = false))
+    recognition.start();
+    recognition.onstart = () => {
+      // console.log("Listening");
+    };
+    setTimeout(() => {
+      recognition.stop();
+      // console.log('stop');
+    }, 4000)
 
-  //   recognition.onresult = (e) => {     
-  //     setListening((listening = true))
-  //     // If voice is recognized this function runs.
-  //     let current = e.resultIndex;
-      
-  //     let transcript = e.results[current][0].transcript;
-  //     let mobileRepeatBug =
-  //     current === 1 && transcript === e.results[0][0].transcript;
-  //     if (!mobileRepeatBug) {
-  //       fetch("/api/v1/users")
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         const phrase = data[0].phrase.toLowerCase();
-  //         if (transcript === phrase || transcript === ` ${phrase}`) {
-  //             setPhrase((userPhrase = "yes"));
-  //             console.log(userPhrase);
-  //             recognition.stop();
-  //             setRun((runVoice = false));
-  //           } 
-  //         });
-  //       }
-  //     };
-  // };
+    recognition.onresult = (e) => {
+      setListening((listening = true))
+      // If voice is recognized this function runs.
+      let current = e.resultIndex;
 
-  // useEffect(() => {
-  //   //This function runs voiceCommands function whenever the page loads.
+      let transcript = e.results[current][0].transcript;
+      let mobileRepeatBug =
+        current === 1 && transcript === e.results[0][0].transcript;
+      if (!mobileRepeatBug) {
+        fetch("/api/v1/users")
+          .then((res) => res.json())
+          .then((data) => {
+            const phrase = data[0].phrase.toLowerCase();
+            if (transcript === phrase || transcript === ` ${phrase}`) {
+              setPhrase((userPhrase = "yes"));
+              console.log(userPhrase);
+              recognition.stop();
+              setRun((runVoice = false));
+            }
+          });
+      }
+    };
+  };
 
-  //   const interval = setInterval(() => {
-  //     if(runVoice === false){
-  //       console.log('done Running')
-  //     } else {
-  //       voiceCommands()
-  //     }
-  //     }, 6000);
-  //   return () => clearInterval(interval);
-  // });
+  useEffect(() => {
+    //This function runs voiceCommands function whenever the page loads.
+
+    const interval = setInterval(() => {
+      if (runVoice === false) {
+        console.log('done Running')
+      } else {
+        voiceCommands()
+      }
+    }, 6000);
+    return () => clearInterval(interval);
+  });
+
 
   return (
     <Router>
-      <div className="App">
+      <div className="App"> 
+      <MyNavbar />
+        <PanicButton />
+
         <Switch>
           <Route path="/" exact component={LandingPage} />
         </Switch>
-          <PanicButton/>
+
 
         <div>
           <Route path="/register" component={Register} />
