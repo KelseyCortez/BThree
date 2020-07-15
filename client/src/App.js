@@ -11,7 +11,6 @@ import Chat from "./component/Chat/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
-import ChatPage from "./component/Chat/ChatPage";
 
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
@@ -80,8 +79,8 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/" exact component={LandingPage} />
-          <PanicButton/>
         </Switch>
+          <PanicButton/>
 
         <div>
           <Route path="/register" component={Register} />
