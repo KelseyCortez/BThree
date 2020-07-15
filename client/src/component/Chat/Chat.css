@@ -1,0 +1,26 @@
+.container {
+    border: 1px solid white;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 15px;
+    background-color: white;
+}
+
+.Messages {
+    border: 1px solid white;
+    width: 20%;
+    height: 50%;
+    margin: 5px auto;
+    border-radius: 10px;
+    background-color: black;
+    color: 'white'
+}
+
+.MessageList {
+    border: 1px solid white;
+    width: 30%;
+    height: 90%;
+    margin: 25px;
+    border-radius: 10px;
+    background-color: black;
+}

@@ -18,12 +18,12 @@ class EmergencyContacts1 extends Component {
 
 
         return (
-            <div className="EmergencyContacts">
+            <div className="EmergencyContacts flexColumn">
 
-                <div> Name: {name} </div>
+                <div> Name: <span className="data" > {name} </span>  </div>
 
-                <div> Number: {number}</div>
-                <div> Relationship: {relationship} </div>
+                <div> Number: <span className= "data">  {number} </span> </div>
+                <div> Relationship: <span className="data">  {relationship} </span> </div>
 
             </div>
 
