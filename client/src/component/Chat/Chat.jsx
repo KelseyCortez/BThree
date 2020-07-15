@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
-import { Nav, Navbar, Button } from 'react-bootstrap'
 import './Chat.css'
 import TextField from '@material-ui/core/TextField';
-
+import { Button} from 'react-bootstrap'
 export default class Chat extends Component {
     constructor(props) {
         super(props);
@@ -49,24 +48,6 @@ export default class Chat extends Component {
     render() {
         return (
             <div>
-                <Navbar>
-                    <Navbar.Brand style={{ fontSize: '55px', color: 'white' }}>BThree</Navbar.Brand>
-                    <Nav className="justify-content-end ml-auto" activeKey="/home">
-                        <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href="/feed">Home</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href='/chat'>Messages</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href="/account">Account</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href='/'>Log Out</Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Navbar>
-
             <div className='container'>
 
                 <div className='MessageList'>
