@@ -1,3 +1,5 @@
+
+
 let createError = require('http-errors');
 let express = require('express');
 let socket = require('socket.io');
@@ -8,7 +10,8 @@ let apiRouter = require('./routes/api');
 let logger = require('morgan');
 let smsRouter = require('./routes/sms');
 let session = require('express-session');
-let withAuth = require('./middleware')
+let withAuth = require('./middleware');
+const db = require('./models');
 
 
 
@@ -23,20 +26,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+const sessionData = session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 600000000
+  }
+})
+
+
+app.use(
+  sessionData
+)
 
 
 app.use('/api/v1/', apiRouter);
 app.use('/api/v1/sms', smsRouter);
-app.use(
-  session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 600000000
-    }
-  })
-)
 
 // function checkAuthentication(req, res, next) {
 //   if (req.session.user) {
@@ -61,25 +67,46 @@ app.get('/checkToken', withAuth, function (req, res) {
 
 
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// // error handler
+// app.use(function (err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.json(err);
-});
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.json(err);
+// });
 
 
 io = socket();
+io.use((socket, next) => {
+  sessionData(socket.request, socket.request.res || {}, next);
+});
+
+const sockets = {}
 
 io.on('connection', (socket) => {
-  console.log(socket.id)
+  if (socket.request.session.user) {
+    sockets[socket.request.session.user.id] = socket.id
+  }
 
-  socket.on('SEND_MESSAGE', function (data) {
-    io.emit('RECEIVE_MESSAGE', data)
+  socket.on('send_private', function (data) {
+    const userSocket = sockets[data.userId]
+    const newMessage = {
+      message: data.message,
+      author: socket.request.session.user.firstName,
+      authorId: socket.request.session.user.id
+    }
+    db.Message.create({
+      content: data.message,
+      SenderId: socket.request.session.user.id,
+      RecipientId: data.userId
+    })
+    if (userSocket) {
+      io.to(userSocket).emit('receive_private', newMessage)
+    }
+    io.to(socket.id).emit('receive_own_private', newMessage)
   })
 })
 
@@ -89,3 +116,10 @@ io.on('connection', (socket) => {
 app.io = io
 
 module.exports = app;
+
+
+
+
+
+
+

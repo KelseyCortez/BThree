@@ -5,20 +5,21 @@ const twilio = require('../module/twilio')
 
 
 router.post('/alert', function (req, res, next) {
-    // db.User.findByPk(req.params.id, {
-    //     include: [{
-    //         model: db.EmergencyContact
-    //     }]
-    // }).then((user) => {
-    //     let emergencyNumbers = [];
-    //     db.EmergencyContact.forEach(contact => {
-    //         emergencyNumbers.push(contact.phoneNumber)
-    //     })
-        twilio.sendMultiSms(['+14077098738', '+14236195332'], 'This is using the button')
+    // const tempEmergencyNumbers = ['+14077098738', '+14236195332', '+16786343529']
+    db.User.findByPk(6, { //change 6 to user number from session. This is hardcoded user 6
+        include: [{
+            model: db.EmergencyContact
+        }]
+    })    .then((user) => {
+        let emergencyNumbers = [];
+        user.EmergencyContacts.forEach(contact => {
+            emergencyNumbers.push(`+1${contact.phoneNumber}`)
+        })
+        twilio.sendMultiSms(emergencyNumbers, user.phrase)
             .then(message => {
                 res.json(message);
             })
     })
-// });
+});
 
 module.exports = router;

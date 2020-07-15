@@ -1,5 +1,20 @@
 .EmergencyContacts { 
-    width: 25vw;
+    width: 90%;
     height: 25vh;  
-    background-color: red;
-}
+    color: white;
+    background-color: red; 
+    align-items: center;
+} 
+
+.data{
+    font-family: "Bungee Hairline";
+    font-weight: 600;
+    color: black;
+} 
+
+.flexColumn { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-around; 
+}  
+

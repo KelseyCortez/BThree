@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
+import { Button, Form, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+
 
 class Register extends Component {
     constructor(props) {
@@ -11,15 +12,14 @@ class Register extends Component {
             userName: "",
             password: "",
             email: "",
-            dob: ""
+            dob: "",
+           phrase:"",
 
         }
-        this.handleFormSubmit = this.handleFormSubmit.bind(this)
     }
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log("blue")
         console.log(this.state)
         fetch('/api/v1/register',
             {
@@ -29,22 +29,21 @@ class Register extends Component {
                     'Content-Type': 'application/json;charset=UTF-8'
                 },
             })
-            .then(res => 
-                {res.json()})
-        // .then(data => {
-        //     this.props.history.push(`/register/${data.id}`);
-        // })
-    }
-    handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value,
-        });
-    }
+            .then(() => {
+                this.props.history.push('/contacts')
+            })
+
+        }
+            handleChange = (e) => {
+                const { value, name } = e.target;
+                this.setState({
+                    [name]: value
+                })
+            }
 
     render() {
         return (
             <div className="RegisterPage">
-
 
                 <h3 style={registerColor}>Sign Up</h3>
                 {/*  start of form for user registration   */}
@@ -95,28 +94,24 @@ class Register extends Component {
                         <input type="date" className="form-control" name="dob" value={this.state.dob} onChange={this.handleChange} />
                         </label> <br />
                     </div>
+                    <Form.Row>
+                Safe Phrase<Col>
+                          <Form.Control name='phrase' placeholder="Phrase" value={this.state.phrase} onChange={this.handleChange} type="text"/>
+                        </Col>
+                        </Form.Row>
 
                     {/* <!-- input field for Cell Phone Number --> */}
                     {/* <label name="" value={this.state. }>
                         Telephone Number:
                         <input type="number" />
                     </label> <br /> */}
-
-
-
-
-
                     <Button className="btn btn-primary btn-block" onSubmit={this.handleFormSubmit} type="submit"> Sign Up</Button>
-
-                    {/* end of registration form */}
                 </form>
                 <p className="forgot-password text-right" style={registerColor}>
                     Already registered? <Link to={'/login'}>Sign in</Link>
                 </p>
-            </div>
-
-
-
+                {/* end of registration form */}
+            </div >
         );
     }
 }
@@ -124,8 +119,6 @@ class Register extends Component {
 
 
 export default Register;
-
-
 
 const registerColor = {
     color: 'white'

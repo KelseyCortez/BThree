@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import './feed.css'
 import { Link } from 'react-router-dom';
 import Friends from '../component/Friends';
-import Chat from '../component/Chat'
-import { Navbar, Nav } from 'react-bootstrap'
+import Chat from '../component/Chat/Chat'
+
 import MapContainer from '../component/MapContainer'
 
 
@@ -15,24 +15,6 @@ class Feed extends Component {
     render() {
         return (
             <div className="FeedPage">
-            <Navbar>
-                <Navbar.Brand style={{fontSize: '55px', color: 'white'}}>BThree</Navbar.Brand>
-                <Nav className="justify-content-end ml-auto" activeKey="/home">
-                    <Nav.Item>
-                        <Nav.Link style={{color: 'white'}} href="/feed">Home</Nav.Link>
-                    </Nav.Item> 
-                    <Nav.Item>
-                        <Nav.Link style={{color: 'white'}} href='/chat'>Messages</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link style={{color: 'white'}} href="/account">Account</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link style={{color: 'white'}} href='/'>Log Out</Nav.Link>
-                    </Nav.Item>
-                </Nav>
-            </Navbar>
-
                 <header>
                     <div className="flexRow">
                         <h1 style={{margin: '10px auto', width: '100px', color: 'white'}}> Feed </h1>
