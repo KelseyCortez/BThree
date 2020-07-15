@@ -11,7 +11,7 @@
 .messages {
     border: 1px black solid;
     margin: 20px;
-    width: 80%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -21,8 +21,8 @@
 
 .messageList {
     border: 1px solid black;
-    width: 20%;
-    height: 825px;
+    width: 40%;
+    height: 640px;
     margin: 15px;
     border-radius: 10px;
 }

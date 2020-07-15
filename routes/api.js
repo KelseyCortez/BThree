@@ -158,20 +158,20 @@ router.get('/messages/:id', (req, res) => {
     const B = req.session.user.id
     db.Message.findAll({
         where: {
-            [    
+            [Op.or]: [
                 {
-                    RecipientId: A,      
-                    SenderId: B    
-                },    
-                {      
-                    RecipientId: B,      
-                    SenderId: A    
-                }  
+                    RecipientId: A,
+                    SenderId: B
+                },
+                {
+                    RecipientId: B,
+                    SenderId: A
+                }
             ]
         },
-        order: [
-            ['createdAt']
-        ],
+        // order: {
+        //     ['createdAt', 'DESC']
+        // }, 
         include: {
             model: db.User,
             as: 'Sender'
