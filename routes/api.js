@@ -24,6 +24,7 @@ router.get('/user', checkAuth, function (req, res, next) {
 
 router.get('/user/contacts', checkAuth, (req, res, next) => {
     db.User.findByPk(req.session.user.id, {
+
         include: [{
             model: db.EmergencyContact
         }]
@@ -32,8 +33,10 @@ router.get('/user/contacts', checkAuth, (req, res, next) => {
     })
 })
 
+
 router.post('/user/contacts', checkAuth, (req, res, next) => {
     db.User.findByPk(req.session.user.id)
+
         .then(User => User.createEmergencyContact({
             name: req.body.name,
             phoneNumber: req.body.phoneNumber,
@@ -78,7 +81,7 @@ router.post('/login', (req, res) => {
 
 router.post('/register', function (req, res) { 
     console.log(req.body)
-    const { userName, email, password, firstName, lastName, dob } = req.body
+    const { userName, email, password, firstName, lastName, dob, phrase } = req.body
     if (!userName) { res.status(400).json({ error: 'user-name field is required' }); }
     if (!email) { res.status(400).json({ error: 'email field is required' }); }
     if (!password) { res.status(400).json({ error: 'password field is required' }); }
@@ -91,6 +94,7 @@ router.post('/register', function (req, res) {
             dob: dob,
             password: hash,
             email: email,
+            phrase: phrase,
         })
             .then(user => {
                 res.status(201).json(user);
