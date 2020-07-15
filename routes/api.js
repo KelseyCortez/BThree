@@ -34,9 +34,8 @@ router.get('/user/contacts', checkAuth, (req, res, next) => {
 })
 
 
-router.post('/user/contacts', checkAuth, (req, res, next) => {
+router.post('/user/contacts/new', checkAuth, (req, res, next) => {
     db.User.findByPk(req.session.user.id)
-
         .then(User => User.createEmergencyContact({
             name: req.body.name,
             phoneNumber: req.body.phoneNumber,
