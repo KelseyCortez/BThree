@@ -10,20 +10,20 @@ class MyNavbar extends Component {
     render() {
         return (
             <div>
-                <Navbar>
+                <Navbar style={{backgroundColor:"#8B0000"}}>
                     <Navbar.Brand style={{ fontSize: '55px', color: 'white', fontFamily: "Bungee Inline" }}>BThree</Navbar.Brand>
                     <Nav className="justify-content-end ml-auto" activeKey="/home">
                         <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href="/feed">Home</Nav.Link>
+                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href="/feed">Home</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href='/chat'>Messages</Nav.Link>
+                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee"  }} href='/chat'>Messages</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href="/account">Account</Nav.Link>
+                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee"  }} href="/account">Account</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href='/'>Log Out</Nav.Link>
+                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee"  }} href='/'>Log Out</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar>
