@@ -1,26 +1,11 @@
 import React from 'react'
-import { Card, Button, Nav, Navbar } from 'react-bootstrap';
+import { Card, Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 
 
 export default function LandingPage() {
     return (
         <div className="App">
-            <Navbar>
-                <Navbar.Brand style={{fontSize: '55px', color: 'white', fontFamily: "Bungee Inline"}}>BThree</Navbar.Brand>
-                <Nav className="justify-content-end ml-auto" activeKey="/home">
-                    <Nav.Item>
-                        <Nav.Link style={{color: 'white'}} href="/">Home</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link style={{color: 'white'}} href="/login">Login</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link style={{color: 'white'}} href='/register'>Sign Up</Nav.Link>
-                    </Nav.Item>
-                </Nav>
-            </Navbar>
-
             <div style={{ width: '25%', height: '100%', margin: '10px auto' }}>
                 <h1 style={{ color: 'grey', margin: '30px' }}> B3</h1>
                 <Card className="text-center">

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './account.css'
-import { Button, Nav, Navbar } from 'react-bootstrap'
+import { Button} from 'react-bootstrap'
 import EmergencyContacts1 from '../component/emergencyContacts'
+
 
 class Account extends Component {
     constructor(props) {
@@ -101,24 +102,8 @@ class Account extends Component {
 
 
         return (
-            <div className = "flexColumn space">
-                <Navbar style={{backgroundColor:"black", marginTop: "10px"}} >
-                    <Navbar.Brand style={{ fontSize: '90px', letterSpacing:"3px", color: 'white', fontFamily: "Bungee Inline" }}>B3</Navbar.Brand>
-                    <Nav className="justify-content-end ml-auto" activeKey="/home">
-                        <Nav.Item>
-                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href="/feed">Home</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee"  }} href='/chat'>Messages</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee"  }} href="/account">Account</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee"  }} href='/'>Log Out</Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Navbar>
+            <div>
+                
 
 
                 <div className="AccountPage flexColumn">

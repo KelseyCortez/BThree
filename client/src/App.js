@@ -11,7 +11,8 @@ import Chat from "./component/Chat/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
-
+import ChatPage from "./component/Chat/ChatPage";
+import MyNavbar from './component/navbar'
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -76,7 +77,8 @@ function App() {
  
   return (
     <Router>
-      <div className="App">
+      <div className="App"> 
+      <MyNavbar />
         <Switch>
           <Route path="/" exact component={LandingPage} />
         </Switch>
@@ -94,8 +96,8 @@ function App() {
         <Route path="/chat/:id" component={Chat} />
       </div>
 
-    </Router>
-  );
+  </Router>
+);
 }
 
 export default App;
