@@ -1,20 +1,39 @@
 .AccountPage{ 
-    font-family: "Coda Caption";
+    font-family: "Bungee"; 
+    align-items: center;
 
+} 
+
+
+
+.Title{  
+    margin-top: 40px; 
+    text-align: center; 
+    font-size: 30px; 
+    color: whitesmoke; 
+    background-color: #212F3D; 
+    width: 60vw; 
+    opacity: .9 ;
 }
 
 .Info{ 
-    width: 65vw; 
-    height: 80vh; 
+    
+    width: 60vw;
+    height: 60vh; 
     justify-content: center;
     align-items: center; 
+    /* background-color: black;  */ 
+    /* margin-top: 10px; */
+    margin-bottom: 10px;
+   
 }
 
 .TextArea{ 
-    width: 80% ; 
-    height: 90% ; 
-    border: 2px solid black; 
+    width: 50% ; 
+    height: 100% ; 
+    border: 2px solid whitesmoke; 
     background-color: white;  
+    align-items: center;  
    
 } 
 
@@ -25,7 +44,27 @@
 
 }  
 
+
 .flexColumn { 
     display: flex; 
-    flex-direction: column;
+    flex-direction: column; 
+    justify-content: space-around;  
+    
+    
+   
+} 
+
+.data{
+    font-family: "Bungee Hairline";
+    font-weight: 600;
+    color: black;
+} 
+
+.EC{ 
+    align-items: center;
+    background-color:black;
+    color: white; 
+    overflow-y: scroll;
+    width: 50%; 
+    height: 100%; 
 }

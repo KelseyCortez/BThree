@@ -7,7 +7,7 @@ export default function LandingPage() {
     return (
         <div className="App">
             <Navbar>
-                <Navbar.Brand style={{fontSize: '55px', color: 'white'}}>BThree</Navbar.Brand>
+                <Navbar.Brand style={{fontSize: '55px', color: 'white', fontFamily: "Bungee Inline"}}>BThree</Navbar.Brand>
                 <Nav className="justify-content-end ml-auto" activeKey="/home">
                     <Nav.Item>
                         <Nav.Link style={{color: 'white'}} href="/">Home</Nav.Link>
@@ -22,11 +22,11 @@ export default function LandingPage() {
             </Navbar>
 
             <div style={{ width: '25%', height: '100%', margin: '10px auto' }}>
-                <h1 style={{ color: 'grey', margin: '30px' }}> BThree</h1>
+                <h1 style={{ color: 'grey', margin: '30px' }}> B3</h1>
                 <Card className="text-center">
                     <Card.Body style={{ backgroundColor: 'black', color: 'white' }}>
                         <Card.Text style={{ fontSize: '20px' }}>
-                            BThree is an app that allows users to share their location with
+                            B3 is an app that allows users to share their location with
                             friends and family. They can also send their location and SMS
                             messages to their emergency contacts.
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './account.css'
-import {Button, Nav, Navbar } from 'react-bootstrap' 
+import { Button, Nav, Navbar } from 'react-bootstrap'
 import EmergencyContacts1 from '../component/emergencyContacts'
 
 class Account extends Component {
@@ -15,7 +15,7 @@ class Account extends Component {
             Age: "",
             FriendList: [],
             EmergencyContacts: [],
-            
+
 
 
 
@@ -48,17 +48,19 @@ class Account extends Component {
 
     getEmergencyContacts() {
         fetch(`/api/v1/users/${this.props.match.params.id}/contacts`)
-        .then(res => res.json())
-        .then(contacts => {
-            console.log(contacts)
-            this.setState({
-              EmergencyContacts : contacts
+            .then(res => res.json())
+            .then(contacts => {
+                console.log(contacts)
+                this.setState({
+                    EmergencyContacts: contacts
+                })
             })
-        })
     }
 
     makeAccountChanges = (e) => {
-        fetch()
+        e.preventDefault() 
+
+        fetch(`/`)
 
     }
 
@@ -67,17 +69,17 @@ class Account extends Component {
         this.getEmergencyContacts();
     }
 
-    render() { 
+    render() {
         let EmergencyContacts = this.state.EmergencyContacts;
         EmergencyContacts = EmergencyContacts.map((contact, index) => {
             let name
-           return <EmergencyContacts1 
-           name = {contact.name} 
-           phoneNumber = {contact.phoneNumber} 
-           relationship = {contact.relationship} 
-           key = {index}
-           
-           />
+            return <EmergencyContacts1
+                name={contact.name}
+                phoneNumber={contact.phoneNumber}
+                relationship={contact.relationship}
+                key={index}
+
+            />
         })
 
         let currentTime = new Date()
@@ -95,55 +97,54 @@ class Account extends Component {
         let age = this.state.Age
         console.log(age)
         age = today - age
-        let FriendList = this.state.FriendList
+        // let FriendList = this.state.FriendList 
+
 
         return (
-            <div>
-                <Navbar>
-                    <Navbar.Brand style={{ fontSize: '55px', color: 'white' }}>BThree</Navbar.Brand>
+            <div className = "flexColumn space">
+                <Navbar style={{backgroundColor:"black", marginTop: "10px"}} >
+                    <Navbar.Brand style={{ fontSize: '90px', letterSpacing:"3px", color: 'white', fontFamily: "Bungee Inline" }}>B3</Navbar.Brand>
                     <Nav className="justify-content-end ml-auto" activeKey="/home">
                         <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href="/feed">Home</Nav.Link>
+                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href="/feed">Home</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href='/chat'>Messages</Nav.Link>
+                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee"  }} href='/chat'>Messages</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href="/account">Account</Nav.Link>
+                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee"  }} href="/account">Account</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link style={{ color: 'white' }} href='/'>Log Out</Nav.Link>
+                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee"  }} href='/'>Log Out</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar>
 
 
-                <div className="AccountPage">
+                <div className="AccountPage flexColumn">
 
-                    <header> Account Information </header>
+                     <div className="Title"> Account Information </div> 
 
                     <div className="Info flexRow">
 
-                        <div className="TextArea">
-
-                            <div>Name: {name} </div>
-                            <div>Username: {username} </div>
+                        <div className="TextArea flexColumn">
+                            <div>Name: <span className="data">{name}</span> </div>
+                            <div>Username: <span className="data">{username}</span> </div>
                             {/* <div>Age: {age} </div> */}
-                            <div>Password: {password} </div>
-                            <div>Email: {email} </div>
-                            <div>Cellular Number: {cellNumber}</div>
-                            <div className="flexColumn"> 
-                                Emergency Contacts  
-                                {EmergencyContacts}  
-                                
-                                </div>
-                        
+                            <div>Password: <span className="data">{password}</span> </div>
+                            <div>Email: <span className="data">{email}</span> </div>
+                            <div>Cellular Number: <span className="data">{cellNumber}</span> </div>
+
+
                             <Button> Edit </Button>
 
 
                         </div>
 
-
+                        <div className="EC flexColumn">
+                            <div> Emergency Contacts </div>
+                                {EmergencyContacts}
+                        </div>
                     </div>
 
 
