@@ -2,13 +2,25 @@
     border: 1px solid white;
     width: 100vw;
     height: 100vh;
-    margin: 5px auto;
     border-radius: 15px;
+    background-color: white;
 }
 
-.card-body {
+.Messages {
     border: 1px solid white;
-    width: 50%;
+    width: 20%;
+    height: 50%;
     margin: 5px auto;
     border-radius: 10px;
+    background-color: black;
+    color: 'white'
+}
+
+.MessageList {
+    border: 1px solid white;
+    width: 30%;
+    height: 90%;
+    margin: 25px;
+    border-radius: 10px;
+    background-color: black;
 }

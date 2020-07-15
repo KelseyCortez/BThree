@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
-import { Nav, Navbar } from 'react-bootstrap'
+import { Nav, Navbar, Button } from 'react-bootstrap'
 import './Chat.css'
+import TextField from '@material-ui/core/TextField';
 
 export default class Chat extends Component {
     constructor(props) {
@@ -67,10 +68,16 @@ export default class Chat extends Component {
                 </Navbar>
 
             <div className='container'>
-                <div className='card-body'>
-                    <div style={{color: 'white'}}>{this.state.name}</div>
+
+                <div className='MessageList'>
+                    {/* messages list */}
+                </div>
+
+
+                <div className='Messages'>
+                    <div>{this.state.name}</div>
                     <hr />
-                    <div className="messages" style={{color: 'white'}} >
+                    <div className="messages">
                         {this.state.messages.map((message, index) => {
                             return (
                                 <div key={index}>
@@ -82,9 +89,9 @@ export default class Chat extends Component {
                     </div>
 
                     <div>
-                        <textarea
+                        <TextField id='outlined-basic' fullWidth
                             type="text"
-                            placeholder="Message"
+                            placeholder="Send Message"
                             value={this.state.message}
                             onChange={(e) =>
                                 this.setState({
@@ -93,7 +100,7 @@ export default class Chat extends Component {
                             }
                         />
                         <br />
-                        <button onClick={this.sendMessage}>Send</button>
+                        <Button type='button' class='btn btn-secondary' onClick={this.sendMessage}>Send </Button>
                     </div>
                 </div>
             </div>
