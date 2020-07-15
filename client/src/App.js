@@ -7,14 +7,11 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 import Feed from "./pages/feed";
 import Account from "./pages/account";
-import Chat from "./component/Chat";
+import Chat from "./component/Chat/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
-
-
-
-
+import ChatPage from "./component/Chat/ChatPage";
 
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
@@ -107,12 +104,12 @@ function App() {
         </div>
 
         <Route path="/map" component={MapContainer} />
-        <Route path="/chat" component={Chat} />
+        <Route path="/chat/:id" component={Chat} />
       </div>
 
     </Router>
   );
-} 
+}
 
 export default App;
 

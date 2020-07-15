@@ -1,0 +1,14 @@
+.container {
+    border: 1px solid white;
+    width: 100vw;
+    height: 100vh;
+    margin: 5px auto;
+    border-radius: 15px;
+}
+
+.card-body {
+    border: 1px solid white;
+    width: 50%;
+    margin: 5px auto;
+    border-radius: 10px;
+}

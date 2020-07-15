@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 const mapStyles = {
 
-  map: { height: 620, 
+  map: { height: 600, 
     width: '100%', 
     display: 'flex', 
     flexFlow: 'row nowrap', 

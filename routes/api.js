@@ -74,7 +74,7 @@ router.post('/login', (req, res) => {
                     res.cookie('token', token, { httpOnly: true })
                         .status(200)
 
-                    // req.session.user = User; 
+                    req.session.user = User; 
                     
                     res.json(User)
 
@@ -151,6 +151,19 @@ router.put('/contacts/:id', (req, res, next)=> {
         })
 
     })
+})
+
+// logs user out
+router.get('/logout', (req, res) => {
+    if (req.session) {
+        req.session.destroy(function(err) {
+            if (err) {
+                return next(err);
+            } else {
+                return res.redirect('/')
+            }
+        })
+    }
 })
 
 

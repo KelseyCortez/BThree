@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import { Nav, Navbar } from 'react-bootstrap'
+import './Chat.css'
 
 export default class Chat extends Component {
     constructor(props) {
@@ -9,17 +10,25 @@ export default class Chat extends Component {
         this.state = {
             message: "",
             messages: [],
-            name: "Zahria",
+            name: "",
         };
 
         this.socket = io("localhost:3001");
     }
 
     componentDidMount() {
-        this.socket.on("RECEIVE_MESSAGE", (data) => {
+        this.socket.on("receive_private", (data) => {
+            console.log(data)
+            if (this.props.match.params.id == data.authorId) {
+                this.addMessage(data);
+            } 
+        });
+        this.socket.on("receive_own_private", (data) => {
+            console.log(data)
             this.addMessage(data);
         });
     }
+
     addMessage = (data) => {
         console.log(data);
         this.setState({
@@ -29,8 +38,8 @@ export default class Chat extends Component {
     };
     sendMessage = (e) => {
         e.preventDefault();
-        this.socket.emit("SEND_MESSAGE", {
-            author: this.state.name,
+        this.socket.emit("send_private", {
+            userId: this.props.match.params.id,
             message: this.state.message,
         });
         this.setState({ message: "" });
@@ -59,9 +68,9 @@ export default class Chat extends Component {
 
             <div className='container'>
                 <div className='card-body'>
-                    <div>{this.state.name}</div>
+                    <div style={{color: 'white'}}>{this.state.name}</div>
                     <hr />
-                    <div className="messages">
+                    <div className="messages" style={{color: 'white'}} >
                         {this.state.messages.map((message, index) => {
                             return (
                                 <div key={index}>
@@ -73,7 +82,7 @@ export default class Chat extends Component {
                     </div>
 
                     <div>
-                        <input
+                        <textarea
                             type="text"
                             placeholder="Message"
                             value={this.state.message}

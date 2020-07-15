@@ -14,7 +14,7 @@ router.post('/alert', function (req, res, next) {
     //     db.EmergencyContact.forEach(contact => {
     //         emergencyNumbers.push(contact.phoneNumber)
     //     })
-        twilio.sendMultiSms(['+14077098738', '+14236195332'], 'This is using the button')
+        twilio.sendMultiSms(['4044021862'], 'This is using the button')
             .then(message => {
                 res.json(message);
             })
