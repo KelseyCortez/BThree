@@ -1,5 +1,3 @@
-
-
 let createError = require('http-errors');
 let express = require('express');
 let socket = require('socket.io');
@@ -13,14 +11,9 @@ let session = require('express-session');
 let withAuth = require('./middleware');
 const db = require('./models');
 
-
-
-
-
 let app = express();
 
 app.use(express.static(path.join(__dirname, 'client/build')));
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -35,24 +28,12 @@ const sessionData = session({
   }
 })
 
-
 app.use(
   sessionData
 )
 
-
 app.use('/api/v1/', apiRouter);
 app.use('/api/v1/sms', smsRouter);
-
-// function checkAuthentication(req, res, next) {
-//   if (req.session.user) {
-//     next();
-//   } else {
-//     res.send('you are not logged in')
-//   }
-// }
-
-
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client/build/index.html'))
@@ -65,8 +46,6 @@ app.get('/checkToken', withAuth, function (req, res) {
   res.sendStatus(200);
 });
 
-
-
 // // error handler
 // app.use(function (err, req, res, next) {
 //   // set locals, only providing error in development
@@ -77,7 +56,6 @@ app.get('/checkToken', withAuth, function (req, res) {
 //   res.status(err.status || 500);
 //   res.json(err);
 // });
-
 
 io = socket();
 io.use((socket, next) => {
@@ -116,10 +94,3 @@ io.on('connection', (socket) => {
 app.io = io
 
 module.exports = app;
-
-
-
-
-
-
-

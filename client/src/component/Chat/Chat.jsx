@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import io from "socket.io-client";
 import TextField from '@material-ui/core/TextField';
 import MessageList from './MessageList'
-import './Chat.css'
-
 import { Button } from 'react-bootstrap'
 import { Input } from "@material-ui/core";
+import './Chat.css'
+
 export default class Chat extends Component {
     constructor(props) {
         super(props);
@@ -14,6 +14,7 @@ export default class Chat extends Component {
             message: "",
             messages: [],
             name: "",
+            chatList: [],
         };
 
         this.socket = io("localhost:3001");
@@ -54,16 +55,31 @@ export default class Chat extends Component {
         });
         this.setState({
             message: "",
-            fromMe: true
         });
     };
+
+    chatList = (data) => {
+        console.log(data);
+        this.setState({
+            chatList: [...this.state.chatList, data]
+        })
+    }
 
     render() {
         return (
             <div className='container'>
-                <div className='messageList'>
+                {/* <div className='messageList'>
+                    {this.state.chats.map((chat, index) => {
+                        return (
+                            <div key={index}>
+                                {chat.author}
+                            </div>
+                        )
+                    })}
+                </div> */}
 
-                </div>
+
+
                 <div className="messages">
                     {this.state.messages.map((message, index) => {
                         return (

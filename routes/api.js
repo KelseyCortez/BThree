@@ -3,30 +3,32 @@ const router = express.Router();
 const db = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
+const secret = "mysecretshhh"
 const Op = db.Sequelize.Op
-const secret = "mysecretshhh";
-const checkAuth = require('../auth/checkAuthentication');
 
+router.get('/users/:id', function (req, res, next) {
+    // res.send(req.params.id)
+    db.User.findByPk(req.params.id).then((data) => {
+        res.json(data);
+    });
+})
 
+router.get('/users', function (req, res, next) {
+    // res.send(req.params.id)
+    db.User.findAll().then((data) => {
+        res.json(data);
+    });
+});
 
-
-// router.get('/users', checkAuth, function (req, res, next) {
-//     // res.send(req.params.id)
-//     db.User.findAll().then((data) => {
-//         res.json(data);
-//     });
-// });
-
-router.get('/user', checkAuth, function (req, res, next) {
-    db.User.findByPk(req.session.user.id)
+router.get('/users/:id', function (req, res, next) {
+    db.User.findByPk(req.params.id)
         .then(data => {
             res.json(data)
         })
 })
 
-router.get('/user/contacts', checkAuth, (req, res, next) => {
-    db.User.findByPk(req.session.user.id, {
-
+router.get('/users/:id/contacts', (req, res, next) => {
+    db.User.findByPk(req.params.id, {
         include: [{
             model: db.EmergencyContact
         }]
@@ -35,10 +37,8 @@ router.get('/user/contacts', checkAuth, (req, res, next) => {
     })
 })
 
-
-router.post('/user/contacts', checkAuth, (req, res, next) => {
-    db.User.findByPk(req.session.user.id)
-
+router.post('/users/:id/contacts', (req, res, next) => {
+    db.User.findByPk(req.params.id)
         .then(User => User.createEmergencyContact({
             name: req.body.name,
             phoneNumber: req.body.phoneNumber,
@@ -67,7 +67,15 @@ router.post('/login', (req, res) => {
                             error: 'Incorrect email or password'
                         })
                 } else {
-                    req.session.user = User;
+                    const payload = { username }
+                    const token = jwt.sign(payload, secret, {
+                        expiresIn: '1h'
+                    })
+                    res.cookie('token', token, { httpOnly: true })
+                        .status(200)
+
+                    req.session.user = User; 
+                    
                     res.json(User)
 
                 }
@@ -83,7 +91,7 @@ router.post('/login', (req, res) => {
 
 router.post('/register', function (req, res) { 
     console.log(req.body)
-    const { userName, email, password, firstName, lastName, dob, phrase } = req.body
+    const { userName, email, password, firstName, lastName, dob } = req.body
     if (!userName) { res.status(400).json({ error: 'user-name field is required' }); }
     if (!email) { res.status(400).json({ error: 'email field is required' }); }
     if (!password) { res.status(400).json({ error: 'password field is required' }); }
@@ -96,7 +104,6 @@ router.post('/register', function (req, res) {
             dob: dob,
             password: hash,
             email: email,
-            phrase: phrase,
         })
             .then(user => {
                 res.status(201).json(user);
@@ -105,7 +112,7 @@ router.post('/register', function (req, res) {
 });
 
 //deletes a user works and also deletes associated contacts
-router.delete('/users/:id', checkAuth, (req, res) => {
+router.delete('/users/:id', (req, res) => {
     db.User.destroy({
         where: {
             id: req.params.id
@@ -133,7 +140,7 @@ router.delete('/contacts/:id', (req, res) => {
 })
 
 //updates emergency contacts
-router.put('/contacts/:id', checkAuth, (req, res, next)=> {
+router.put('/contacts/:id', (req, res, next)=> {
     db.EmergencyContact.findByPk(parseInt(req.params.id))
     .then((contact) => {
         contact.name = req.body.name;
@@ -149,7 +156,13 @@ router.put('/contacts/:id', checkAuth, (req, res, next)=> {
 // logs user out
 router.get('/logout', (req, res) => {
     if (req.session) {
-        req.session.destroy();
+        req.session.destroy(function(err) {
+            if (err) {
+                return next(err);
+            } else {
+                return res.redirect('/')
+            }
+        })
     }
 })
 
@@ -158,7 +171,7 @@ router.get('/messages/:id', (req, res) => {
     const B = req.session.user.id
     db.Message.findAll({
         where: {
-            [    
+            [Op.or]: [    
                 {
                     RecipientId: A,      
                     SenderId: B    
@@ -170,7 +183,7 @@ router.get('/messages/:id', (req, res) => {
             ]
         },
         order: [
-            ['createdAt']
+            ['createdAt', 'DESC']
         ],
         include: {
             model: db.User,
@@ -198,19 +211,3 @@ router.get('/messages/:id', (req, res) => {
 
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
