@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Register from "./pages/register";
+import Contacts from "./pages/contacts";
 import Login from "./pages/login";
 import Feed from "./pages/feed";
 import Account from "./pages/account";
@@ -73,7 +74,6 @@ function App() {
   //   return () => clearInterval(interval);
   // });
 
-
   return (
     <Router>
       <div className="App"> 
@@ -87,9 +87,10 @@ function App() {
 
         <div>
           <Route path="/register" component={Register} />
+          <Route path="/contacts" component={Contacts} />
           <Route path="/login" component={Login} />
           <Route path="/feed" component={Feed} />
-          <Route path="/account/:id" component={Account} />
+          <Route path="/account" component={Account} />
           <Route path="/about" component={About} />
         </div>
 
