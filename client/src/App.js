@@ -40,9 +40,11 @@ function App() {
       // console.log('stop');
     }, 4000)
 
+
     
-    recognition.onresult = (e) => {
+  //   recognition.onresult = (e) => {
       
+
       setListening((listening = true))
       // If voice is recognized this function runs.
       let current = e.resultIndex;
@@ -84,6 +86,7 @@ function App() {
       }, 6000);
     return () => clearInterval(interval);
   });
+
 
 
  
