@@ -29,7 +29,7 @@ function App() {
 
   const voiceCommands = () => {
     //setListening((listening = false))
-    recognition.start();
+    // recognition.start();
     recognition.onstart = () => {
       // console.log("Listening");
     };
@@ -103,7 +103,7 @@ function App() {
         </div>
 
         <Route path="/map" component={MapContainer} />
-        <Route path="/chat/:id" component={Chat} />
+        <Route path="/chat" component={Chat} />
       </div>
 
     </Router>

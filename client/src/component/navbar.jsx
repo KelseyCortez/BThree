@@ -19,7 +19,7 @@ function MyNavbar() {
                             <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href="/feed">Home</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee"  }} href='/chat'>Messages</Nav.Link>
+                            <Nav.Link style={{ color: 'white', fontFamily: "Bungee"  }} href='/chat'>Forum</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link style={{ color: 'white', fontFamily: "Bungee"  }} href="/account">Account</Nav.Link>

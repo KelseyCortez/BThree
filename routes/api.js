@@ -149,31 +149,16 @@ router.get('/logout', (req, res) => {
         req.session.destroy()   }
 })
 
-router.get('/messages/:id', (req, res) => {
-    const A = parseInt(req.params.id)
-    const B = req.session.user.id
+// get messages from forum 
+router.get('/messages', (req, res) => {
     db.Message.findAll({
-        where: {
-            [Op.or]: [
-                {
-                    RecipientId: A,
-                    SenderId: B
-                },
-                {
-
-                    RecipientId: B,
-                    SenderId: A
-                }
-            ]
-        },
         order: [
-            ['createdAt', 'DESC']
+            ['createdAt', 'ASC']
         ], 
         include: {
             model: db.User,
             as: 'Sender'
-        }
-
+        } 
     }).then((messages) => {
         if (messages) {
             const formattedMessages = messages.map(message => {
