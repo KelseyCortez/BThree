@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, Col } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -13,7 +13,7 @@ class Register extends Component {
             password: "",
             email: "",
             dob: "",
-           phrase:"",
+            phrase: "",
 
         }
     }
@@ -35,16 +35,16 @@ class Register extends Component {
                     username: this.state.userName,
                     password: this.state.password
                 })
-            this.props.history.push('/contacts')
-        })
+                this.props.history.push('/contacts')
+            })
 
-        }
-            handleChange = (e) => {
-                const { value, name } = e.target;
-                this.setState({
-                    [name]: value
-                })
-            }
+    }
+    handleChange = (e) => {
+        const { value, name } = e.target;
+        this.setState({
+            [name]: value
+        })
+    }
 
     render() {
         return (
@@ -85,7 +85,6 @@ class Register extends Component {
                         <input className="form-control" placeholder="Enter password" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
                         </label> <br />
                     </div>
-
                     {/* <!-- input field for Email --> */}
                     <div className="form-group" style={registerColor}>
                         <label >
@@ -105,12 +104,6 @@ class Register extends Component {
                         <input type="text" className="form-control" name="phrase" value={this.state.phrase} onChange={this.handleChange} />
                         </label> <br />
                     </div>
-            
-                Safe Phrase<Col>
-                          <Form.Control name='phrase' placeholder="Phrase" value={this.state.phrase} onChange={this.handleChange} type="text"/>
-                        </Col>
-                        
-
                     {/* <!-- input field for Cell Phone Number --> */}
                     {/* <label name="" value={this.state. }>
                         Telephone Number:
