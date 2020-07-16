@@ -38,9 +38,15 @@ router.get('/user/contacts', checkAuth, (req, res, next) => {
 
 
 router.post('/user/contacts', checkAuth, (req, res, next) => {
-    console.log('heyy');
     console.log(req.body);
-    let contactsArray = [{...req.body.contact1}, {...req.body.contact2}, {...req.body.contact3}]
+    const contactsArray = [];
+    let keys = Object.keys(req.body)
+    for(key of keys){
+        if(req.body[key].phoneNumber) {
+            contactsArray.push(req.body[key])
+
+        }
+    }
     
     db.User.findByPk(req.session.user.id)
 
@@ -158,8 +164,7 @@ router.put('/contacts/:id', checkAuth, (req, res, next) => {
 // logs user out
 router.get('/logout', (req, res) => {
     if (req.session) {
-        req.session.destroy();
-    }
+        req.session.destroy()   }
 })
 
 router.get('/messages/:id', (req, res) => {
@@ -167,7 +172,7 @@ router.get('/messages/:id', (req, res) => {
     const B = req.session.user.id
     db.Message.findAll({
         where: {
-            [    
+            [Op.or] : [    
                 {
                     RecipientId: A,      
                     SenderId: B    
