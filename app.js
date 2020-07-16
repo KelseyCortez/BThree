@@ -1,5 +1,3 @@
-
-
 let createError = require('http-errors');
 let express = require('express');
 let socket = require('socket.io');
@@ -12,10 +10,6 @@ let smsRouter = require('./routes/sms');
 let session = require('express-session');
 let withAuth = require('./middleware');
 const db = require('./models');
-
-
-
-
 
 let app = express();
 
@@ -35,24 +29,12 @@ const sessionData = session({
   }
 })
 
-
 app.use(
   sessionData
 )
 
-
 app.use('/api/v1/', apiRouter);
 app.use('/api/v1/sms', smsRouter);
-
-// function checkAuthentication(req, res, next) {
-//   if (req.session.user) {
-//     next();
-//   } else {
-//     res.send('you are not logged in')
-//   }
-// }
-
-
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client/build/index.html'))
@@ -65,8 +47,6 @@ app.get('/checkToken', withAuth, function (req, res) {
   res.sendStatus(200);
 });
 
-
-
 // // error handler
 // app.use(function (err, req, res, next) {
 //   // set locals, only providing error in development
@@ -77,7 +57,6 @@ app.get('/checkToken', withAuth, function (req, res) {
 //   res.status(err.status || 500);
 //   res.json(err);
 // });
-
 
 io = socket();
 io.use((socket, next) => {
@@ -90,7 +69,6 @@ io.on('connection', (socket) => {
   if (socket.request.session.user) {
     sockets[socket.request.session.user.id] = socket.id
   }
-
   socket.on('send_private', function (data) {
     const userSocket = sockets[data.userId]
     const newMessage = {
@@ -109,9 +87,6 @@ io.on('connection', (socket) => {
     io.to(socket.id).emit('receive_own_private', newMessage)
   })
 })
-
-
-
 
 app.io = io
 
