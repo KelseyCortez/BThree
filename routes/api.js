@@ -7,16 +7,6 @@ const Op = db.Sequelize.Op
 const secret = "mysecretshhh";
 const checkAuth = require('../auth/checkAuthentication');
 
-
-
-
-// router.get('/users', checkAuth, function (req, res, next) {
-//     // res.send(req.params.id)
-//     db.User.findAll().then((data) => {
-//         res.json(data);
-//     });
-// });
-
 router.get('/user', checkAuth, function (req, res, next) {
     db.User.findByPk(req.session.user.id)
         .then(data => {
@@ -35,17 +25,12 @@ router.get('/user/contacts', checkAuth, (req, res, next) => {
     })
 })
 
-
-
 router.post('/user/contacts', checkAuth, (req, res, next) => {
     console.log('heyy');
     console.log(req.body);
     let contactsArray = [{...req.body.contact1}, {...req.body.contact2}, {...req.body.contact3}]
-    
     db.User.findByPk(req.session.user.id)
-
         .then(User => contactsArray.forEach(contact => {
-
             User.createEmergencyContact({
                 name: contact.name,
                 phoneNumber: contact.phoneNumber,
@@ -54,8 +39,6 @@ router.post('/user/contacts', checkAuth, (req, res, next) => {
         }))
         .then(data => res.json(data));
 })
-
-
 
 router.post('/login', (req, res) => {
     const username = req.body.username;
@@ -77,7 +60,6 @@ router.post('/login', (req, res) => {
                 } else {
                     req.session.user = User;
                     res.json(User)
-
                 }
             })
         })
@@ -85,9 +67,7 @@ router.post('/login', (req, res) => {
             res.status(401)
                 .json({ error: 'username not found' })
         })
-
 })
-
 
 router.post('/register', function (req, res) {
     console.log(req.body)
@@ -96,7 +76,6 @@ router.post('/register', function (req, res) {
     if (!email) { res.status(400).json({ error: 'email field is required' }); }
     if (!password) { res.status(400).json({ error: 'password field is required' }); }
     bcrypt.hash(password, 10, (err, hash) => {
-
         db.User.create({
             firstName: firstName,
             lastName: lastName,
@@ -167,20 +146,20 @@ router.get('/messages/:id', (req, res) => {
     const B = req.session.user.id
     db.Message.findAll({
         where: {
-            [    
+            [Op.or]: [
                 {
-                    RecipientId: A,      
-                    SenderId: B    
-                },    
-                {      
-                    RecipientId: B,      
-                    SenderId: A    
-                }  
+                    RecipientId: A,
+                    SenderId: B
+                },
+                {
+                    RecipientId: B,
+                    SenderId: A
+                }
             ]
         },
         order: [
-            ['createdAt']
-        ],
+            ['createdAt', 'DESC']
+        ], 
         include: {
             model: db.User,
             as: 'Sender'
@@ -202,9 +181,6 @@ router.get('/messages/:id', (req, res) => {
         }
     })
 })
-
-
-
 
 module.exports = router;
 
