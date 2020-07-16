@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Button, Form, Col } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-
+import axios from 'axios'
 
 class Register extends Component {
     constructor(props) {
@@ -16,12 +16,14 @@ class Register extends Component {
            phrase:"",
            text:""
 
+
         }
     }
 
     handleFormSubmit = (e) => {
         e.preventDefault();
         console.log(this.state)
+
         fetch('/api/v1/register',
             {
                 method: 'POST',
@@ -31,16 +33,20 @@ class Register extends Component {
                 },
             })
             .then(() => {
+                axios.post('/api/v1/login', {
+                    username: this.state.userName,
+                    password: this.state.password
+                })
                 this.props.history.push('/contacts')
             })
 
-        }
-            handleChange = (e) => {
-                const { value, name } = e.target;
-                this.setState({
-                    [name]: value
-                })
-            }
+    }
+    handleChange = (e) => {
+        const { value, name } = e.target;
+        this.setState({
+            [name]: value
+        })
+    }
 
     render() {
         return (
@@ -81,7 +87,6 @@ class Register extends Component {
                         <input className="form-control" placeholder="Enter password" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
                         </label> <br />
                     </div>
-
                     {/* <!-- input field for Email --> */}
                     <div className="form-group" style={registerColor}>
                         <label >
@@ -108,6 +113,7 @@ class Register extends Component {
                         </label> <br />
                     </div>
                         
+
 
                     {/* <!-- input field for Cell Phone Number --> */}
                     {/* <label name="" value={this.state. }>

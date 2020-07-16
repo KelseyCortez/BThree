@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import './feed.css'
 import { Link } from 'react-router-dom';
-import Friends from '../component/Friends';
-import Chat from '../component/Chat/Chat'
 
-import MapContainer from '../component/MapContainer'
+
+import PanicButton from '../component/PanicButton';
+import MapContainer from '../component/MapContainer';
 
 
 class Feed extends Component {
@@ -26,7 +26,7 @@ class Feed extends Component {
                     {/* timeline of all notifications from friends and yourself */}
                     <div className="FriendsArea"> 
                         Friends <hr/>
-                        <Friends />
+                        <PanicButton />
                     </div>
 
                     {/* Users can see their location and have the option to have it turned on or off */}
