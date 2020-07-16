@@ -30,6 +30,9 @@ module.exports = {
       phrase: {
         type: Sequelize.TEXT
       },
+      text: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

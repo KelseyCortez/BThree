@@ -79,7 +79,7 @@ router.post('/login', (req, res) => {
 
 router.post('/register', function (req, res) {
     console.log(req.body)
-    const { userName, email, password, firstName, lastName, dob, phrase } = req.body
+    const { userName, email, password, firstName, lastName, dob, phrase, text } = req.body
     if (!userName) { res.status(400).json({ error: 'user-name field is required' }); }
     if (!email) { res.status(400).json({ error: 'email field is required' }); }
     if (!password) { res.status(400).json({ error: 'password field is required' }); }
@@ -92,6 +92,7 @@ router.post('/register', function (req, res) {
             password: hash,
             email: email,
             phrase: phrase,
+            text: text
         })
             .then(user => {
                 req.session.user = user;
@@ -153,10 +154,13 @@ router.get('/messages/:id', (req, res) => {
     const B = req.session.user.id
     db.Message.findAll({
         where: {
-
-            [Op.or] : [    
-
+            [Op.or]: [
                 {
+                    RecipientId: A,
+                    SenderId: B
+                },
+                {
+
                     RecipientId: B,
                     SenderId: A
                 }
@@ -188,8 +192,6 @@ router.get('/messages/:id', (req, res) => {
 })
 
 module.exports = router;
-
-
 
 
 
