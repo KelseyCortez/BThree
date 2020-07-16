@@ -15,13 +15,14 @@
     margin: 40px auto;
     border-radius: 15px;
     display: flex;
-    display: row;
+    /* display: row; */
+    overflow-y: scroll;
     
 }
 
 .messages {
-    border: 1px black solid;
     margin: 20px auto;
+    margin-top: 300px;
     width: 100%;
     height: 90vh;
     display: flex;
@@ -30,12 +31,12 @@
     border-radius: 10px;
     text-align: left;
     padding: 20px;
-    overflow-y: scroll!important;
 }
 
 .chat-input {
     width: 75%;
     border-radius: 10px;
+    margin: 1px auto
 }
 
 Button {

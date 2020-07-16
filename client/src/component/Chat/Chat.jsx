@@ -65,10 +65,11 @@ export default class Chat extends Component {
                 {/* <div>
                     <h1>Forum </h1>
                 </div> */}
+
                 <div className="messages">
                     {this.state.messages.map((message, index) => {
                         return (
-                            <div key={index} style={{ float: 'left' }}>
+                            <div key={index}>
                                 <span style={{fontWeight: 'bold'}}> {message.author}: </span>
                                 {message.message} | {moment(message.time).format('MMMM Do YYYY, h:mm:ss a')}
 
