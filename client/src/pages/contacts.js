@@ -26,13 +26,16 @@ export default class Contacts extends Component {
 
             }
 
+
         }
     }
 
     handleFormSubmit = (e) => {
         e.preventDefault();
         console.log(this.state)
+
         fetch('api/v1/user/contacts',
+
             {
                 method: 'POST',
                 body: JSON.stringify(this.state),
@@ -80,6 +83,7 @@ export default class Contacts extends Component {
         return (
             <div>
                 <Form onSubmit={this.handleFormSubmit}>
+
                     <Form.Row>
                         Emergency Contact 1 <Col>
                             <Form.Control placeholder="Name" name='name' value={this.state.contact1.name} onChange={this.handleChange1} type="text" />
@@ -101,11 +105,13 @@ export default class Contacts extends Component {
                         </Col>
                         <Col>
                             <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact2.relationship} onChange={this.handleChange2} />
+
                         </Col>
                     </Form.Row>
                     <Form.Row>
                         Emergency Contact 3
                         <Col>
+
                             <Form.Control placeholder="Name" name='name' value={this.state.contact3.name} onChange={this.handleChange3} type="text" />
                         </Col>
                         <Col>
@@ -113,9 +119,10 @@ export default class Contacts extends Component {
                         </Col>
                         <Col>
                             <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact3.relationship} onChange={this.handleChange3} type="text" />
+
                         </Col>
 
-                    </Form.Row>
+                    </Form.Row> */}
                     <Button onSubmit={this.handleFormSubmit} type='submit'>Submit</Button>
                 </Form>
             </div>

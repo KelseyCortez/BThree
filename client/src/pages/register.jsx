@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Form, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-
+import axios from 'axios'
 
 class Register extends Component {
     constructor(props) {
@@ -21,6 +21,7 @@ class Register extends Component {
     handleFormSubmit = (e) => {
         e.preventDefault();
         console.log(this.state)
+
         fetch('/api/v1/register',
             {
                 method: 'POST',
@@ -30,8 +31,12 @@ class Register extends Component {
                 },
             })
             .then(() => {
-                this.props.history.push('/contacts')
-            })
+                axios.post('/api/v1/login', {
+                    username: this.state.userName,
+                    password: this.state.password
+                })
+            this.props.history.push('/contacts')
+        })
 
         }
             handleChange = (e) => {
