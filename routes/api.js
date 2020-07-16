@@ -3,8 +3,10 @@ const router = express.Router();
 const db = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
+const Op = db.Sequelize.Op
 const secret = "mysecretshhh";
 const checkAuth = require('../auth/checkAuthentication');
+
 
 
 
@@ -34,12 +36,21 @@ router.get('/user/contacts', checkAuth, (req, res, next) => {
 })
 
 
-router.post('/user/contacts/new', checkAuth, (req, res, next) => {
+
+router.post('/user/contacts', checkAuth, (req, res, next) => {
+    console.log('heyy');
+    console.log(req.body);
+    let contactsArray = [{...req.body.contact1}, {...req.body.contact2}, {...req.body.contact3}]
+    
     db.User.findByPk(req.session.user.id)
-        .then(User => User.createEmergencyContact({
-            name: req.body.name,
-            phoneNumber: req.body.phoneNumber,
-            relationship: req.body.relationship,
+
+        .then(User => contactsArray.forEach(contact => {
+
+            User.createEmergencyContact({
+                name: contact.name,
+                phoneNumber: contact.phoneNumber,
+                relationship: contact.relationship,
+            })
         }))
         .then(data => res.json(data));
 })
@@ -75,10 +86,10 @@ router.post('/login', (req, res) => {
                 .json({ error: 'username not found' })
         })
 
-}) 
+})
 
 
-router.post('/register', function (req, res) { 
+router.post('/register', function (req, res) {
     console.log(req.body)
     const { userName, email, password, firstName, lastName, dob, phrase } = req.body
     if (!userName) { res.status(400).json({ error: 'user-name field is required' }); }
@@ -96,6 +107,7 @@ router.post('/register', function (req, res) {
             phrase: phrase,
         })
             .then(user => {
+                req.session.user = user;
                 res.status(201).json(user);
             })
     });
@@ -122,25 +134,25 @@ router.delete('/contacts/:id', (req, res) => {
             id: req.params.id
         }
     })
-    .then((contact) => {
-        res.json(contact);
-    }).catch((err)=>{
-        res.json({error: 'Could not delete contact'});
-    })
+        .then((contact) => {
+            res.json(contact);
+        }).catch((err) => {
+            res.json({ error: 'Could not delete contact' });
+        })
 })
 
 //updates emergency contacts
-router.put('/contacts/:id', checkAuth, (req, res, next)=> {
+router.put('/contacts/:id', checkAuth, (req, res, next) => {
     db.EmergencyContact.findByPk(parseInt(req.params.id))
-    .then((contact) => {
-        contact.name = req.body.name;
-        contact.phoneNumber = req.body.phoneNumber;
-        contact.relationship = req.body.relationship;
-        contact.save().then((result)=>{
-            res.json(result);
-        })
+        .then((contact) => {
+            contact.name = req.body.name;
+            contact.phoneNumber = req.body.phoneNumber;
+            contact.relationship = req.body.relationship;
+            contact.save().then((result) => {
+                res.json(result);
+            })
 
-    })
+        })
 })
 
 // logs user out
@@ -148,6 +160,47 @@ router.get('/logout', (req, res) => {
     if (req.session) {
         req.session.destroy();
     }
+})
+
+router.get('/messages/:id', (req, res) => {
+    const A = parseInt(req.params.id)
+    const B = req.session.user.id
+    db.Message.findAll({
+        where: {
+            [    
+                {
+                    RecipientId: A,      
+                    SenderId: B    
+                },    
+                {      
+                    RecipientId: B,      
+                    SenderId: A    
+                }  
+            ]
+        },
+        order: [
+            ['createdAt']
+        ],
+        include: {
+            model: db.User,
+            as: 'Sender'
+        }
+
+    }).then((messages) => {
+        if (messages) {
+            const formattedMessages = messages.map(message => {
+                return {
+                    authorId: message.SenderId,
+                    author: message.Sender.firstName,
+                    message: message.content,
+                    time: message.createdAt
+                }
+            })
+            res.json(formattedMessages)
+        } else {
+            res.json([])
+        }
+    })
 })
 
 

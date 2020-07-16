@@ -99,11 +99,17 @@ class Register extends Component {
                         <input type="date" className="form-control" name="dob" value={this.state.dob} onChange={this.handleChange} />
                         </label> <br />
                     </div>
-                    <Form.Row>
+                    <div className="form-group" style={registerColor}>
+                        <label >
+                            Safe Phrase:
+                        <input type="text" className="form-control" name="phrase" value={this.state.phrase} onChange={this.handleChange} />
+                        </label> <br />
+                    </div>
+            
                 Safe Phrase<Col>
                           <Form.Control name='phrase' placeholder="Phrase" value={this.state.phrase} onChange={this.handleChange} type="text"/>
                         </Col>
-                        </Form.Row>
+                        
 
                     {/* <!-- input field for Cell Phone Number --> */}
                     {/* <label name="" value={this.state. }>

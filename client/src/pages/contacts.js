@@ -5,18 +5,37 @@ import { Form, Col, Button } from 'react-bootstrap';
 export default class Contacts extends Component {
     constructor(props) {
         super(props)
-    
+
         this.state = {
-            name: '',
-            phoneNumber: '',
-            relationship: ''
+            contact1: {
+                name: "",
+                phoneNumber: '',
+                relationship: '',
+
+            },
+            contact2: {
+                name: "",
+                phoneNumber: '',
+                relationship: '',
+
+            },
+            contact3: {
+                name: "",
+                phoneNumber: '',
+                relationship: '',
+
+            }
+
+
         }
     }
-    
+
     handleFormSubmit = (e) => {
         e.preventDefault();
         console.log(this.state)
-        fetch('/api/v1/user/contacts/new',
+
+        fetch('api/v1/user/contacts',
+
             {
                 method: 'POST',
                 body: JSON.stringify(this.state),
@@ -28,53 +47,79 @@ export default class Contacts extends Component {
                 this.props.history.push('/feed')
             }
             )
-      }
+    }
 
-    handleChange = (e) => {
+    handleChange1 = (e) => {
+
         const { value, name } = e.target;
         this.setState({
-            [name]: value
+            contact1: { ...this.state.contact1, [name]: value }
+
+        }, () => {
+            
+        });
+
+    }
+    handleChange2 = (e) => {
+        const { value, name } = e.target;
+        this.setState({
+            contact2: { ...this.state.contact2, [name]: value }
+
+        }, () => {
+            
+        });
+    }
+    handleChange3 = (e) => {
+        const { value, name } = e.target;
+        this.setState({
+            contact3: { ...this.state.contact3, [name]: value }
+        }, () => {
+        
         });
     }
 
-    
+
     render() {
         return (
             <div>
                 <Form onSubmit={this.handleFormSubmit}>
-                <Form.Row>
-                Emergency Contact 1 <Col>
-                          <Form.Control placeholder="name" name="name" defaultValue={this.state.name} onChange={this.handleChange} type="text"/>
-                        </Col>
-                        <Col>
-                            <Form.Control placeholder="Phone Number " name="num" defautValue={this.state.phoneNumber} onChange={this.handleChange} type="text"/>
-                        </Col>
-                        <Col>
-                            <Form.Control placeholder="Relationship" name="rel" defaultValue={this.state.relationship} onChange={this.handleChange} type="text" />
-                        </Col>
-                        </Form.Row>
-                    {/* <Form.Row>
-                    Emergency Contact 2
-                        <Col>
-                            <Form.Control placeholder="Name" name="name" defaultValue={this.state.name} onChange={this.handleChange} type="text"/>
-                        </Col>
-                        <Col>
-                            <Form.Control placeholder="Phone Number" name="num" defaultValue={this.state.phoneNumber} onChange={this.handleChange} type="text"/>
-                        </Col>
-                        <Col>
-                            <Form.Control name="rel" placeholder="Relationship" />
-                        </Col>
-                        </Form.Row>
+
                     <Form.Row>
-                    Emergency Contact 3
-                        <Col>
-                            <Form.Control placeholder="Name" name="name" defaultValue={this.state.name} onChange={this.handleChange} type="text"/>
+                        Emergency Contact 1 <Col>
+                            <Form.Control placeholder="Name" name='name' value={this.state.contact1.name} onChange={this.handleChange1} type="text" />
                         </Col>
                         <Col>
-                            <Form.Control placeholder="Phone Number" name="num" defaultValue={this.state.phoneNumber} onChange={this.handleChange} type="text" />
+                            <Form.Control placeholder="Phone Number " name='phoneNumber' value={this.state.contact1.phoneNumber} onChange={this.handleChange1} type="text" />
                         </Col>
                         <Col>
-                            <Form.Control placeholder="Relationship" name="rel" defaultValue={this.state.relationship} onChange={this.handleChange} type="text"/>
+                            <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact1.relationship} onChange={this.handleChange1} type="text" />
+                        </Col>
+                    </Form.Row>
+                    <Form.Row>
+                        Emergency Contact 2
+                        <Col>
+                            <Form.Control placeholder="Name" name='name' value={this.state.contact2.name} onChange={this.handleChange2} type="text" />
+                        </Col>
+                        <Col>
+                            <Form.Control placeholder="Phone Number" name='phoneNumber' value={this.state.contact2.phoneNumber} onChange={this.handleChange2} type="text" />
+                        </Col>
+                        <Col>
+                            <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact2.relationship} onChange={this.handleChange2} />
+
+                        </Col>
+                    </Form.Row>
+                    <Form.Row>
+                        Emergency Contact 3
+                        <Col>
+
+                            <Form.Control placeholder="Name" name='name' value={this.state.contact3.name} onChange={this.handleChange3} type="text" />
+                        </Col>
+                        <Col>
+                            <Form.Control placeholder="Phone Number" name='phoneNumber' value={this.state.contact3.phoneNumber} onChange={this.handleChange3} type="text" />
+                        </Col>
+                        <Col>
+                            <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact3.relationship} onChange={this.handleChange3} type="text" />
+
                         </Col>
 
                     </Form.Row> */}
