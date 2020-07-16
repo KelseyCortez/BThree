@@ -36,7 +36,7 @@ function App() {
     setTimeout(() => {
       recognition.stop();
       // console.log('stop');
-    }, 4000)
+    }, 7000)
 
     recognition.onresult = (e) => {
       setListening((listening = true))
@@ -53,8 +53,6 @@ function App() {
             if(data === 'Logged Out'){
               console.log('please log in')
             } else {
-              console.log(data)
-              console.log(data.firstName)
               const phrase = data.phrase.toLowerCase();
               console.log(phrase)
               if (transcript === phrase || transcript === ` ${phrase}`) {
@@ -78,9 +76,9 @@ function App() {
       } else {
         voiceCommands()
       }
-    }, 6000);
+    }, 8000);
     return () => clearInterval(interval);
-  });
+  }, []);
 
   return (
     <Router>
