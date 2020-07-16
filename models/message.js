@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.Message.belongsTo(models.User, {as: 'Recipient', foreignKey: 'RecipientId'})
+      // models.Message.belongsTo(models.User, {as: 'Recipient', foreignKey: 'RecipientId'})
       models.Message.belongsTo(models.User, {as: 'Sender', foreignKey: 'SenderId'})
     }
   };

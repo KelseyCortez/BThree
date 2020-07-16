@@ -69,22 +69,23 @@ io.on('connection', (socket) => {
   if (socket.request.session.user) {
     sockets[socket.request.session.user.id] = socket.id
   }
-  socket.on('send_private', function (data) {
-    const userSocket = sockets[data.userId]
+
+  socket.on('send_message', function (data) {
+    if (!socket.request.session.user) {
+      io.to(socket.id).emit('not_logged_in')
+      return
+    }
     const newMessage = {
       message: data.message,
-      author: socket.request.session.user.firstName,
+      author: socket.request.session.user.userName,
       authorId: socket.request.session.user.id
     }
+    io.emit('receive_message', newMessage)
+
     db.Message.create({
       content: data.message,
-      SenderId: socket.request.session.user.id,
-      RecipientId: data.userId
+      SenderId: socket.request.session.user.id
     })
-    if (userSocket) {
-      io.to(userSocket).emit('receive_private', newMessage)
-    }
-    io.to(socket.id).emit('receive_own_private', newMessage)
   })
 })
 
