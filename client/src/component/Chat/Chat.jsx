@@ -6,8 +6,6 @@ import moment from 'moment'
 
 moment().format()
 
-const messagesEndRef = React.createRef()
-
 export default class Chat extends Component {
     constructor(props) {
         super(props);
@@ -30,6 +28,7 @@ export default class Chat extends Component {
                     messages: messages
                 })
             })
+
         this.socket.on("receive_message", (data) => {
             console.log(data)
                 this.addMessage(data);
@@ -39,7 +38,6 @@ export default class Chat extends Component {
         this.socket.on("not_logged_in", () => {
             this.props.history.push('/login')
         });
-
     }
 
     addMessage = (data) => {
@@ -60,14 +58,13 @@ export default class Chat extends Component {
         });
     };
 
-   
 
     render() {
         return (
             <div className='container'>
-                <div>
+                {/* <div>
                     <h1>Forum </h1>
-                </div>
+                </div> */}
                 <div className="messages">
                     {this.state.messages.map((message, index) => {
                         return (
