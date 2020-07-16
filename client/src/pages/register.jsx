@@ -21,7 +21,7 @@ class Register extends Component {
     handleFormSubmit = (e) => {
         e.preventDefault();
         console.log(this.state)
-        
+
         fetch('/api/v1/register',
             {
                 method: 'POST',
@@ -31,10 +31,9 @@ class Register extends Component {
                 },
             })
             .then(() => {
-                console.log(this.state.userName)
                 axios.post('/api/v1/login', {
-                    ...this.state.userName,
-                    ...this.state.password
+                    username: this.state.userName,
+                    password: this.state.password
                 })
             this.props.history.push('/contacts')
         })
