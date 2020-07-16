@@ -14,6 +14,7 @@ class Register extends Component {
             email: "",
             dob: "",
            phrase:"",
+           text:""
 
         }
     }
@@ -100,10 +101,12 @@ class Register extends Component {
                         <input type="text" className="form-control" name="phrase" value={this.state.phrase} onChange={this.handleChange} />
                         </label> <br />
                     </div>
-            
-                Safe Phrase<Col>
-                          <Form.Control name='phrase' placeholder="Phrase" value={this.state.phrase} onChange={this.handleChange} type="text"/>
-                        </Col>
+                    <div className="form-group" style={registerColor}>
+                        <label >
+                            Text Message:
+                        <input type="text" className="form-control" name="text" value={this.state.text} onChange={this.handleChange} />
+                        </label> <br />
+                    </div>
                         
 
                     {/* <!-- input field for Cell Phone Number --> */}
