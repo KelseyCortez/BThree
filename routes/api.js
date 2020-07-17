@@ -30,8 +30,8 @@ router.post('/user/contacts', checkAuth, (req, res, next) => {
 
     const contactsArray = [];
     let keys = Object.keys(req.body)
-    for(key of keys){
-        if(req.body[key].phoneNumber) {
+    for (key of keys) {
+        if (req.body[key].phoneNumber) {
             contactsArray.push(req.body[key])
 
         }
@@ -43,6 +43,7 @@ router.post('/user/contacts', checkAuth, (req, res, next) => {
                 name: contact.name,
                 phoneNumber: contact.phoneNumber,
                 relationship: contact.relationship,
+                id: contact.id,
             })
         }))
         .then(data => res.json(data));
@@ -101,10 +102,10 @@ router.post('/register', function (req, res) {
 });
 
 //deletes a user works and also deletes associated contacts
-router.delete('/users/:id', checkAuth, (req, res) => {
+router.delete('/users', checkAuth, (req, res) => {
     db.User.destroy({
         where: {
-            id: req.params.id
+            id: req.session.user.id
         }
     })
         .then((user) => {
@@ -115,37 +116,77 @@ router.delete('/users/:id', checkAuth, (req, res) => {
 });
 
 //deletes an emergency contact
-router.delete('/contacts/:id', (req, res) => {
+router.delete('/user/contacts', (req, res) => {
+    console.log(req.query);
     db.EmergencyContact.destroy({
         where: {
-            id: req.params.id
+            id: req.query.id
         }
     })
         .then((contact) => {
-            res.json(contact);
+            res.json(req.query.id);
         }).catch((err) => {
             res.json({ error: 'Could not delete contact' });
         })
 })
 
 //updates emergency contacts
-router.put('/contacts/:id', checkAuth, (req, res, next) => {
-    db.EmergencyContact.findByPk(parseInt(req.params.id))
-        .then((contact) => {
-            contact.name = req.body.name;
-            contact.phoneNumber = req.body.phoneNumber;
-            contact.relationship = req.body.relationship;
-            contact.save().then((result) => {
-                res.json(result);
+router.put('/user/contacts', checkAuth, (req, res, next) => {
+    const contacts = req.body;
+    console.log('*');
+    console.log(contacts);
+    db.EmergencyContact.findAll({
+        where: {
+            userId: req.session.user.id
+        }
+    }).then(contactsArray => {
+        contactsArray.forEach((contact, index) => {
+            contact.update({
+                name: contacts[`contact${index + 1}`].name,
+                phoneNumber: contacts[`contact${index + 1}`].phoneNumber,
+                relationship: contacts[`contact${index + 1}`].relationship,
             })
-
         })
+    })
+        .then(data => res.json(data))
 })
+
+//     const contactsArray = [];
+// let keys = Object.keys(req.body)
+// for(key of keys){
+//     if(req.body[key].phoneNumber) {
+//         contactsArray.push(req.body[key])
+
+//     }
+// }
+
+// db.User.findByPk(req.session.user.id)
+//     .then(User => contactsArray.forEach(contact => {
+//         User.createEmergencyContact({
+//             name: contact.name,
+//             phoneNumber: contact.phoneNumber,
+//             relationship: contact.relationship,
+//         })
+//     }))
+//     .then(data => res.json(data));
+
+// db.EmergencyContact.findByPk(parseInt(req.params.id))
+//     .then((contact) => {
+//         contact.name = req.body.name;
+//         contact.phoneNumber = req.body.phoneNumber;
+//         contact.relationship = req.body.relationship;
+//         contact.save().then((result) => {
+//             res.json(result);
+//         })
+
+//     })
+
 
 // logs user out
 router.get('/logout', (req, res) => {
     if (req.session) {
-        req.session.destroy()   }
+        req.session.destroy()
+    }
 })
 
 router.get('/messages/:id', (req, res) => {
@@ -154,7 +195,7 @@ router.get('/messages/:id', (req, res) => {
     db.Message.findAll({
         where: {
 
-            [Op.or] : [    
+            [Op.or]: [
 
                 {
                     RecipientId: B,
@@ -164,7 +205,7 @@ router.get('/messages/:id', (req, res) => {
         },
         order: [
             ['createdAt', 'DESC']
-        ], 
+        ],
         include: {
             model: db.User,
             as: 'Sender'

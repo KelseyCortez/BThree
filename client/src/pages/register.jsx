@@ -20,8 +20,6 @@ class Register extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
-
         fetch('/api/v1/register',
             {
                 method: 'POST',

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import Account from './account';
 
 
 
@@ -47,7 +48,7 @@ class Login extends Component {
             .then((response) => { 
                 
                 console.log(response)
-                this.setState({ redirect: `/account` })
+                this.setState({ redirect: '/account' })
             })
             .catch(err => {
                 console.log(err);

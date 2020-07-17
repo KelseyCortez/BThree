@@ -13,6 +13,7 @@ import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
 import MyNavbar from './component/navbar'
+import EditContact from './pages/editcontact';
 // creates variables that allow chrome speech recognition
 // const SpeechRecognition =
 //   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -92,10 +93,12 @@ function App() {
           <Route path="/feed" component={Feed} />
           <Route path="/account" component={Account} />
           <Route path="/about" component={About} />
+          <Route path="/editcontact" component={EditContact} />
         </div>
 
         <Route path="/map" component={MapContainer} />
         <Route path="/chat/:id" component={Chat} />
+
       </div>
 
     </Router>
