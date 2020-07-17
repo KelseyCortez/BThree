@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 import PanicButton from '../component/PanicButton';
 import MapContainer from '../component/MapContainer';
+import EmergencyContacts1 from '../component/emergencyContacts';
 
 
 class Feed extends Component {
@@ -43,7 +44,8 @@ class Feed extends Component {
 
                         {/* timeline of all notifications from friends and yourself */}
                         <div className="FriendsArea">
-                            Friends <hr />
+                            Emergency Contacts: <emergencyContacts /> 
+                                <hr />
                             <PanicButton />
                         </div>
 
