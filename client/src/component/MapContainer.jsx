@@ -33,7 +33,8 @@ class MapContainer extends Component {
     return (
       <CurrentLocation
         centerAroundCurrentLocation
-        google={this.props.google}
+        google={this.props.google} 
+        style={{height:"70vh"}}
       >
         <Marker onClick={this.onMarkerClick} name={'current location'} />
         <InfoWindow
