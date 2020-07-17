@@ -127,7 +127,7 @@ class CurrentLocation extends React.Component {
 }
 
 
-CurrentLocation.defaultProps = {
+export default CurrentLocation.defaultProps = {
   zoom: 14,
   initialCenter: {
     lat: -1.2884,
@@ -149,4 +149,4 @@ const mapDispatchToProps = {
   location
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentLocation);
+connect(mapStateToProps, mapDispatchToProps)(CurrentLocation);
