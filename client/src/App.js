@@ -1,5 +1,5 @@
 import About from "./pages/about";
-import MapContainer from "./component/MapContainer";
+import Map from "./component/Map";
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -100,7 +100,7 @@ function App() {
           <Route path="/about" component={About} />
         </div>
 
-        <Route path="/map" component={MapContainer} />
+        <Route path="/map" component={Map} />
         <Route path="/chat" component={Chat} />
       </div>
 
