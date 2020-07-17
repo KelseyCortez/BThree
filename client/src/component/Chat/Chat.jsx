@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import './Chat.css';
 import SendIcon from '@material-ui/icons/Send';
 import moment from 'moment'
+import { Redirect } from 'react-router-dom'
 
 moment().format()
 
@@ -21,6 +22,17 @@ export default class Chat extends Component {
     }
 
     componentDidMount() {
+        fetch(`/api/v1/user`)
+            .then(res =>
+
+                res.json()
+            )
+            .then(data => {
+                console.log(data)
+                if (data === 'Logged Out') {
+                    this.setState({ Redirect: true })
+                }
+        });
         fetch(`/api/v1/messages`)
             .then(res => res.json())
             .then(messages => {
@@ -28,7 +40,7 @@ export default class Chat extends Component {
                     messages: messages
                 })
             })
-
+            
         this.socket.on("receive_message", (data) => {
             console.log(data)
                 this.addMessage(data);
@@ -65,7 +77,7 @@ export default class Chat extends Component {
                 {/* <div>
                     <h1>Forum </h1>
                 </div> */}
-
+                {this.state.Redirect ? <Redirect to='/login' /> : (
                 <div className="messages">
                     {this.state.messages.map((message, index) => {
                         return (
@@ -97,6 +109,7 @@ export default class Chat extends Component {
                         </form>
                     </div>
                 </div>
+                )}
             </div>
         );
     }

@@ -28,8 +28,8 @@ function App() {
 
 
   const voiceCommands = () => {
-    //setListening((listening = false))
-    // recognition.start();
+    setListening((listening = false))
+    recognition.start();
     recognition.onstart = () => {
       // console.log("Listening");
     };
