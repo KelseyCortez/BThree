@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { connect } from "socket.io-client";
+import { location } from './redux/actions'
 
 const mapStyles = {
 
@@ -17,7 +19,7 @@ const mapStyles = {
   // },
 };
 
-export class CurrentLocation extends React.Component {
+class CurrentLocation extends React.Component {
   constructor(props) {
     super(props);
     const { lat, lng } = this.props.initialCenter;
@@ -83,6 +85,7 @@ export class CurrentLocation extends React.Component {
       if (navigator && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((pos) => {
           const coords = pos.coords;
+          this.props.location(coords)
           this.setState({
             currentLocation: {
               lat: coords.latitude,
@@ -123,7 +126,6 @@ export class CurrentLocation extends React.Component {
   }
 }
 
-export default CurrentLocation;
 
 CurrentLocation.defaultProps = {
   zoom: 14,
@@ -134,3 +136,17 @@ CurrentLocation.defaultProps = {
   centerAroundCurrentLocation: false,
   visible: true,
 };
+
+
+const mapStateToProps = (state) => {
+  return {
+    latitude: state.latitude,
+    longitude: state.longitude
+  }
+}
+
+const mapDispatchToProps = {
+  location
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentLocation);

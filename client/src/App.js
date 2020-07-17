@@ -36,7 +36,7 @@ function App() {
     setTimeout(() => {
       recognition.stop();
       // console.log('stop');
-    }, 7000)
+    }, 6000)
 
     recognition.onresult = (e) => {
       setListening((listening = true))
