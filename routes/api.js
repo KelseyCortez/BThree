@@ -73,7 +73,7 @@ router.post('/login', (req, res) => {
         })
         .catch(() => {
             res.status(401)
-                .json({ error: 'username not found' })
+                .json({ error: 'Username not found' })
         })
 })
 

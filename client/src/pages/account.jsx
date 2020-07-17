@@ -30,7 +30,6 @@ class Account extends Component {
     getAccountInfo() {
         fetch(`/api/v1/user`)
             .then(res =>
-
                 res.json()
             )
             .then(data => {
@@ -51,9 +50,6 @@ class Account extends Component {
                 }
             })
             .catch(err => err)
-
-
-
     }
 
     getEmergencyContacts() {

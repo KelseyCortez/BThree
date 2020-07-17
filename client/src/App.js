@@ -11,9 +11,9 @@ import Account from "./pages/account";
 import Chat from "./component/Chat/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
-import PanicButton from './component/PanicButton';
-import MyNavbar from './component/navbar'
-import axios from 'axios'
+import PanicButton from "./component/PanicButton";
+import MyNavbar from "./component/navbar";
+import axios from "axios";
 
 import { connect, useSelector } from 'react-redux';
 
@@ -22,7 +22,6 @@ const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
 const recognition = new SpeechRecognition();
-
 
 function App() {
   const location = useSelector(state => {
@@ -35,20 +34,34 @@ function App() {
   let [runVoice, setRun] = useState(true);
   let [listening, setListening] = useState(false);
 
+  let [loggedIn, setLoggedIn] = useState("not checked");
+
+  const checkLogIn = () => {
+    fetch("/api/v1/user")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data !== "Logged Out") {
+          setLoggedIn("logged in");
+        } else {
+          setLoggedIn("logged out");
+        }
+      })
+      .catch((err) => err);
+  };
 
   const voiceCommands = () => {
-    setListening((listening = false))
-    recognition.start();
-    recognition.onstart = () => {
-      // console.log("Listening");
-    };
+    setListening((listening = false));
+    // recognition.start();
+    // recognition.onstart = () => {
+    //   // console.log("Listening");
+    // };
     setTimeout(() => {
       recognition.stop();
       // console.log('stop');
     }, 6000)
 
     recognition.onresult = (e) => {
-      setListening((listening = true))
+      setListening((listening = true));
       // If voice is recognized this function runs.
       let current = e.resultIndex;
 
@@ -59,14 +72,15 @@ function App() {
         fetch("/api/v1/user")
           .then((res) => res.json())
           .then((data) => {
-            if(data === 'Logged Out'){
-              console.log('please log in')
+            if (data === "Logged Out") {
+              console.log("please log in");
             } else {
               const phrase = data.phrase.toLowerCase();
-              console.log(phrase)
+              console.log(phrase);
               if (transcript === phrase || transcript === ` ${phrase}`) {
-                axios.post('/api/v1/sms/alert', {})
-                .then(data => {console.log(data)})
+                axios.post("/api/v1/sms/alert", {}).then((data) => {
+                  console.log(data);
+                });
                 recognition.stop();
                 setRun((runVoice = false));
               }
@@ -77,13 +91,14 @@ function App() {
   };
 
   useEffect(() => {
+    checkLogIn();
     //This function runs voiceCommands function whenever the page loads.
 
     const interval = setInterval(() => {
       if (runVoice === false) {
-        console.log('done Running')
+        console.log("done Running");
       } else {
-        voiceCommands()
+        voiceCommands();
       }
     }, 8000);
     return () => clearInterval(interval);
@@ -91,33 +106,35 @@ function App() {
 
   return (
     <Router>
-      <div className="App"> 
-      <MyNavbar />
+      <div className="App">
+        <MyNavbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         {/* <PanicButton /> */}
+        {loggedIn == "not checked" && <div> Loading.. </div>}
 
-        <Switch>
-          <Route path="/" exact component={LandingPage} /> 
-          
-        </Switch>
+        {loggedIn == "logged out" && (
+          <Switch>
+            <Route path="/" exact component={LandingPage} />
+            <Route path="/login">
+              <Login setLoggedIn={setLoggedIn} />
+            </Route>
+            <Route path="/register" component={Register} />
+            <Route path="/about" component={About} />
+          </Switch>
+        )}
 
-
-        <div> 
-          <Route path="/register" component={Register} />
-          <Route path="/contacts" component={Contacts} />
-          <Route path="/login" component={Login} />
-          <Route path="/feed" component={Feed} />
-          <Route path="/account" component={Account} />
-          <Route path="/about" component={About} />
-        </div>
-
-        <Route path="/map" component={Map} />
-        <Route path="/chat" component={Chat} />
+        {loggedIn == "logged in" && (
+          <Switch>
+            <Route path="/" exact component={LandingPage} />
+            <Route path="/contacts" component={Contacts} />
+            <Route path="/feed" component={Feed} />
+            <Route path="/account" component={Account} />
+            <Route path="/map" component={MapContainer} />
+            <Route path="/chat" component={Chat} />
+            <Route path="/about" component={About} />
+          </Switch>
+        )}
       </div>
-
     </Router>
   );
 }
-
-
-
 export default App;
