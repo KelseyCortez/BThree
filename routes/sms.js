@@ -10,7 +10,7 @@ router.post('/alert', checkAuth, function (req, res, next) {
         include: [{
             model: db.EmergencyContact
         }]
-    })    .then((user) => {
+    }).then((user) => {
         let emergencyNumbers = [];
         user.EmergencyContacts.forEach(contact => {
             emergencyNumbers.push(`+1${contact.phoneNumber}`)
@@ -22,4 +22,26 @@ router.post('/alert', checkAuth, function (req, res, next) {
     })
 });
 
-module.exports = router; 
+
+
+router.post('/alert/timer', checkAuth, function (req, res, next) {
+    let automatedMessage = "My Be right back timer just ended without me cancelling, can you text me to check in?"
+    console.log(req.session.user)
+    db.User.findByPk(req.session.user.id, {
+        include: [{
+            model: db.EmergencyContact
+        }]
+    }).then((user) => {
+        let emergencyNumbers = [];
+        user.EmergencyContacts.forEach(contact => {
+            emergencyNumbers.push(`+1${contact.phoneNumber}`)
+        })
+        twilio.sendMultiSms(emergencyNumbers, automatedMessage)
+            .then(message => {
+                res.json(message)
+            })
+    })
+
+})
+
+module.exports = router;  
