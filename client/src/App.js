@@ -1,5 +1,5 @@
 import About from "./pages/about";
-import MapContainer from "./component/MapContainer";
+import Map from "./component/Map";
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -14,6 +14,9 @@ import LandingPage from "./component/LandingPage";
 import PanicButton from "./component/PanicButton";
 import MyNavbar from "./component/navbar";
 import axios from "axios";
+
+import { connect, useSelector } from 'react-redux';
+
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -21,6 +24,12 @@ const SpeechRecognition =
 const recognition = new SpeechRecognition();
 
 function App() {
+  const location = useSelector(state => {
+    return {
+        latitude: state.latitude,
+        longitude: state.longitude
+    }
+  })
   let [userPhrase, setPhrase] = useState("");
   let [runVoice, setRun] = useState(true);
   let [listening, setListening] = useState(false);
@@ -49,7 +58,7 @@ function App() {
     setTimeout(() => {
       recognition.stop();
       // console.log('stop');
-    }, 7000);
+    }, 6000)
 
     recognition.onresult = (e) => {
       setListening((listening = true));
@@ -100,7 +109,6 @@ function App() {
       <div className="App">
         <MyNavbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         {/* <PanicButton /> */}
-
         {loggedIn == "not checked" && <div> Loading.. </div>}
 
         {loggedIn == "logged out" && (
@@ -129,5 +137,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;

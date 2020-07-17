@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import './account.css'
 import { Button} from 'react-bootstrap'
 import EmergencyContacts1 from '../component/emergencyContacts'
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom' 
+import Timer from '../component/timer'
 
 
 class Account extends Component {
@@ -16,7 +17,8 @@ class Account extends Component {
             // CellNumber: "",
             Age: "",
             FriendList: [],
-            EmergencyContacts: [],
+            EmergencyContacts: [], 
+            id: "",
             Redirect: false
 
 
@@ -39,7 +41,8 @@ class Account extends Component {
                         Name: (data.firstName + " " + data.lastName),
                         Username: data.userName,
                         Password: data.password,
-                        Email: data.email,
+                        Email: data.email, 
+                        id: data.id,
                         // CellNumber: 
                         Age: data.dob
                         // FriendList: 
@@ -106,9 +109,10 @@ class Account extends Component {
 
         return (
             <div>
-                {this.state.Redirect ? <Redirect to='/login'/> : (
+                {this.state.Redirect ? <Redirect to='/login'/> : ( 
+                   
                     <div className="AccountPage flexColumn">
-
+                             <Timer/>
                         <div className="Title"> Account Information </div> 
 
                         <div className="Info flexRow">

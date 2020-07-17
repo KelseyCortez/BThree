@@ -5,8 +5,9 @@ import { Redirect } from 'react-router-dom'
 
 
 import PanicButton from '../component/PanicButton';
-import MapContainer from '../component/MapContainer';
 import EmergencyContacts1 from '../component/emergencyContacts';
+import Map from '../component/Map'
+
 
 
 class Feed extends Component {
@@ -52,7 +53,7 @@ class Feed extends Component {
                         {/* Users can see their location and have the option to have it turned on or off */}
 
                         <div className="LocationArea"> Location <hr />
-                            <MapContainer />
+                            <Map />
                         </div>
                     </div>
 
