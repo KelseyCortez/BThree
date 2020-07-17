@@ -14,6 +14,7 @@ import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
 import MyNavbar from './component/navbar'
 import axios from 'axios'
+import { connect, useSelector } from 'react-redux';
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -21,7 +22,13 @@ const SpeechRecognition =
 const recognition = new SpeechRecognition();
 
 
-function App() {
+function App( {latitude, longitude} ) {
+  const location = useSelector(state => {
+    return {
+        latitude: state.latitude,
+        longitude: state.longitude
+    }
+  })
   let [userPhrase, setPhrase] = useState("");
   let [runVoice, setRun] = useState(true);
   let [listening, setListening] = useState(false);
@@ -108,7 +115,6 @@ function App() {
   );
 }
 
+
+
 export default App;
-
-
-
