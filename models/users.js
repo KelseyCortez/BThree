@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       models.User.hasMany(models.EmergencyContact, {foreignKey: 'userId'});
-      models.User.hasMany(models.Message, {as: 'Recipient', foreignKey: 'RecipientId'})
+      // models.User.hasMany(models.Message, {as: 'Recipient', foreignKey: 'RecipientId'})
       models.User.hasMany(models.Message, {as: 'Sender', foreignKey: 'SenderId'})
     }
   };
@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     dob: DataTypes.DATEONLY,
     email: DataTypes.TEXT,
     phrase: DataTypes.TEXT,
+    text: DataTypes.TEXT,
     password: DataTypes.TEXT,
   }, {
     sequelize,

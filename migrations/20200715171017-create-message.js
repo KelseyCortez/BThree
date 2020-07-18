@@ -11,14 +11,14 @@ module.exports = {
       content: {
         type: Sequelize.STRING
       },
-      RecipientId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id'
-        }
-      },
+      // RecipientId: {
+      //   allowNull: false,
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: 'Users',
+      //     key: 'id'
+      //   }
+      // },
       SenderId: {
         allowNull: false,
         type: Sequelize.INTEGER,

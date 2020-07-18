@@ -13,7 +13,9 @@ class Register extends Component {
             password: "",
             email: "",
             dob: "",
-            phrase: "",
+           phrase:"",
+           text:""
+
 
         }
     }
@@ -102,6 +104,15 @@ class Register extends Component {
                         <input type="text" className="form-control" name="phrase" value={this.state.phrase} onChange={this.handleChange} />
                         </label> <br />
                     </div>
+                    <div className="form-group" style={registerColor}>
+                        <label >
+                            Text Message:
+                        <input type="text" className="form-control" name="text" value={this.state.text} onChange={this.handleChange} />
+                        </label> <br />
+                    </div>
+                        
+
+
                     {/* <!-- input field for Cell Phone Number --> */}
                     {/* <label name="" value={this.state. }>
                         Telephone Number:

@@ -74,13 +74,13 @@ router.post('/login', (req, res) => {
         })
         .catch(() => {
             res.status(401)
-                .json({ error: 'username not found' })
+                .json({ error: 'Username not found' })
         })
 })
 
 router.post('/register', function (req, res) {
     console.log(req.body)
-    const { userName, email, password, firstName, lastName, dob, phrase } = req.body
+    const { userName, email, password, firstName, lastName, dob, phrase, text } = req.body
     if (!userName) { res.status(400).json({ error: 'user-name field is required' }); }
     if (!email) { res.status(400).json({ error: 'email field is required' }); }
     if (!password) { res.status(400).json({ error: 'password field is required' }); }
@@ -93,6 +93,7 @@ router.post('/register', function (req, res) {
             password: hash,
             email: email,
             phrase: phrase,
+            text: text
         })
             .then(user => {
                 req.session.user = user;
@@ -189,9 +190,8 @@ router.get('/logout', (req, res) => {
     }
 })
 
-router.get('/messages/:id', (req, res) => {
-    const A = parseInt(req.params.id)
-    const B = req.session.user.id
+// get messages from forum 
+router.get('/messages', (req, res) => {
     db.Message.findAll({
         where: {
 
@@ -209,8 +209,7 @@ router.get('/messages/:id', (req, res) => {
         include: {
             model: db.User,
             as: 'Sender'
-        }
-
+        } 
     }).then((messages) => {
         if (messages) {
             const formattedMessages = messages.map(message => {
@@ -229,8 +228,6 @@ router.get('/messages/:id', (req, res) => {
 })
 
 module.exports = router;
-
-
 
 
 
