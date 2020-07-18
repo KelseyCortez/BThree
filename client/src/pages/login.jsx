@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import { Redirect, withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import Account from './account';
 
 
 
@@ -45,6 +46,8 @@ class Login extends Component {
             //     }) 
 
             .then((response) => { 
+                console.log(response)
+                this.setState({ redirect: '/account' })
                 this.props.setLoggedIn('logged in') 
                 this.props.history.push('/account')
                 // this.setState({ redirect: `/account` })
