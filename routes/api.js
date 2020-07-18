@@ -143,6 +143,18 @@ router.put('/contacts/:id', checkAuth, (req, res, next) => {
         })
 })
 
+
+router.put('/user', checkAuth, (req,res, next) => {
+    db.User.findByPk(req.session.user.id)
+    .then((user) => {
+        user.lat = req.body.lat;
+        user.lng = req.body.lng;
+        user.save().then((result) => {
+            res.json(result);
+        })
+    })
+})
+
 // logs user out
 router.get('/logout', (req, res) => {
     if (req.session) {

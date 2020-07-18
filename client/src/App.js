@@ -51,7 +51,7 @@ function App() {
 
   const voiceCommands = () => {
     setListening((listening = false));
-    // recognition.start();
+    recognition.start();
     // recognition.onstart = () => {
     //   // console.log("Listening");
     // };
@@ -78,9 +78,13 @@ function App() {
               const phrase = data.phrase.toLowerCase();
               console.log(phrase);
               if (transcript === phrase || transcript === ` ${phrase}`) {
-                axios.post("/api/v1/sms/alert", {}).then((data) => {
-                  console.log(data);
-                });
+                axios.put('/api/v1/user', {
+                  lat: location.latitude,
+                  lng: location.longitude
+              }).then(
+                  axios.post('/api/v1/sms/alert', {})
+                  // .then(res => res.json())
+              )  
                 recognition.stop();
                 setRun((runVoice = false));
               }
@@ -128,7 +132,7 @@ function App() {
             <Route path="/contacts" component={Contacts} />
             <Route path="/feed" component={Feed} />
             <Route path="/account" component={Account} />
-            <Route path="/map" component={MapContainer} />
+            <Route path="/map" component={Map} />
             <Route path="/chat" component={Chat} />
             <Route path="/about" component={About} />
           </Switch>

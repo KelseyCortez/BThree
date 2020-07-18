@@ -12,10 +12,11 @@ router.post('/alert', checkAuth, function (req, res, next) {
         }]
     }).then((user) => {
         let emergencyNumbers = [];
+        let text = `${user.text}.\n- ${user.firstName} ${user.lastName}.\n Last known Latitude and Longitude:\n ${user.lat}  ${user.lng}`
         user.EmergencyContacts.forEach(contact => {
             emergencyNumbers.push(`+1${contact.phoneNumber}`)
         })
-        twilio.sendMultiSms(emergencyNumbers, user.text)
+        twilio.sendMultiSms(emergencyNumbers, text)
             .then(message => {
                 res.json(message);
             })
