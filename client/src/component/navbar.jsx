@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, Button } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
-import axios from 'axios'
+import axios from 'axios' 
+import './navBar.css'
 
 
 function MyNavbar() {
@@ -14,8 +15,8 @@ function MyNavbar() {
     
             return (
                 <div>
-                    <Navbar style={{backgroundColor:"#8B0000"}}>
-                        <Navbar.Brand style={{ fontSize: '55px', color: 'white', fontFamily: "Bungee Inline" }}>BThree</Navbar.Brand>
+                    <Navbar style={{backgroundColor:"#8B0000", height:"16vh"}}>
+                        <Navbar.Brand className="glow" style={{ fontSize: '85px', color: 'white', fontFamily: "Bungee Inline", letterSpacing:"3px", marginLeft:"20px" }}>BThree</Navbar.Brand>
                         <Nav className="justify-content-end ml-auto" activeKey="/home">
                             <Nav.Item>
                                 <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href="/feed">Home</Nav.Link>

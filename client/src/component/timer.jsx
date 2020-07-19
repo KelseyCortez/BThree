@@ -68,7 +68,7 @@ class Timer extends Component {
 
                 <div style={{ backgroundColor: `${this.state.color}` }} className="numbers"> {this.state.timeLeft} </div>
 
-                <div>
+                <div className="flexRight">
                     <form onSubmit={this.countDownTimer}>
                         <div className="flexColumn"> 
                         <select className="select" onChange={this.myChangeHandler} value={this.state.value}>

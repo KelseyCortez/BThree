@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom' 
+import './login.css'
 
 
 
@@ -56,7 +57,8 @@ class Login extends Component {
     }
     render() {
         return (
-            <div className="LoginPage">
+            <div className="LoginPage"> 
+            <div className="blackboard"> 
                 {this.state.redirect && <Redirect to={this.state.redirect} />}
                 <h3 style={loginColor}>Sign In</h3>
                 {/* <!-- form for user login  --> */}
@@ -85,7 +87,8 @@ class Login extends Component {
                         <a href="/">Forgot Password? </a>
                     </p>
                     <p style={loginColor}><Link to={'/register'}>Not signed up? Register here</Link></p>
-                </form>
+                </form> 
+                </div>
             </div>
 
         );

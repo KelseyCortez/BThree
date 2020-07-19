@@ -73,19 +73,23 @@ export default class Chat extends Component {
 
     render() {
         return (
-            <div className='container'>
+            <div className='container'> 
+            
                 {/* <div>
                     <h1>Forum </h1>
                 </div> */}
                 {this.state.Redirect ? <Redirect to='/login' /> : (
-                <div className="messages">
+                <div className="messages"> 
+                <h2>What's On Your mind? </h2>
                     {this.state.messages.map((message, index) => {
-                        return (
-                            <div key={index}>
-                                <span style={{fontWeight: 'bold'}}> {message.author}: </span>
-                                {message.message} | {moment(message.time).format('MMMM Do YYYY, h:mm:ss a')}
+                        return ( 
+                            
+                            <div className="message" key={index}>
+                                <span style={{fontWeight: 'bold', color:"red", fontSize:"20px"}}> {message.author}: </span>
+                               <span style={{fontSize: "20px"}}> {message.message} </span> <br/> 
+                                 <span style={{fontSize: "10px", fontFamily:"Bungee"}}> {moment(message.time).format('MMMM Do YYYY, h:mm:ss a')} </span>
 
-                                <hr />
+                                <hr  className="horizontalRule"/>
                             </div>
                         );
                     })}

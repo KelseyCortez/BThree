@@ -14,7 +14,7 @@ import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
 import MyNavbar from './component/navbar'
 import axios from 'axios'
-
+import Footer from "./component/footer"
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -51,14 +51,14 @@ function App() {
         fetch("/api/v1/user")
           .then((res) => res.json())
           .then((data) => {
-            if(data === 'Logged Out'){
+            if (data === 'Logged Out') {
               console.log('please log in')
             } else {
               const phrase = data.phrase.toLowerCase();
               console.log(phrase)
               if (transcript === phrase || transcript === ` ${phrase}`) {
                 axios.post('/api/v1/sms/alert', {})
-                .then(data => {console.log(data)})
+                  .then(data => { console.log(data) })
                 recognition.stop();
                 setRun((runVoice = false));
               }
@@ -83,17 +83,18 @@ function App() {
 
   return (
     <Router>
-      <div className="App"> 
-      <MyNavbar />
+      <div className="App">
+        <MyNavbar />
         {/* <PanicButton /> */}
 
+
         <Switch>
-          <Route path="/" exact component={LandingPage} /> 
-          
+          <Route path="/" exact component={LandingPage} />
+
         </Switch>
 
 
-        <div> 
+        <div>
           <Route path="/register" component={Register} />
           <Route path="/contacts" component={Contacts} />
           <Route path="/login" component={Login} />
@@ -105,6 +106,9 @@ function App() {
         <Route path="/map" component={MapContainer} />
         <Route path="/chat" component={Chat} />
       </div>
+
+      <footer> <Footer /> </footer>
+
 
     </Router>
   );

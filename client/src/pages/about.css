@@ -1,72 +1,43 @@
-.AboutPage{ 
-    font-family: "Coda Caption"; 
-    height: 100vh;
-}   
 
-p{ 
-    font-size: 15px;
-    line-height: 200%; 
-    
-} 
-header{ 
-    border: 2px solid black; 
-    height: 15vh; 
-    text-align: center; 
-    font-family: "Coda Caption"; 
-    /* margin-bottom: 10px; */
-    
-}
-
-.SectionTitle{ 
-    border: 2px solid black; 
-    width: 80vw;
-    /* height: 7vh; */
-    font-size: 35px; 
-    text-align: center; 
-} 
-.flexColumn{ 
+.AboutPage { 
+    font-family: "Bungee";
     display: flex; 
-    flex-direction: column;
-} 
- 
-.alignCenterItems{ 
-    align-items: center;
-}
-
-.alignCenter{ 
+    flex-direction: column;  
+    justify-content: center; 
+    justify-items: center;
+    align-items: center; 
     align-content: center;
-}
-.adjustCenter{
-    justify-content: center;
-    align-items: center;
-} 
-
-.quickLinks{ 
-    position: absolute; 
-    right: 0px; 
-    justify-content: flex-end; 
-    
-}  
-
-.flexRow{ 
-    display: flex; 
-    flex-direction: row;
+    color: white;   
+    background-color: brown;
+   
+    /* background-color: #cccccc; */
+    /* background-color: #7EADDC; */
+    min-height: 100vh; 
+    width: 100%;
 
 } 
-.AccountArea{ 
-    /* height: 50px;  */
-    width: 100px; 
-    text-align: center; 
-    
+.theParagraphs{ 
+    width: 90vw; 
+   height:  95vh;  
+   background-image: url("/public/faces.jpeg");
+   background-color: black; 
+   overflow-y: scroll;
 }
-
-.FriendsArea{  
-
-    /* height: 50px;  */
-    width: 100px;
-    text-align: center;
+p{ 
+    font-family: "Bungee Hairline"; 
+    font-weight: 700;
+    color: white; 
+    font-size: 30px; 
+    margin: 20px 40px 10px 40px; 
+    padding: 30px;
 } 
-
-.spaceAround{ 
-justify-content: space-around;
-}
+body {
+    background-color: black;
+    font-family: cursive;
+  } 
+  h2{  
+      padding: 30px;
+      background-color: white; 
+      width: 100%;
+  }
+  
