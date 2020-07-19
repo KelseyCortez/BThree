@@ -13,8 +13,11 @@ import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
 import MyNavbar from './component/navbar'
+
+import axios from 'axios'
+import Footer from "./component/footer"
+
 import EditContact from './pages/editcontact';
-import axios from "axios";
 
 import { connect, useSelector } from 'react-redux';
 
@@ -73,12 +76,14 @@ function App() {
         fetch("/api/v1/user")
           .then((res) => res.json())
           .then((data) => {
+
             if (data === "Logged Out") {
-              console.log("please log in");
+
             } else {
               const phrase = data.phrase.toLowerCase();
               console.log(phrase);
               if (transcript === phrase || transcript === ` ${phrase}`) {
+
                 axios.put('/api/v1/user', {
                   lat: location.latitude,
                   lng: location.longitude
@@ -86,6 +91,7 @@ function App() {
                   axios.post('/api/v1/sms/alert', {})
                   // .then(res => res.json())
               )  
+
                 recognition.stop();
                 setRun((runVoice = false));
               }
@@ -112,7 +118,9 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <MyNavbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+
+        <MyNavbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> 
+     <footer> <Footer /> </footer>
         {/* <PanicButton /> */}
 
         {loggedIn == "not checked" && <div> Loading.. </div>}
@@ -141,6 +149,7 @@ function App() {
           </Switch>
         )}
       </div>
+
     </Router>
   );
 }

@@ -9,45 +9,23 @@ class About extends Component {
     }
     render() {
         return (
-            <div className="AboutPage flexColumn  alignCenter spaceAround">
-
-                <header>
-                    <div className="flexRow">
-                        <h1> About </h1>
-                        <div className="flexColumn quickLinks" >
-                            <div className="AccountArea"> <Link to={{ pathname: '/account' }}>  Account </Link> </div>
-                            <div className="FriendsArea"> <Link> Friends </Link> </div>
-                        </div>
-                    </div>
-                </header>
 
 
-                <div className="flexColumn alignCenter">
-                    <div className="flexColumn alignCenterItems">
-                        <div className="SectionTitle"> Who  </div>
-                        <p>Group of 5 software engineers</p>
-                    </div>
 
-                    <div className="flexColumn alignCenterItems ">
-                        <div className="SectionTitle"> What </div>
-                        <p> Seeking to create an application that can make your emergency contacts readily available </p>
-                    </div>
+            <div className="AboutPage">
+                <div className="theParagraphs">
 
-                    <div className=" flexColumn alignCenterItems ">
-                        <div className="SectionTitle"> Why  </div>
-                        <p>  Discrete way of having access to your contacts without having to fumble through phone in time of distress
-                        Gives the option of sharing your location to those close to you without actively sharing it all the time in
-                    the event of distress </p>
-
-                    </div>
-
-                    <div className="flexColumn alignCenterItems ">
-                        <div className="SectionTitle"> How  </div>
-                        <p> Voice activated response
-                        Preset phrases
-                        Auto record </p>
-
-                    </div>
+                    <h2>  If a tree falls in the middle of the woods, and no one is around to hear it does it make a sound? </h2>
+                   
+                    <p>
+                        No matter where you are  we want you to feel secure in knowing that you have the support of those closest to you. While our phones are great for giving us an expedient resource to reach out to nearly anyone, it has yet to provide us with true uniformity to send resourceful information to those around us in times of greatest concern. <br />
+                        <br /> B3 is an abbreviation for the codename  “Bravo, Bravo, Bravo” which is a signal sent over passenger ship radio to alert crew to a fire or other serious incident on board without alarming passengers. Our team thought this would be a great name for our app because we wanted our users to have security in knowing that no matter where they are they can  keep those closest to them on alert without giving rise to a situation. We envisioned our app as kind of a standby for those situations between Immediate Danger and “just taking precaution”.
+                      <br /> <br /> We want our users to be okay with adhering to caution without feeling uneasy with today's modern surveillance techniques. Here you decide what data you want to access and it only gets sent when you tell it to.
+                    <br /> <br /> Our market audience is everyone. Many of our day to day operations
+                whether it be going out for a jog, late night trips to the bank, leaving work, getting off the bus, phone battery dying, we are surrounded by people but unaware of anyone's attention. Many times an individual will feel rightfully weary about a situation but not want to be a bother to their friends or family because they hope for the best in the end. Our app allows for users to ...</p>
+                    <p> Voice activated response
+                    Preset phrases
+                Auto record </p>
 
 
                 </div>
@@ -56,11 +34,8 @@ class About extends Component {
 
 
 
-             Hello, Thanks so much for stopping by.B3 is an app developed by 5 software developers in order to provide users with
-             around the clock support from their trusted peers.In many emergency situations, individuals cannot easily alert their
-        loved ones until it is too late or their loved ones have been contacted by an Emergency service(like firefighters, paramedics,
-            police, etc.).There are also plenty of situations where our phone battery is low and there isn't much time to access our contacts
-        and share our location.
+
+
 
             </div >
 
