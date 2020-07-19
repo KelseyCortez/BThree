@@ -6,7 +6,9 @@ import Timer from '../component/timer'
 
 
 import PanicButton from '../component/PanicButton';
-import MapContainer from '../component/MapContainer';
+import EmergencyContacts1 from '../component/emergencyContacts';
+import Map from '../component/Map'
+
 
 
 class Feed extends Component {
@@ -44,17 +46,21 @@ class Feed extends Component {
 
                         {/* timeline of all notifications from friends and yourself */}
                         <div className="FriendsArea">
+
                            
                             <PanicButton />  
                          <div className="Clock"> <div className="upsideDown1"> In </div> <div className="clockColumn"> <div> Be </div> <div className="time"> <Timer/> </div> <div> Back </div> </div> <div className="upsideDown2"> Right </div> </div>
                             Friends <hr /> 
 
+
                         </div>
 
                         {/* Users can see their location and have the option to have it turned on or off */}
 
+
                         <div className="LocationArea"> Location 
                           <div className="theMap">   <MapContainer /> </div>
+
                         </div>
                     </div>
 

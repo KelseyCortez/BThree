@@ -1,5 +1,5 @@
 import About from "./pages/about";
-import MapContainer from "./component/MapContainer";
+import Map from "./component/Map";
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -13,34 +13,59 @@ import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
 import MyNavbar from './component/navbar'
+
 import axios from 'axios'
 import Footer from "./component/footer"
+
+import EditContact from './pages/editcontact';
+
+import { connect, useSelector } from 'react-redux';
+
 // creates variables that allow chrome speech recognition
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
 const recognition = new SpeechRecognition();
 
-
 function App() {
+  const location = useSelector(state => {
+    return {
+        latitude: state.latitude,
+        longitude: state.longitude
+    }
+  })
   let [userPhrase, setPhrase] = useState("");
   let [runVoice, setRun] = useState(true);
   let [listening, setListening] = useState(false);
 
+  let [loggedIn, setLoggedIn] = useState("not checked");
+
+  const checkLogIn = () => {
+    fetch("/api/v1/user")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data !== "Logged Out") {
+          setLoggedIn("logged in");
+        } else {
+          setLoggedIn("logged out");
+        }
+      })
+      .catch((err) => err);
+  };
 
   const voiceCommands = () => {
-    setListening((listening = false))
+    setListening((listening = false));
     recognition.start();
-    recognition.onstart = () => {
-      // console.log("Listening");
-    };
+    // recognition.onstart = () => {
+    //   // console.log("Listening");
+    // };
     setTimeout(() => {
       recognition.stop();
       // console.log('stop');
-    }, 7000)
+    }, 6000)
 
     recognition.onresult = (e) => {
-      setListening((listening = true))
+      setListening((listening = true));
       // If voice is recognized this function runs.
       let current = e.resultIndex;
 
@@ -51,14 +76,22 @@ function App() {
         fetch("/api/v1/user")
           .then((res) => res.json())
           .then((data) => {
-            if (data === 'Logged Out') {
-              console.log('please log in')
+
+            if (data === "Logged Out") {
+
             } else {
               const phrase = data.phrase.toLowerCase();
-              console.log(phrase)
+              console.log(phrase);
               if (transcript === phrase || transcript === ` ${phrase}`) {
-                axios.post('/api/v1/sms/alert', {})
-                  .then(data => { console.log(data) })
+
+                axios.put('/api/v1/user', {
+                  lat: location.latitude,
+                  lng: location.longitude
+              }).then(
+                  axios.post('/api/v1/sms/alert', {})
+                  // .then(res => res.json())
+              )  
+
                 recognition.stop();
                 setRun((runVoice = false));
               }
@@ -69,13 +102,14 @@ function App() {
   };
 
   useEffect(() => {
+    checkLogIn();
     //This function runs voiceCommands function whenever the page loads.
 
     const interval = setInterval(() => {
       if (runVoice === false) {
-        console.log('done Running')
+        console.log("done Running");
       } else {
-        voiceCommands()
+        voiceCommands();
       }
     }, 8000);
     return () => clearInterval(interval);
@@ -84,37 +118,39 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <MyNavbar />
+
+        <MyNavbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> 
+     <footer> <Footer /> </footer>
         {/* <PanicButton /> */}
 
+        {loggedIn == "not checked" && <div> Loading.. </div>}
 
-        <Switch>
-          <Route path="/" exact component={LandingPage} />
+        {loggedIn == "logged out" && (
+          <Switch>
+            <Route path="/" exact component={LandingPage} />
+            <Route path="/login">
+              <Login setLoggedIn={setLoggedIn} />
+            </Route>
+            <Route path="/register" component={Register} />
+            <Route path="/about" component={About} />
+          </Switch>
+        )}
 
-        </Switch>
-
-
-        <div>
-          <Route path="/register" component={Register} />
-          <Route path="/contacts" component={Contacts} />
-          <Route path="/login" component={Login} />
-          <Route path="/feed" component={Feed} />
-          <Route path="/account" component={Account} />
-          <Route path="/about" component={About} />
-        </div>
-
-        <Route path="/map" component={MapContainer} />
-        <Route path="/chat" component={Chat} />
+        {loggedIn == "logged in" && (
+          <Switch>
+            <Route path="/" exact component={LandingPage} />
+            <Route path="/contacts" component={Contacts} />
+            <Route path="/feed" component={Feed} />
+            <Route path="/account" component={Account} />
+            <Route path="/map" component={Map} />
+            <Route path="/chat" component={Chat} />
+            <Route path="/about" component={About} />
+          <Route path="/editcontact" component={EditContact} />
+          </Switch>
+        )}
       </div>
-
-      <footer> <Footer /> </footer>
-
 
     </Router>
   );
 }
-
 export default App;
-
-
-

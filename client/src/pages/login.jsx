@@ -2,9 +2,13 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
+
+
 import { Link } from 'react-router-dom' 
 import './login.css'
+import { Redirect, withRouter } from 'react-router-dom'
+import Account from './account';
+
 
 
 
@@ -46,9 +50,11 @@ class Login extends Component {
             //     }) 
 
             .then((response) => { 
-                
                 console.log(response)
-                this.setState({ redirect: `/account` })
+                this.setState({ redirect: '/account' })
+                this.props.setLoggedIn('logged in') 
+                this.props.history.push('/account')
+                // this.setState({ redirect: `/account` })
             })
             .catch(err => {
                 console.log(err);
@@ -56,10 +62,11 @@ class Login extends Component {
             })
     }
     render() {
-        return (
+
             <div className="LoginPage"> 
             <div className="blackboard"> 
-                {this.state.redirect && <Redirect to={this.state.redirect} />}
+                {/* {this.state.redirect && <Redirect to={this.state.redirect} />} */}
+
                 <h3 style={loginColor}>Sign In</h3>
                 {/* <!-- form for user login  --> */}
                 <form onSubmit={this.authorizeLogin} style={{ width: '30%', margin: '40px auto' }} >
@@ -95,7 +102,7 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);
 
 
 const loginColor = {

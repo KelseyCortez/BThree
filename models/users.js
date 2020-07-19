@@ -23,6 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.TEXT,
     phrase: DataTypes.TEXT,
     text: DataTypes.TEXT,
+    lat: DataTypes.TEXT,
+    lng: DataTypes.TEXT,
     password: DataTypes.TEXT,
   }, {
     sequelize,

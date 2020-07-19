@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import './account.css'
-import { Button} from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import EmergencyContacts1 from '../component/emergencyContacts'
-import { Redirect } from 'react-router-dom' 
+import { Redirect, Link } from 'react-router-dom';
+import EditContact from './editcontact';
 import Timer from '../component/timer'
+
 
 
 class Account extends Component {
@@ -20,23 +22,18 @@ class Account extends Component {
             EmergencyContacts: [], 
             id: "",
             Redirect: false
-
-
-
-
         }
     }
 
     getAccountInfo() {
         fetch(`/api/v1/user`)
             .then(res =>
-
                 res.json()
             )
             .then(data => {
                 console.log(data)
-                if(data === 'Logged Out'){
-                    this.setState({Redirect: true})
+                if (data === 'Logged Out') {
+                    this.setState({ Redirect: true })
                 } else {
                     this.setState({
                         Name: (data.firstName + " " + data.lastName),
@@ -45,15 +42,12 @@ class Account extends Component {
                         Email: data.email, 
                         id: data.id,
                         // CellNumber: 
-                        Age: data.dob
+                        Age: data.dob,
                         // FriendList: 
                     })
                 }
             })
             .catch(err => err)
-
-
-
     }
 
     getEmergencyContacts() {
@@ -62,16 +56,23 @@ class Account extends Component {
             .then(contacts => {
                 console.log(contacts)
                 this.setState({
-                    EmergencyContacts: contacts
+                    EmergencyContacts : contacts
                 })
             })
     }
-
-    makeAccountChanges = (e) => {
-        e.preventDefault() 
-
-        fetch(`/`)
-
+    
+    
+    //deletes user account
+    removeUser = () => {
+        fetch(`/api/v1/users`, {
+            method: 'DELETE'
+        })
+            .then((data) => {
+                this.setState({
+                    Redirect: !this.state.Redirect
+                })
+            }
+            )
     }
 
     componentDidMount() {
@@ -81,35 +82,32 @@ class Account extends Component {
 
     render() {
         // if (!this.state.Redirect){
-            let EmergencyContacts = this.state.EmergencyContacts;
-            EmergencyContacts = EmergencyContacts.map((contact, index) => {
-                let name
-                return <EmergencyContacts1
-                    name={contact.name}
-                    phoneNumber={contact.phoneNumber}
-                    relationship={contact.relationship}
-                    key={index}
-    
-                />
-            })
-            
-                    let currentTime = new Date()
-                    let month = currentTime.getMonth()
-                    let year = currentTime.getFullYear()
-                    let day = currentTime.getDate()
-                    let today = (month + "/" + day + "/" + year)
-            
-                    console.log(today)
-                    let name = this.state.Name
-                    let username = this.state.Username
-                    let password = this.state.Password
-                    let email = this.state.Email
-                    let cellNumber = this.state.cellNumber
-                    let age = this.state.Age
-                    console.log(age)
-                    age = today - age
-                    // let FriendList = this.state.FriendList 
-                
+        let EmergencyContacts = this.state.EmergencyContacts;
+        EmergencyContacts = EmergencyContacts.map((contact, index) => {
+            let name
+            return <EmergencyContacts1
+                name={contact.name}
+                phoneNumber={contact.phoneNumber}
+                relationship={contact.relationship}
+                key={index}
+
+            />
+        })
+
+        let currentTime = new Date()
+        let month = currentTime.getMonth()
+        let year = currentTime.getFullYear()
+        let day = currentTime.getDate()
+        // let today = (month + "/" + day + "/" + year)
+
+        let name = this.state.Name
+        let username = this.state.Username
+        let email = this.state.Email
+        let cellNumber = this.state.cellNumber
+        // let age = this.state.Age
+        // age = today - age
+        // let FriendList = this.state.FriendList 
+
 
         return (
             <div>
@@ -118,26 +116,24 @@ class Account extends Component {
                     <div className="AccountPage flexColumn">
                              <Timer/>
                         <div className="Title"> Account Information </div> 
-
                         <div className="Info flexRow">
 
                             <div className="TextArea flexColumn">
                                 <div>Name: <span className="data">{name}</span> </div>
                                 <div>Username: <span className="data">{username}</span> </div>
-                                {/* <div>Age: {age} </div> */}
-                                <div>Password: <span className="data">{password}</span> </div>
                                 <div>Email: <span className="data">{email}</span> </div>
-                                <div>Cellular Number: <span className="data">{cellNumber}</span> </div>
-
-
-                                <Button> Edit </Button>
+                                <div>Cell Number: <span className="data">{cellNumber}</span> </div>
+                                <Button onClick={this.removeUser}> Delete Account </Button>
 
 
                             </div>
 
                             <div className="EC flexColumn">
                                 <div> Emergency Contacts </div>
-                                    {EmergencyContacts}
+                                {EmergencyContacts}
+                                
+                                <Button><Link to='/contacts'>Edit</Link> </Button>
+                                
                             </div>
 
                         </div>
@@ -147,5 +143,6 @@ class Account extends Component {
         );
     }
 }
+
 
 export default Account;

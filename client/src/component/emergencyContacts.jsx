@@ -1,5 +1,6 @@
 import React, { Component } from 'react' 
 import '../component/emergencyContacts.css'
+import { Link } from 'react-router-dom';
 
 class EmergencyContacts1 extends Component {
     constructor(props) {
@@ -21,10 +22,8 @@ class EmergencyContacts1 extends Component {
             <div className="EmergencyContacts flexColumn">
 
                 <div> Name: <span className="data" > {name} </span>  </div>
-
                 <div> Number: <span className= "data">  {number} </span> </div>
                 <div> Relationship: <span className="data">  {relationship} </span> </div>
-
             </div>
 
         );

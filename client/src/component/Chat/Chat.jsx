@@ -15,7 +15,6 @@ export default class Chat extends Component {
             message: "",
             messages: [],
             name: "",
-            users: []
         };
 
         this.socket = io("localhost:3001");
@@ -106,7 +105,7 @@ export default class Chat extends Component {
                                     })
                                 }
                             />
-                            <SendIcon style={{ margin: '20', textDecorationLine: 'underline'}}
+                            <SendIcon 
                                 type='button'
                                 variant="outline-secondary"
                                 onClick={this.sendMessage}>Send </SendIcon>
