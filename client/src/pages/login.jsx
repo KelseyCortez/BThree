@@ -62,7 +62,7 @@ class Login extends Component {
             })
     }
     render() {
-
+        return (
             <div className="LoginPage"> 
             <div className="blackboard"> 
                 {/* {this.state.redirect && <Redirect to={this.state.redirect} />} */}
@@ -97,8 +97,7 @@ class Login extends Component {
                 </form> 
                 </div>
             </div>
-
-        );
+        )
     }
 }
 

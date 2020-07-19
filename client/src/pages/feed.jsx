@@ -59,7 +59,7 @@ class Feed extends Component {
 
 
                         <div className="LocationArea"> Location 
-                          <div className="theMap">   <MapContainer /> </div>
+                          <div className="theMap">   <Map /> </div>
 
                         </div>
                     </div>
