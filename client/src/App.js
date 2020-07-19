@@ -11,8 +11,9 @@ import Account from "./pages/account";
 import Chat from "./component/Chat/Chat";
 import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
-import PanicButton from "./component/PanicButton";
-import MyNavbar from "./component/navbar";
+import PanicButton from './component/PanicButton';
+import MyNavbar from './component/navbar'
+import EditContact from './pages/editcontact';
 import axios from "axios";
 
 import { connect, useSelector } from 'react-redux';
@@ -113,6 +114,7 @@ function App() {
       <div className="App">
         <MyNavbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         {/* <PanicButton /> */}
+
         {loggedIn == "not checked" && <div> Loading.. </div>}
 
         {loggedIn == "logged out" && (
@@ -135,6 +137,7 @@ function App() {
             <Route path="/map" component={Map} />
             <Route path="/chat" component={Chat} />
             <Route path="/about" component={About} />
+          <Route path="/editcontact" component={EditContact} />
           </Switch>
         )}
       </div>
