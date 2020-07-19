@@ -152,6 +152,19 @@ router.put('/user/contacts', checkAuth, (req, res, next) => {
         .then(data => res.json(data))
 })
 
+
+
+router.put('/user', checkAuth, (req,res, next) => {
+    db.User.findByPk(req.session.user.id)
+    .then((user) => {
+        user.lat = req.body.lat;
+        user.lng = req.body.lng;
+        user.save().then((result) => {
+            res.json(result);
+        })
+    })
+})
+
 //     const contactsArray = [];
 // let keys = Object.keys(req.body)
 // for(key of keys){
@@ -181,6 +194,7 @@ router.put('/user/contacts', checkAuth, (req, res, next) => {
 //         })
 
 //     })
+
 
 
 // logs user out
