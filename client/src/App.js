@@ -2,7 +2,7 @@ import About from "./pages/about";
 import Map from "./component/Map";
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Register from "./pages/register";
 import Contacts from "./pages/contacts";
 import Login from "./pages/login";
@@ -53,7 +53,7 @@ function App() {
 
   const voiceCommands = () => {
     setListening((listening = false));
-    recognition.start();
+    // recognition.start();
     // recognition.onstart = () => {
     //   // console.log("Listening");
     // };
@@ -118,8 +118,7 @@ function App() {
       <div className="App">
 
         <MyNavbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> 
-     <footer> <Footer /> </footer>
-        {/* <PanicButton /> */}
+        <footer> <Footer /> </footer>
 
         {loggedIn == "not checked" && <div> Loading.. </div>}
 
@@ -131,6 +130,7 @@ function App() {
             </Route>
             <Route path="/register" component={Register} />
             <Route path="/about" component={About} />
+            <Redirect to='/login' />
           </Switch>
         )}
 
@@ -143,6 +143,7 @@ function App() {
             <Route path="/map" component={Map} />
             <Route path="/chat" component={Chat} />
             <Route path="/about" component={About} />
+            <Redirect to='/' />
           </Switch>
         )}
       </div>

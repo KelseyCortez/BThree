@@ -207,18 +207,8 @@ router.get('/logout', (req, res) => {
 // get messages from forum 
 router.get('/messages', (req, res) => {
     db.Message.findAll({
-        where: {
-
-            [Op.or]: [
-
-                {
-                    RecipientId: B,
-                    SenderId: A
-                }
-            ]
-        },
         order: [
-            ['createdAt', 'DESC']
+            ['createdAt', 'ASC']
         ],
         include: {
             model: db.User,
