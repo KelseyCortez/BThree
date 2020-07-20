@@ -1,6 +1,8 @@
 .FeedPage{ 
     font-family: "Bungee"; 
-    background-color: brown;
+    background-color: brown; 
+   margin-top: none;
+   
 }
 
 
@@ -128,5 +130,4 @@ header{
     text-align: center;
   } 
 
-  
   
