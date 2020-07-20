@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import './feed.css'
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom'
@@ -15,19 +15,20 @@ class Feed extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Redirect: false , 
-            userName: "", 
-            mood: "", 
-            moodTitle:""
-            
-        
+            Redirect: false,
+            userName: "",
+            mood: "",
+            moodTitle: "",
+
+
+
         }
-    } 
-    setMyMood = (e) => { 
-        e.preventDefault(); 
-        this.setState({ 
+    }
+    setMyMood = (e) => {
+        e.preventDefault();
+        this.setState({
             moodTitle: e.target.name,
-            mood: e.target.value, 
+            mood: e.target.value,
 
 
         })
@@ -42,14 +43,15 @@ class Feed extends Component {
             .then(data => {
                 console.log(data)
                 if (data === 'Logged Out') {
-                    this.setState({ Redirect: true }) 
-                } 
-                else { 
-                    this.setState({userName: data.firstName})
+                    this.setState({ Redirect: true })
+                }
+                else {
+                    this.setState({ userName: data.firstName })
                 }
             });
     }
-    render() { 
+    render() {
+
         console.log(this.props)
         return (
             <div>
@@ -57,10 +59,10 @@ class Feed extends Component {
                     <div className="FeedPage">
                         <header>
                             <div className="titleDiv">
-                                <h1 style={{ marginTop: "20px", color: 'white',}}> Feed </h1>
-                                
-                                
-                            </div> 
+                                <h1 style={{ marginTop: "20px", color: 'white', }}> Feed </h1>
+
+
+                            </div>
                             <div className="greeting"> Welcome Back, #{this.state.userName} </div>
                         </header>
 
@@ -72,24 +74,25 @@ class Feed extends Component {
 
                                 <PanicButton />
                                 <div className="Clock"> <div className="upsideDown1"> In </div> <div className="clockColumn"> <div> Be </div> <div className="time"> <Timer /> </div> <div> Back </div> </div> <div className="upsideDown2"> Right </div> </div>
-                                    
+
                                 <div className="MoodArea">
-                                    <div> #MAJOR MOODZ </div> 
-                                    <br/>
+                                    <div> #MAJOR MOODZ </div>
+                                    <br />
                                     <div>
                                         <button onClick={this.setMyMood} value="Happy" name="&#128512; "> &#128512; </button>
-                                        <button onClick={this.setMyMood}  value="Weary" name="&#128528; "> &#128528; </button>
+                                        <button onClick={this.setMyMood} value="Weary" name="&#128528; "> &#128528; </button>
                                         <button onClick={this.setMyMood} value="silly" name="&#128541;">&#128541; </button>
                                     </div>
                                     <div>
-                                        <button onClick={this.setMyMood}  value="Love" name="&#128525;"> &#128525;</button>
+                                        <button onClick={this.setMyMood} value="Love" name="&#128525;"> &#128525;</button>
                                         {/* <button value="Nervous"> & </button> */}
-                                        <button  onClick={this.setMyMood} value="Sad" name="&#128532;"> &#128532; </button>
+                                        <button onClick={this.setMyMood} value="Sad" name="&#128532;"> &#128532; </button>
                                         <button onClick={this.setMyMood} value="Angry" name="&#128545;"> &#128545; </button>
                                     </div>
 
-                                </div>  
-                                <br/>
+                                </div>
+                                <br />
+                                <br />
                                 Today I am Feeling: {this.state.moodTitle} {this.state.mood}
 
                             </div>
@@ -97,8 +100,8 @@ class Feed extends Component {
                             {/* Users can see their location and have the option to have it turned on or off */}
 
 
-                            <div className="LocationArea"> Location
-                          <div className="theMap">   <Map /> </div>
+                            <div className="LocationArea">  Current Location
+                                <div className="theMap">  <Map /> </div>
 
                             </div>
                         </div>
