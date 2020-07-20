@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import './feed.css'
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom'
@@ -54,8 +54,6 @@ class Feed extends Component {
                             <div className="titleDiv">
                                 {/* <h1 style={{ marginTop: "20px", color: 'white', }}> Feed </h1> */}
                                 <div className="greeting"> Welcome Back, {this.state.userName} </div>
-
-
                             </div>
                         </header>
                         <div className="flexRow ">
