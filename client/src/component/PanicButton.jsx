@@ -10,15 +10,17 @@ function PanicButton({latitude, longitude}) {
             longitude: state.longitude
         }
     })
+    console.log(location)
     const onClick = (e)=>{
         axios.put('/api/v1/user', {
             lat: location.latitude,
             lng: location.longitude
-        }).then(
+        }).then(() => {
             axios.post('/api/v1/sms/alert', {})
             // .then(res => res.json())
             .then(data => {console.log(data)
                 console.log(location.latitude)})
+        }
         )
        
     }

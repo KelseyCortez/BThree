@@ -39,7 +39,7 @@ function App({latitude, longitude}) {
   let [userPhrase, setPhrase] = useState("");
   let [runVoice, setRun] = useState(true);
   let [listening, setListening] = useState(false);
-
+  
   let [loggedIn, setLoggedIn] = useState("not checked");
 
   const checkLogIn = () => {
@@ -57,6 +57,7 @@ function App({latitude, longitude}) {
 
   // Voice command function that starts the browser listening.
   const voiceCommands = () => {
+    console.log(location)
     setListening((listening = false));
     recognition.start();
     // Set time out that insures that even if someone talks for 6 seconds it will still end on time.
@@ -79,21 +80,23 @@ function App({latitude, longitude}) {
           .then((data) => {
 
             if (data === "Logged Out") {
-
+              console.log("Logged Out")
             } else {
               // If they are not logged out it checks the user phrase in the database and if it is the same as
               // the transcript it will run the put request for location and the post request for the sms message.
               const phrase = data.phrase.toLowerCase();
               console.log(phrase);
               if (transcript === phrase || transcript === ` ${phrase}`) {
-                console.log(location.latitude)
+                console.log(location)
                 axios.put('/api/v1/user', {
                   lat: location.latitude,
                   lng: location.longitude
-              }).then(
-                  axios.post('/api/v1/sms/alert', {})
-                  // .then(res => res.json())
-              )  
+              }).then(() => {
+                axios.post('/api/v1/sms/alert', {})
+                // .then(res => res.json())
+                .then(data => {console.log(data)
+                    console.log(location.latitude)})
+            })
               // Stops the recognition after the alert is reached.
                 recognition.stop();
                 setRun((runVoice = false));
@@ -116,7 +119,7 @@ function App({latitude, longitude}) {
       }
     }, 8000);
     return () => clearInterval(interval);
-  }, []);
+  }, [location]);
 
   return (
     <Router>
