@@ -53,7 +53,7 @@ class Login extends Component {
                 console.log(response)
                 this.setState({ redirect: '/account' })
                 this.props.setLoggedIn('logged in') 
-                this.props.history.push('/account')
+                this.props.history.push('/feed')
                 // this.setState({ redirect: `/account` })
             })
             .catch(err => {
@@ -90,10 +90,6 @@ class Login extends Component {
 
                     <Button className="btn btn-primary btn-block" onClick={this.authorizeLogin}  > Login</Button>
 
-                    {/* <!-- forgot password link --> */}
-                    <p className="forgot-password text-right">
-                        <a href="/">Forgot Password? </a>
-                    </p>
                     <p style={loginColor}><Link to={'/register'}>Not signed up? Register here</Link></p>
                 </form> 
                 </div>
