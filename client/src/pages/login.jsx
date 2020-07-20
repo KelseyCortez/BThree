@@ -61,7 +61,8 @@ class Login extends Component {
                 alert('Error logging in please try again')
             })
     }
-    render() {
+    render() { 
+        return( 
 
             <div className="LoginPage"> 
             <div className="blackboard"> 
