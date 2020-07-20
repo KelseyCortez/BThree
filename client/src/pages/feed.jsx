@@ -72,7 +72,7 @@ class Feed extends Component {
 
                                 <PanicButton />
                                 <div className="Clock"> <div className="upsideDown1"> In </div> <div className="clockColumn"> <div> Be </div> <div className="time"> <Timer /> </div> <div> Back </div> </div> <div className="upsideDown2"> Right </div> </div>
-                                      Invite <br/> Friends?  <hr /> 
+                                    
                                 <div className="MoodArea">
                                     <div> #MAJOR MOODZ </div> 
                                     <br/>

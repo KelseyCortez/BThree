@@ -122,8 +122,11 @@ header{
     font-size: 40px ; 
     font-weight: 300;  
     letter-spacing: 3px;
-    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-width: 3px;
     -webkit-text-stroke-color:#F25CFE ;
     /* background-color: tomato;  */
     text-align: Left;
-  }
+  } 
+
+  
+  

@@ -25,10 +25,10 @@ export default class NavBar extends Component {
 
                         <Nav className="justify-content-end ml-auto" activeKey="/home">
                             <Nav.Item>
-                                <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href="/feed">Feed</Nav.Link>
+                                <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href="/feed">Feed </Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href='/chat'>Forum</Nav.Link>
+                                <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href='/chat'>Forum <div className="inviteFriends">  1  </div></Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
 
