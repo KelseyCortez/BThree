@@ -4,7 +4,8 @@ import { Button } from 'react-bootstrap'
 import EmergencyContacts1 from '../component/emergencyContacts'
 import { Redirect, Link } from 'react-router-dom';
 // import EditContact from './editcontact';
-import Timer from '../component/timer'
+import Timer from '../component/timer' 
+import PanicButton from '../component/PanicButton'
 
 
 
@@ -19,7 +20,7 @@ class Account extends Component {
             // CellNumber: "",
             Age: "",
             FriendList: [],
-            EmergencyContacts: [], 
+            EmergencyContacts: [],
             id: "",
             Redirect: false
         }
@@ -39,7 +40,7 @@ class Account extends Component {
                         Name: (data.firstName + " " + data.lastName),
                         Username: data.userName,
                         Password: data.password,
-                        Email: data.email, 
+                        Email: data.email,
                         id: data.id,
                         // CellNumber: 
                         Age: data.dob,
@@ -56,12 +57,12 @@ class Account extends Component {
             .then(contacts => {
                 console.log(contacts)
                 this.setState({
-                    EmergencyContacts : contacts
+                    EmergencyContacts: contacts
                 })
             })
     }
-    
-    
+
+
     //deletes user account
     removeUser = () => {
         fetch(`/api/v1/users`, {
@@ -110,32 +111,35 @@ class Account extends Component {
 
 
         return (
-            <div>
-                {this.state.Redirect ? <Redirect to='/login'/> : ( 
-                   
-                    <div className="AccountPage flexColumn">
-                             <Timer/>
-                        <div className="Title"> Account Information </div> 
-                        <div className="Info flexRow">
+            <div className="AccountPage ">
+                {this.state.Redirect ? <Redirect to='/login' /> : (
 
-                            <div className="TextArea flexColumn">
-                                <div>Name: <span className="data">{name}</span> </div>
-                                <div>Username: <span className="data">{username}</span> </div>
-                                <div>Email: <span className="data">{email}</span> </div>
-                                <div>Cell Number: <span className="data">{cellNumber}</span> </div>
-                                <Button onClick={this.removeUser}> Delete Account </Button>
+                    <div> 
+                        <div className="timerAndButton"> 
+                      <div className="TimerArea">   <Timer /> </div>  
+                      <div className="PB"> <PanicButton/> </div>
+                      </div>
+                        <div className="Main">
+                            <div className="Title"> Account Information </div>
+                            <div className="Info">
 
+                                <div className="TextArea">
+                                    <div>Name: <span className="data">{name}</span> </div>
+                                    <div>Username: <span className="data">{username}</span> </div>
+                                    <div>Email: <span className="data">{email}</span> </div>
+                                    <div>Cell Number: <span className="data">{cellNumber}</span> </div>
+                                    <Button onClick={this.removeUser}> Delete Account </Button>
+                                </div>
+
+                                <div className="EC">
+                                    <div> Emergency Contacts </div>
+                                    {EmergencyContacts}
+
+                                    <Button ><Link style={{color:"white"}} to='/contacts'>Edit</Link> </Button>
+
+                                </div>
 
                             </div>
-
-                            <div className="EC flexColumn">
-                                <div> Emergency Contacts </div>
-                                {EmergencyContacts}
-                                
-                                <Button><Link to='/contacts'>Edit</Link> </Button>
-                                
-                            </div>
-
                         </div>
                     </div>
                 )}
