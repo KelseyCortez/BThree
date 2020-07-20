@@ -13,10 +13,8 @@ class Register extends Component {
             password: "",
             email: "",
             dob: "",
-           phrase:"",
-           text:""
-
-
+            phrase: "",
+            text: ""
         }
     }
 
@@ -110,14 +108,7 @@ class Register extends Component {
                         <input type="text" className="form-control" name="text" value={this.state.text} onChange={this.handleChange} />
                         </label> <br />
                     </div>
-                        
 
-
-                    {/* <!-- input field for Cell Phone Number --> */}
-                    {/* <label name="" value={this.state. }>
-                        Telephone Number:
-                        <input type="number" />
-                    </label> <br /> */}
                     <Button className="btn btn-primary btn-block" onSubmit={this.handleFormSubmit} type="submit"> Sign Up</Button>
                 </form>
                 <p className="forgot-password text-right" style={registerColor}>

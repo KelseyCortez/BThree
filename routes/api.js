@@ -4,51 +4,35 @@ const db = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const Op = db.Sequelize.Op
-const secret = "mysecretshhh";
+// const secret = "mysecretshhh";
 const checkAuth = require('../auth/checkAuthentication');
 
-router.get('/user', checkAuth, function (req, res, next) {
-    db.User.findByPk(req.session.user.id)
-        .then(data => {
-            res.json(data)
+//registers a new user
+router.post('/register', function (req, res) {
+    console.log(req.body)
+    const { userName, email, password, firstName, lastName, dob, phrase, text } = req.body
+    if (!userName) { res.status(400).json({ error: 'user-name field is required' }); }
+    if (!email) { res.status(400).json({ error: 'email field is required' }); }
+    if (!password) { res.status(400).json({ error: 'password field is required' }); }
+    bcrypt.hash(password, 10, (err, hash) => {
+        db.User.create({
+            firstName: firstName,
+            lastName: lastName,
+            userName: userName,
+            dob: dob,
+            password: hash,
+            email: email,
+            phrase: phrase,
+            text: text
         })
-})
-
-router.get('/user/contacts', checkAuth, (req, res, next) => {
-    db.User.findByPk(req.session.user.id, {
-
-        include: [{
-            model: db.EmergencyContact
-        }]
-    }).then((data) => {
-        res.json(data.EmergencyContacts)
-    })
-})
-
-router.post('/user/contacts', checkAuth, (req, res, next) => {
-    console.log(req.body);
-
-    const contactsArray = [];
-    let keys = Object.keys(req.body)
-    for (key of keys) {
-        if (req.body[key].phoneNumber) {
-            contactsArray.push(req.body[key])
-
-        }
-    }
-
-    db.User.findByPk(req.session.user.id)
-        .then(User => contactsArray.forEach(contact => {
-            User.createEmergencyContact({
-                name: contact.name,
-                phoneNumber: contact.phoneNumber,
-                relationship: contact.relationship,
-                id: contact.id,
+            .then(user => {
+                req.session.user = user;
+                res.status(201).json(user);
             })
-        }))
-        .then(data => res.json(data));
-})
+    });
+});
 
+//logs in an existing user
 router.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -78,29 +62,63 @@ router.post('/login', (req, res) => {
         })
 })
 
-router.post('/register', function (req, res) {
-    console.log(req.body)
-    const { userName, email, password, firstName, lastName, dob, phrase, text } = req.body
-    if (!userName) { res.status(400).json({ error: 'user-name field is required' }); }
-    if (!email) { res.status(400).json({ error: 'email field is required' }); }
-    if (!password) { res.status(400).json({ error: 'password field is required' }); }
-    bcrypt.hash(password, 10, (err, hash) => {
-        db.User.create({
-            firstName: firstName,
-            lastName: lastName,
-            userName: userName,
-            dob: dob,
-            password: hash,
-            email: email,
-            phrase: phrase,
-            text: text
+//gets existing user after logging in
+router.get('/user', checkAuth, function (req, res, next) {
+    db.User.findByPk(req.session.user.id)
+        .then(data => {
+            res.json(data)
         })
-            .then(user => {
-                req.session.user = user;
-                res.status(201).json(user);
+})
+
+//gets account info of user and their contacts
+router.get('/user/contacts', checkAuth, (req, res, next) => {
+    db.User.findByPk(req.session.user.id, {
+
+        include: [{
+            model: db.EmergencyContact
+        }]
+    }).then((data) => {
+        res.json(data.EmergencyContacts)
+    })
+})
+
+//finds a users location
+router.put('/user', checkAuth, (req, res, next) => {
+    db.User.findByPk(req.session.user.id)
+        .then((user) => {
+            user.lat = req.body.lat;
+            user.lng = req.body.lng;
+            user.save().then((result) => {
+                res.json(result);
             })
-    });
-});
+        })
+})
+
+//posts emergency contact associated with a user
+router.post('/user/contacts', checkAuth, (req, res, next) => {
+    console.log(req.body);
+
+    const contactsArray = [];
+    let keys = Object.keys(req.body)
+    for (key of keys) {
+        if (req.body[key].phoneNumber) {
+            contactsArray.push(req.body[key])
+
+        }
+    }
+
+    //creates emergency contacts for a user
+    db.User.findByPk(req.session.user.id)
+        .then(User => contactsArray.forEach(contact => {
+            User.createEmergencyContact({
+                name: contact.name,
+                phoneNumber: contact.phoneNumber,
+                relationship: contact.relationship,
+                id: contact.id,
+            })
+        }))
+        .then(data => res.json(data));
+})
 
 //deletes a user works and also deletes associated contacts
 router.delete('/users', checkAuth, (req, res) => {
@@ -152,78 +170,16 @@ router.put('/user/contacts', checkAuth, (req, res, next) => {
         .then(data => res.json(data))
 })
 
-
-
-router.put('/user', checkAuth, (req,res, next) => {
-    db.User.findByPk(req.session.user.id)
-    .then((user) => {
-        user.lat = req.body.lat;
-        user.lng = req.body.lng;
-        user.save().then((result) => {
-            res.json(result);
-        })
-    })
-})
-
-//     const contactsArray = [];
-// let keys = Object.keys(req.body)
-// for(key of keys){
-//     if(req.body[key].phoneNumber) {
-//         contactsArray.push(req.body[key])
-
-//     }
-// }
-
-// db.User.findByPk(req.session.user.id)
-//     .then(User => contactsArray.forEach(contact => {
-//         User.createEmergencyContact({
-//             name: contact.name,
-//             phoneNumber: contact.phoneNumber,
-//             relationship: contact.relationship,
-//         })
-//     }))
-//     .then(data => res.json(data));
-
-// db.EmergencyContact.findByPk(parseInt(req.params.id))
-//     .then((contact) => {
-//         contact.name = req.body.name;
-//         contact.phoneNumber = req.body.phoneNumber;
-//         contact.relationship = req.body.relationship;
-//         contact.save().then((result) => {
-//             res.json(result);
-//         })
-
-//     })
-
-
-
-// logs user out
-router.get('/logout', (req, res) => {
-    if (req.session) {
-        req.session.destroy()
-    }
-})
-
 // get messages from forum 
 router.get('/messages', (req, res) => {
     db.Message.findAll({
-        where: {
-
-            [Op.or]: [
-
-                {
-                    RecipientId: B,
-                    SenderId: A
-                }
-            ]
-        },
         order: [
-            ['createdAt', 'DESC']
+            ['createdAt', 'ASC']
         ],
         include: {
             model: db.User,
             as: 'Sender'
-        } 
+        }
     }).then((messages) => {
         if (messages) {
             const formattedMessages = messages.map(message => {
@@ -240,6 +196,15 @@ router.get('/messages', (req, res) => {
         }
     })
 })
+
+// logs user out
+router.get('/logout', (req, res) => {
+    if (req.session) {
+        req.session.destroy()
+    }
+})
+
+
 
 module.exports = router;
 

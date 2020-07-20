@@ -28,16 +28,13 @@ class Feed extends Component {
         e.preventDefault();
         this.setState({
             moodTitle: e.target.name,
-            mood: e.target.value,
-
-
+            mood: e.target.value, 
         })
 
     }
     componentDidMount = () => {
         fetch(`/api/v1/user`)
             .then(res =>
-
                 res.json()
             )
             .then(data => {
@@ -65,13 +62,9 @@ class Feed extends Component {
                             </div>
                             <div className="greeting"> Welcome Back, #{this.state.userName} </div>
                         </header>
-
                         <div className="flexRow ">
-
                             {/* timeline of all notifications from friends and yourself */}
                             <div className="FriendsArea">
-
-
                                 <PanicButton />
                                 <div className="Clock"> <div className="upsideDown1"> In </div> <div className="clockColumn"> <div> Be </div> <div className="time"> <Timer /> </div> <div> Back </div> </div> <div className="upsideDown2"> Right </div> </div>
 
@@ -94,19 +87,18 @@ class Feed extends Component {
                                 <br />
                                 <br />
                                 Today I am Feeling: {this.state.moodTitle} {this.state.mood}
-
                             </div>
 
                             {/* Users can see their location and have the option to have it turned on or off */}
 
 
-                            <div className="LocationArea">  Current Location
-                                <div className="theMap">  <Map /> </div>
+
+                            <div className="LocationArea"> 👇 You are here  👇
+                          <div className="theMap">   <Map /> </div>
+
 
                             </div>
                         </div>
-
-
                     </div>
                 )}
             </div>

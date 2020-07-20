@@ -17,7 +17,6 @@ class Account extends Component {
             Username: "",
             Password: "",
             Email: "",
-            // CellNumber: "",
             Age: "",
             FriendList: [],
             EmergencyContacts: [],
@@ -41,10 +40,8 @@ class Account extends Component {
                         Username: data.userName,
                         Password: data.password,
                         Email: data.email,
-                        id: data.id,
-                        // CellNumber: 
-                        Age: data.dob,
-                        // FriendList: 
+                        id: data.id, 
+                        Age: data.dob, 
                     })
                 }
             })
@@ -127,7 +124,6 @@ class Account extends Component {
                                     <div>Name: <span className="data">{name}</span> </div>
                                     <div>Username: <span className="data">{username}</span> </div>
                                     <div>Email: <span className="data">{email}</span> </div>
-                                    <div>Cell Number: <span className="data">{cellNumber}</span> </div>
                                     <Button onClick={this.removeUser}> Delete Account </Button>
                                 </div>
 
@@ -138,7 +134,6 @@ class Account extends Component {
                                     <Button ><Link style={{color:"white"}} to='/contacts'>Edit</Link> </Button>
 
                                 </div>
-
                             </div>
                         </div>
                     </div>

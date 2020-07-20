@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Col, Button } from 'react-bootstrap';
+import { Form, Col, Button, Container} from 'react-bootstrap';
 import axios from 'axios';
 
 
@@ -26,7 +26,6 @@ export default class Contacts extends Component {
                 phoneNumber: '',
                 relationship: '',
                 id: '',
-
             },
             editing: false,
         }
@@ -51,7 +50,6 @@ export default class Contacts extends Component {
     handleFormUpdate = (e) => {
         e.preventDefault();
         console.log(this.state)
-
         axios.put('/api/v1/user/contacts', {
             ...this.state
         })
@@ -64,43 +62,38 @@ export default class Contacts extends Component {
 
     //deletes contact
     removeContact = (id) => {
-    console.log(this.state);
-        axios.delete(`/api/v1/user/contacts`, {params: {id : id}})
+        console.log(this.state);
+        axios.delete(`/api/v1/user/contacts`, { params: { id: id } })
             .then((res) => {
                 console.log(res);
                 const deletedId = res.data;
                 let contactToDelete = Object.keys(this.state).find(contact => {
-                if(this.state[contact].id == deletedId) {
-                    return contact
-                }
+                    if (this.state[contact].id == deletedId) {
+                        return contact
+                    }
                 })
                 console.log(contactToDelete);
                 return contactToDelete
 
-            }) .then(contactToDelete => {
-                    this.setState({
-                        [contactToDelete] : {
-                            name: '',
-                            phoneNumber: '',
-                            relationship: '',
-                            id: '',
-                        }
-                    })
-
+            }).then(contactToDelete => {
+                this.setState({
+                    [contactToDelete]: {
+                        name: '',
+                        phoneNumber: '',
+                        relationship: '',
+                        id: '',
+                    }
+                })
             })
-            
-
     }
 
     handleChange = (e, key) => {
-
         const { value, name } = e.target;
         this.setState({
             [key]: { ...this.state[key], [name]: value }
         });
     }
 
-    
     componentDidMount() {
         console.log(this.props);
         fetch(`/api/v1/user/contacts`)
@@ -122,9 +115,7 @@ export default class Contacts extends Component {
                             id: contact.id,
                         }
                     })
-
                 })
-
             }
             )
     }
@@ -133,6 +124,7 @@ export default class Contacts extends Component {
     render() {
         return (
             <div>
+                <Container>
                 {this.state.editing ?
                     <Form >
 
@@ -146,7 +138,7 @@ export default class Contacts extends Component {
                             <Col>
                                 <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact1.relationship} onChange={(e) => this.handleChange(e, 'contact1')} type="text" />
                             </Col>
-                            <Button onClick={()=>this.removeContact(this.state.contact1.id)}> X </Button>
+                            <Button onClick={() => this.removeContact(this.state.contact1.id)}> X </Button>
                         </Form.Row>
                         <Form.Row>
                             Emergency Contact 2
@@ -159,7 +151,7 @@ export default class Contacts extends Component {
                             <Col>
                                 <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact2.relationship} onChange={(e) => this.handleChange(e, 'contact2')} />
                             </Col>
-                            <Button onClick={()=>this.removeContact(this.state.contact2.id)}> X </Button>
+                            <Button onClick={() => this.removeContact(this.state.contact2.id)}> X </Button>
                         </Form.Row>
                         <Form.Row>
                             Emergency Contact 3
@@ -172,7 +164,7 @@ export default class Contacts extends Component {
                             <Col>
                                 <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact3.relationship} onChange={(e) => this.handleChange(e, 'contact3')} type="text" />
                             </Col>
-                            <Button onClick={()=>this.removeContact(this.state.contact3.id)}> X </Button>
+                            <Button onClick={() => this.removeContact(this.state.contact3.id)}> X </Button>
                         </Form.Row>
                         <Button onClick={this.handleFormUpdate}>Save Changes</Button>
 
@@ -217,6 +209,7 @@ export default class Contacts extends Component {
                         <Button onClick={this.handleFormSubmit}>Submit</Button>
                     </Form>
                 }
+                </Container>
             </div>
         )
     }
