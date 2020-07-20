@@ -4,7 +4,7 @@ const db = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const Op = db.Sequelize.Op
-const secret = "mysecretshhh";
+// const secret = "mysecretshhh";
 const checkAuth = require('../auth/checkAuthentication');
 
 router.get('/user', checkAuth, function (req, res, next) {
@@ -207,16 +207,6 @@ router.get('/logout', (req, res) => {
 // get messages from forum 
 router.get('/messages', (req, res) => {
     db.Message.findAll({
-        where: {
-
-            [Op.or]: [
-
-                {
-                    RecipientId: B,
-                    SenderId: A
-                }
-            ]
-        },
         order: [
             ['createdAt', 'DESC']
         ],
