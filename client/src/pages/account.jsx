@@ -138,7 +138,6 @@ class Account extends Component {
                                     <Button ><Link style={{color:"white"}} to='/contacts'>Edit</Link> </Button>
 
                                 </div>
-
                             </div>
                         </div>
                     </div>
