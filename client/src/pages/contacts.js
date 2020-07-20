@@ -62,7 +62,7 @@ export default class Contacts extends Component {
             )
     }
 
-    //deletes contact is a work in progress
+    //deletes contact
     removeContact = (id) => {
     console.log(this.state);
         axios.delete(`/api/v1/user/contacts`, {params: {id : id}})
@@ -99,6 +99,8 @@ export default class Contacts extends Component {
             [key]: { ...this.state[key], [name]: value }
         });
     }
+
+    
     componentDidMount() {
         console.log(this.props);
         fetch(`/api/v1/user/contacts`)

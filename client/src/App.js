@@ -17,8 +17,6 @@ import MyNavbar from './component/navbar'
 import axios from 'axios'
 import Footer from "./component/footer"
 
-import EditContact from './pages/editcontact';
-
 import { connect, useSelector } from 'react-redux';
 
 // creates variables that allow chrome speech recognition
@@ -145,7 +143,6 @@ function App() {
             <Route path="/map" component={Map} />
             <Route path="/chat" component={Chat} />
             <Route path="/about" component={About} />
-          <Route path="/editcontact" component={EditContact} />
           </Switch>
         )}
       </div>
