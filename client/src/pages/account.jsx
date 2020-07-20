@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './pages.css'
 import './account.css'
 import { Button } from 'react-bootstrap'
 import EmergencyContacts1 from '../component/emergencyContacts'

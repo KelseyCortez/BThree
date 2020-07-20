@@ -1,0 +1,10 @@
+
+.container {
+    background-color: antiquewhite;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+      display: none;
+    }
+  }

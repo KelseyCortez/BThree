@@ -22,3 +22,10 @@ footer {
     padding-right: 20px;
 
 }
+
+
+@media screen and (max-width: 800px) {
+    footer {
+      display: none;
+    }
+  }
