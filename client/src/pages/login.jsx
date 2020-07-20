@@ -88,7 +88,7 @@ class Login extends Component {
                     </div>
 
 
-                    <Button className="btn btn-primary btn-block" onClick={this.authorizeLogin}  > Login</Button>
+                    <Button className="btn btn-primary btn-block" onClick={this.authorizeLogin}> Login</Button>
 
                     <p style={loginColor}><Link to={'/register'}>Not signed up? Register here</Link></p>
                 </form> 

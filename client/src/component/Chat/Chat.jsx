@@ -72,10 +72,6 @@ export default class Chat extends Component {
     render() {
         return (
             <div className='container'>
-
-                {/* <div>
-                    <h1>Forum </h1>
-                </div> */}
                 {this.state.Redirect ? <Redirect to='/login' /> : (
                     <div className="messages">
                         <h2 style={{textAlign: 'center'}}>What's On Your mind? </h2>

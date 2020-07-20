@@ -82,11 +82,12 @@ class Feed extends Component {
                                         <button onClick={this.setMyMood} value="Sad" name="&#128532;"> &#128532; </button>
                                         <button onClick={this.setMyMood} value="Angry" name="&#128545;"> &#128545; </button>
                                     </div>
-
-                                </div>
-                                <br />
-                                <br />
-                                Today I am Feeling: {this.state.moodTitle} {this.state.mood}
+                                </div>  
+                                <br/>
+                                <br/>
+                                
+                                    Today I am Feeling: {this.state.moodTitle} {this.state.mood}
+                               
                             </div>
 
                             {/* Users can see their location and have the option to have it turned on or off */}
