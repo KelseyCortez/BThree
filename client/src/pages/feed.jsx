@@ -82,7 +82,10 @@ class Feed extends Component {
                                     </div>
                                 </div>  
                                 <br/>
-                                Today I am Feeling: {this.state.moodTitle} {this.state.mood}
+                                <br/>
+                                
+                                    Today I am Feeling: {this.state.moodTitle} {this.state.mood}
+                               
                             </div>
 
                             {/* Users can see their location and have the option to have it turned on or off */}
