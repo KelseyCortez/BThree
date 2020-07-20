@@ -22,17 +22,19 @@ const SpeechRecognition =
 
 const recognition = new SpeechRecognition();
 
-function App() {
+function App({latitude, longitude}) {
+  // Passes Redux props to App and creates variable to use Location data
   const location = useSelector(state => {
     return {
         latitude: state.latitude,
         longitude: state.longitude
     }
   })
+  // Hooks that change the way the speech functions run.
   let [userPhrase, setPhrase] = useState("");
   let [runVoice, setRun] = useState(true);
   let [listening, setListening] = useState(false);
-
+  
   let [loggedIn, setLoggedIn] = useState("not checked");
 
   const checkLogIn = () => {
@@ -48,45 +50,49 @@ function App() {
       .catch((err) => err);
   };
 
+  // Voice command function that starts the browser listening.
   const voiceCommands = () => {
+    console.log(location)
     setListening((listening = false));
-    // recognition.start();
-    // recognition.onstart = () => {
-    //   // console.log("Listening");
-    // };
+    recognition.start();
+    // Set time out that insures that even if someone talks for 6 seconds it will still end on time.
     setTimeout(() => {
       recognition.stop();
-      // console.log('stop');
     }, 6000)
 
     recognition.onresult = (e) => {
       setListening((listening = true));
       // If voice is recognized this function runs.
       let current = e.resultIndex;
-
       let transcript = e.results[current][0].transcript;
       let mobileRepeatBug =
         current === 1 && transcript === e.results[0][0].transcript;
+      // If there are no bugs the function will continue.
       if (!mobileRepeatBug) {
+        // Gets the users from the database and checks to see if they are logged out.
         fetch("/api/v1/user")
           .then((res) => res.json())
           .then((data) => {
 
             if (data === "Logged Out") {
-
+              console.log("Logged Out")
             } else {
+              // If they are not logged out it checks the user phrase in the database and if it is the same as
+              // the transcript it will run the put request for location and the post request for the sms message.
               const phrase = data.phrase.toLowerCase();
               console.log(phrase);
               if (transcript === phrase || transcript === ` ${phrase}`) {
-
+                console.log(location)
                 axios.put('/api/v1/user', {
                   lat: location.latitude,
                   lng: location.longitude
-              }).then(
-                  axios.post('/api/v1/sms/alert', {})
-                  // .then(res => res.json())
-              )  
-
+              }).then(() => {
+                axios.post('/api/v1/sms/alert', {})
+                // .then(res => res.json())
+                .then(data => {console.log(data)
+                    console.log(location.latitude)})
+            })
+              // Stops the recognition after the alert is reached.
                 recognition.stop();
                 setRun((runVoice = false));
               }
@@ -96,10 +102,10 @@ function App() {
     };
   };
 
+  // useEffect hook acts like onMount and runs whenever the page is loaded.
   useEffect(() => {
     checkLogIn();
-    //This function runs voiceCommands function whenever the page loads.
-
+    // If a user is logged in it runs the voiceCommand function on a timer. Every 8 seconds the function will be called.
     const interval = setInterval(() => {
       if (runVoice === false) {
         console.log("done Running");
@@ -108,7 +114,7 @@ function App() {
       }
     }, 8000);
     return () => clearInterval(interval);
-  }, []);
+  }, [location]);
 
   return (
     <Router>
