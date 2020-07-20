@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Col, Button } from 'react-bootstrap';
+import { Form, Col, Button, Container} from 'react-bootstrap';
 import axios from 'axios';
 
 
@@ -124,6 +124,7 @@ export default class Contacts extends Component {
     render() {
         return (
             <div>
+                <Container>
                 {this.state.editing ?
                     <Form >
 
@@ -208,6 +209,7 @@ export default class Contacts extends Component {
                         <Button onClick={this.handleFormSubmit}>Submit</Button>
                     </Form>
                 }
+                </Container>
             </div>
         )
     }
