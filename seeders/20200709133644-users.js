@@ -67,6 +67,19 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date(),
     },
+    {
+      firstName: 'BThree Bot',
+      lastName: 'Bot',
+      userName: 'BThree Bot',
+      dob: new Date(1992, 09, 02),
+      password: 'password3434',
+      email: 'zahria@yahoo.com',
+      phrase: "That's pretty cool",
+      lat: '',
+      lng: '',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
 
 
     ], {});

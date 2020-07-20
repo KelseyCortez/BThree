@@ -74,7 +74,7 @@ export default class Chat extends Component {
             <div className='container'>
                 {this.state.Redirect ? <Redirect to='/login' /> : (
                     <div className="messages">
-                        <h2 style={{textAlign: 'center'}}>What's On Your mind? </h2>
+                        <h2 style={{textAlign: 'center'}}>What's Going On? </h2>
                         {this.state.messages.map((message, index) => {
                             return (
 
