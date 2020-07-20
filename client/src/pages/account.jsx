@@ -3,7 +3,7 @@ import './account.css'
 import { Button } from 'react-bootstrap'
 import EmergencyContacts1 from '../component/emergencyContacts'
 import { Redirect, Link } from 'react-router-dom';
-import EditContact from './editcontact';
+// import EditContact from './editcontact';
 import Timer from '../component/timer'
 
 

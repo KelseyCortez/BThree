@@ -15,8 +15,23 @@ class Feed extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Redirect: false
+            Redirect: false , 
+            userName: "", 
+            mood: "", 
+            moodTitle:""
+            
+        
         }
+    } 
+    setMyMood = (e) => { 
+        e.preventDefault(); 
+        this.setState({ 
+            moodTitle: e.target.name,
+            mood: e.target.value, 
+
+
+        })
+
     }
     componentDidMount = () => {
         fetch(`/api/v1/user`)
@@ -27,19 +42,26 @@ class Feed extends Component {
             .then(data => {
                 console.log(data)
                 if (data === 'Logged Out') {
-                    this.setState({ Redirect: true })
+                    this.setState({ Redirect: true }) 
+                } 
+                else { 
+                    this.setState({userName: data.firstName})
                 }
             });
     }
-    render() {
+    render() { 
+        console.log(this.props)
         return (
             <div>
                 {this.state.Redirect ? <Redirect to='/login' /> : (
                     <div className="FeedPage">
                         <header>
                             <div className="titleDiv">
-                                <h1 style={{ margin: '10px auto', color: 'white' }}> Feed </h1>
-                            </div>
+                                <h1 style={{ marginTop: "20px", color: 'white',}}> Feed </h1>
+                                
+                                
+                            </div> 
+                            <div className="greeting"> Welcome Back, #{this.state.userName} </div>
                         </header>
 
                         <div className="flexRow ">
@@ -50,18 +72,32 @@ class Feed extends Component {
 
                                 <PanicButton />
                                 <div className="Clock"> <div className="upsideDown1"> In </div> <div className="clockColumn"> <div> Be </div> <div className="time"> <Timer /> </div> <div> Back </div> </div> <div className="upsideDown2"> Right </div> </div>
-                            Friends <hr />
-                                <div className="MoodArea">  Mood
-                            <button> </button>
-                                    <button> </button>
-                                </div>
+                                      Invite <br/> Friends?  <hr /> 
+                                <div className="MoodArea">
+                                    <div> #MAJOR MOODZ </div> 
+                                    <br/>
+                                    <div>
+                                        <button onClick={this.setMyMood} value="Happy" name="&#128512; "> &#128512; </button>
+                                        <button onClick={this.setMyMood}  value="Weary" name="&#128528; "> &#128528; </button>
+                                        <button onClick={this.setMyMood} value="silly" name="&#128541;">&#128541; </button>
+                                    </div>
+                                    <div>
+                                        <button onClick={this.setMyMood}  value="Love" name="&#128525;"> &#128525;</button>
+                                        {/* <button value="Nervous"> & </button> */}
+                                        <button  onClick={this.setMyMood} value="Sad" name="&#128532;"> &#128532; </button>
+                                        <button onClick={this.setMyMood} value="Angry" name="&#128545;"> &#128545; </button>
+                                    </div>
+
+                                </div>  
+                                <br/>
+                                Today I am Feeling: {this.state.moodTitle} {this.state.mood}
 
                             </div>
 
                             {/* Users can see their location and have the option to have it turned on or off */}
 
 
-                        <div className="LocationArea"> Location 
+                            <div className="LocationArea"> Location
                           <div className="theMap">   <Map /> </div>
 
                             </div>
