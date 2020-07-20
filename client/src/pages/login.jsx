@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 
 
-import { Link } from 'react-router-dom' 
+import { Link } from 'react-router-dom'
 import './login.css'
 import { Redirect, withRouter } from 'react-router-dom'
 import Account from './account';
@@ -49,10 +49,10 @@ class Login extends Component {
             //       },
             //     }) 
 
-            .then((response) => { 
+            .then((response) => {
                 console.log(response)
                 this.setState({ redirect: '/account' })
-                this.props.setLoggedIn('logged in') 
+                this.props.setLoggedIn('logged in')
                 this.props.history.push('/feed')
                 // this.setState({ redirect: `/account` })
             })
@@ -61,37 +61,37 @@ class Login extends Component {
                 alert('Error logging in please try again')
             })
     }
-    render() { 
-        return( 
+    render() {
+        return (
 
-            <div className="LoginPage"> 
-            <div className="blackboard"> 
-                {/* {this.state.redirect && <Redirect to={this.state.redirect} />} */}
+            <div className="LoginPage">
+                <div className="blackboard">
+                    {/* {this.state.redirect && <Redirect to={this.state.redirect} />} */}
 
-                <h3 style={loginColor}>Sign In</h3>
-                {/* <!-- form for user login  --> */}
-                <form onSubmit={this.authorizeLogin} style={{ width: '30%', margin: '40px auto' }} >
+                    <h3 style={loginColor}>Sign In</h3>
+                    {/* <!-- form for user login  --> */}
+                    <form onSubmit={this.authorizeLogin} style={{ width: '30%', margin: '40px auto' }} >
 
-                    {/* <!-- input field for Username --> */}
-                    <div className="form-group" style={loginColor}>
-                        <label>
-                            Username:
+                        {/* <!-- input field for Username --> */}
+                        <div className="form-group" style={loginColor}>
+                            <label>
+                                Username:
                          <input name="username" type="text" onChange={this.myChangeHandler} value={this.state.username} />
-                        </label> <br />
-                    </div>
-                    {/* <!-- input field for Password --> */}
-                    <div className="form-group" style={loginColor}>
-                        <label>
-                            Password:
+                            </label> <br />
+                        </div>
+                        {/* <!-- input field for Password --> */}
+                        <div className="form-group" style={loginColor}>
+                            <label>
+                                Password:
                         <input name="password" type="password" onChange={this.myChangeHandler} value={this.state.password} />
-                        </label> <br />
-                    </div>
+                            </label> <br />
+                        </div>
 
 
-                    <Button className="btn btn-primary btn-block" onClick={this.authorizeLogin}  > Login</Button>
+                        <Button className="btn btn-primary btn-block" style={{display: 'flex', justifyContent: 'center', width: '100%', fontSize: '90%'}}onClick={this.authorizeLogin} > Login</Button>
 
-                    <p style={loginColor}><Link to={'/register'}>Not signed up? Register here</Link></p>
-                </form> 
+                        <p className="text"><Link to={'/register'}>Not signed up? Register here</Link></p>
+                    </form>
                 </div>
             </div>
         )

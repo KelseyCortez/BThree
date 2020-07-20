@@ -1,10 +1,20 @@
-
-.container {
-    background-color: antiquewhite;
+.par {
+  color: aliceblue;
+  font-size: 3vh;
+  font-family: "Bungee Hairline";
 }
 
-@media screen and (max-width: 600px) {
-    .container {
+.button {
+  font-family: "Bungee";
+  color: "white"; 
+  height: '4vh';
+  width: 100%;
+  fontSize: '90%'; 
+  onhover: "pointer" 
+}
+
+@media screen and (max-width: 800px) {
+  .par {
       display: none;
-    }
   }
+}
