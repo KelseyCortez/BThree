@@ -61,8 +61,9 @@ class Login extends Component {
                 alert('Error logging in please try again')
             })
     }
-    render() {
-        return (
+    render() { 
+        return( 
+
             <div className="LoginPage"> 
             <div className="blackboard"> 
                 {/* {this.state.redirect && <Redirect to={this.state.redirect} />} */}
