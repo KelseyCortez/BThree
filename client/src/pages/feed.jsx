@@ -58,7 +58,7 @@ class Feed extends Component {
                                 
                                 
                             </div> 
-                            <div className="greeting"> Welcome Back, #{this.state.userName} </div>
+                            <div className="greeting"> Welcome Back, {this.state.userName} </div>
                         </header>
                         <div className="flexRow ">
                             {/* timeline of all notifications from friends and yourself */}
@@ -86,8 +86,12 @@ class Feed extends Component {
                             </div>
 
                             {/* Users can see their location and have the option to have it turned on or off */}
-                            <div className="LocationArea"> Location
-                            <div className="theMap">   <Map /> </div>
+
+
+
+                            <div className="LocationArea"> 👇 You are here  👇
+                          <div className="theMap">   <Map /> </div>
+
 
                             </div>
                         </div>
