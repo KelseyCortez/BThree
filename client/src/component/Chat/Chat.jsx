@@ -23,7 +23,6 @@ export default class Chat extends Component {
     componentDidMount() {
         fetch(`/api/v1/user`)
             .then(res =>
-
                 res.json()
             )
             .then(data => {
@@ -31,7 +30,7 @@ export default class Chat extends Component {
                 if (data === 'Logged Out') {
                     this.setState({ Redirect: true })
                 }
-        });
+            });
         fetch(`/api/v1/messages`)
             .then(res => res.json())
             .then(messages => {
@@ -39,11 +38,11 @@ export default class Chat extends Component {
                     messages: messages
                 })
             })
-            
+
         this.socket.on("receive_message", (data) => {
             console.log(data)
-                this.addMessage(data);
-            
+            this.addMessage(data);
+
         });
 
         this.socket.on("not_logged_in", () => {
@@ -72,46 +71,46 @@ export default class Chat extends Component {
 
     render() {
         return (
-            <div className='container'> 
-            
+            <div className='container'>
+
                 {/* <div>
                     <h1>Forum </h1>
                 </div> */}
                 {this.state.Redirect ? <Redirect to='/login' /> : (
-                <div className="messages"> 
-                <h2>What's On Your mind? </h2>
-                    {this.state.messages.map((message, index) => {
-                        return ( 
-                            
-                            <div className="message" key={index}>
-                                <span style={{fontWeight: 'bold', color:"red", fontSize:"20px"}}> {message.author}: </span>
-                               <span style={{fontSize: "20px"}}> {message.message} </span> <br/> 
-                                 <span style={{fontSize: "10px", fontFamily:"Bungee"}}> {moment(message.time).format('MMMM Do YYYY, h:mm:ss a')} </span>
+                    <div className="messages">
+                        <h2 style={{textAlign: 'center'}}>What's On Your mind? </h2>
+                        {this.state.messages.map((message, index) => {
+                            return (
 
-                                <hr  className="horizontalRule"/>
-                            </div>
-                        );
-                    })}
-                    <div>
+                                <div className="message" key={index}>
+                                    <span style={{ fontWeight: 'bold', color: "red", fontSize: "20px" }}> {message.author}: </span>
+                                    <span style={{ fontSize: "20px" }}> {message.message} </span> <br />
+                                    <span style={{ fontSize: "10px", fontFamily: "Bungee" }}> {moment(message.time).format('MMMM Do YYYY, h:mm:ss a')} </span>
 
-                        <form>
-                            <input className='chat-input'
-                                type="text"
-                                placeholder="Send Message"
-                                value={this.state.message}
-                                onChange={(e) =>
-                                    this.setState({
-                                        message: e.target.value,
-                                    })
-                                }
-                            />
-                            <SendIcon 
-                                type='button'
-                                variant="outline-secondary"
-                                onClick={this.sendMessage}>Send </SendIcon>
-                        </form>
+                                    <hr className="horizontalRule" />
+                                </div>
+                            );
+                        })}
+                        <div>
+
+                            <form>
+                                <input className='chat-input'
+                                    type="text"
+                                    placeholder="Send Message"
+                                    value={this.state.message}
+                                    onChange={(e) =>
+                                        this.setState({
+                                            message: e.target.value,
+                                        })
+                                    }
+                                />
+                                <SendIcon
+                                    type='button'
+                                    variant="outline-secondary"
+                                    onClick={this.sendMessage}>Send </SendIcon>
+                            </form>
+                        </div>
                     </div>
-                </div>
                 )}
             </div>
         );

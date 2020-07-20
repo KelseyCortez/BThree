@@ -112,9 +112,8 @@ class Account extends Component {
         return (
             <div>
                 {this.state.Redirect ? <Redirect to='/login'/> : ( 
-                   
                     <div className="AccountPage flexColumn">
-                             <Timer/>
+                             {/* <Timer/> */}
                         <div className="Title"> Account Information </div> 
                         <div className="Info flexRow">
 
@@ -122,7 +121,7 @@ class Account extends Component {
                                 <div>Name: <span className="data">{name}</span> </div>
                                 <div>Username: <span className="data">{username}</span> </div>
                                 <div>Email: <span className="data">{email}</span> </div>
-                                <div>Cell Number: <span className="data">{cellNumber}</span> </div>
+                                {/* <div>Cell Number: <span className="data">{cellNumber}</span> </div> */}
                                 <Button onClick={this.removeUser}> Delete Account </Button>
 
 

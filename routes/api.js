@@ -174,7 +174,7 @@ router.put('/user/contacts', checkAuth, (req, res, next) => {
 router.get('/messages', (req, res) => {
     db.Message.findAll({
         order: [
-            ['createdAt', 'DESC']
+            ['createdAt', 'ASC']
         ],
         include: {
             model: db.User,
