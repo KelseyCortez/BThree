@@ -2,7 +2,7 @@ import About from "./pages/about";
 import Map from "./component/Map";
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Register from "./pages/register";
 import Contacts from "./pages/contacts";
 import Login from "./pages/login";
@@ -16,8 +16,6 @@ import MyNavbar from './component/navbar'
 
 import axios from 'axios'
 import Footer from "./component/footer"
-
-import EditContact from './pages/editcontact';
 
 import { connect, useSelector } from 'react-redux';
 
@@ -126,8 +124,7 @@ function App({latitude, longitude}) {
       <div className="App">
 
         <MyNavbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> 
-     <footer> <Footer /> </footer>
-        {/* <PanicButton /> */}
+        <footer> <Footer /> </footer>
 
         {loggedIn == "not checked" && <div> Loading.. </div>}
 
@@ -139,6 +136,7 @@ function App({latitude, longitude}) {
             </Route>
             <Route path="/register" component={Register} />
             <Route path="/about" component={About} />
+            <Redirect to='/login' />
           </Switch>
         )}
 
@@ -151,7 +149,7 @@ function App({latitude, longitude}) {
             <Route path="/map" component={Map} />
             <Route path="/chat" component={Chat} />
             <Route path="/about" component={About} />
-          <Route path="/editcontact" component={EditContact} />
+            <Redirect to='/' />
           </Switch>
         )}
       </div>

@@ -14,7 +14,11 @@ header{
     right: 0px ;
     position: absolute; 
     margin: 15px 15px 0px 15px;
-    background-color: black;
+    background-color: black; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    justify-items: center;
 
     
 } 
@@ -36,21 +40,25 @@ header{
     width: 25%; 
     font-family: "Bungee";
     color: white;
-    height: 85vh; 
-    background-color: black;
+    height: 75vh; 
+    background-color: black; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
 }
 
 .LocationArea{   
+    margin-top: 30px; 
     display: flex; 
     flex-direction: column;  
     justify-items: center;
     align-items: center;
     text-align: center; 
     border: 2px solid white;
-    margin: 0px 15px 15px 15px;
+    margin: 30px 15px 15px 15px;
     padding: 10px;
     width: 70vw; 
-    height: 74.1vh ;
+    height: 54.1vh ;
     color: white;
     top: calc(30% - 15px);
     right: 0px; 
@@ -63,7 +71,7 @@ header{
 
 .theMap{ 
     width: 80%; 
-    height: 20%;
+    height: 80%;
 } 
 .time{ 
     padding: 10px;
@@ -85,7 +93,18 @@ header{
     justify-content: center; 
     width: 100%;
 } 
-
+.MoodArea{ 
+    width: 80%; 
+    height: 15%;  
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #f5f5f5 ;
+    background-color:black ; 
+    border: solid 5px black; 
+    /* background-color:#F2EC2D ; 
+    border: solid 5px #F1D81B;  */
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+}
 .upsideDown1{  
     rotate: 180deg; 
     writing-mode: vertical-rl;
@@ -93,4 +112,21 @@ header{
 } 
 .upsideDown2{ 
     writing-mode: vertical-rl;
-}
+} 
+
+.greeting{ 
+    font-family:"Kalam" ;   
+    margin-top: -20px;
+    margin-left: 30px;
+    color: #C91BF1; 
+    font-size: 40px ; 
+    font-weight: 300;  
+    letter-spacing: 3px;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color:#F25CFE ;
+    /* background-color: tomato;  */
+    text-align: center;
+  } 
+
+  
+  
