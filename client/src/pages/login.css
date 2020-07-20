@@ -7,7 +7,8 @@
     left: 25%;
     position: absolute; 
     text-align: center; 
-   background-color:#000133;
+    background-color:#000133;
+    min-height: 100vh;
   /* border: solid 2px white; */
 } 
 h3{ 

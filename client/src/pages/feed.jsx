@@ -52,11 +52,11 @@ class Feed extends Component {
                     <div className="FeedPage">
                         <header>
                             <div className="titleDiv">
-                                <h1 style={{ marginTop: "20px", color: 'white', }}> Feed </h1>
+                                {/* <h1 style={{ marginTop: "20px", color: 'white', }}> Feed </h1> */}
+                                <div className="greeting"> Welcome Back, {this.state.userName} </div>
 
 
                             </div>
-                            <div className="greeting"> Welcome Back, {this.state.userName} </div>
                         </header>
                         <div className="flexRow ">
                             {/* timeline of all notifications from friends and yourself */}

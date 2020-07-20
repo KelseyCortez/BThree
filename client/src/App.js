@@ -9,14 +9,11 @@ import Login from "./pages/login";
 import Feed from "./pages/feed";
 import Account from "./pages/account";
 import Chat from "./component/Chat/Chat";
-import { Nav } from "react-bootstrap";
 import LandingPage from "./component/LandingPage";
 import PanicButton from './component/PanicButton';
 import MyNavbar from './component/navbar'
-
 import axios from 'axios'
 import Footer from "./component/footer"
-
 import { connect, useSelector } from 'react-redux';
 
 // creates variables that allow chrome speech recognition
