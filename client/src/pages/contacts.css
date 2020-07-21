@@ -1,0 +1,55 @@
+.ContactsPage{ 
+    font-family: "Bungee";
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    justify-content: space-around;
+}
+
+.main {
+    background-color: #000000;
+    color: white;
+    display: flex;
+    align-items: center;
+    background-color:#000133;
+    text-align: center; 
+    min-height: 50%; 
+    width: 75%;
+    margin-top: -20%;
+
+}
+
+
+.header{ 
+    margin-top: -10%;
+    color: white;
+} 
+
+Form.Row {
+    width: 95%;
+}
+
+Form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+Button {
+    padding: 10px;
+    font-size: 10px;
+    display: inline-block;
+    text-decoration: none;
+    
+}
+
+
+@media screen and (max-width: 800px) {
+    .text {
+        font-size: 2vh;
+    }
+  }

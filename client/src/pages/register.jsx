@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 class Register extends Component {
@@ -29,10 +29,7 @@ class Register extends Component {
                 },
             })
             .then(() => {
-                axios.post('/api/v1/login', {
-                    username: this.state.userName,
-                    password: this.state.password
-                })
+                this.props.setLoggedIn('logged in')
                 this.props.history.push('/contacts')
             })
 
@@ -111,8 +108,8 @@ class Register extends Component {
 
                     <Button className="btn btn-primary btn-block" onSubmit={this.handleFormSubmit} type="submit"> Sign Up</Button>
                 </form>
-                <p className="forgot-password text-right" style={registerColor}>
-                    Already registered? <Link to={'/login'}>Sign in</Link>
+                <p className="forgot-password text-right" style={registerColor} style={{ padding: '20px'}}>
+                Already registered? <Link to={'/login'}>Sign in</Link>
                 </p>
                 {/* end of registration form */}
             </div >
@@ -122,7 +119,7 @@ class Register extends Component {
 
 
 
-export default Register;
+export default withRouter(Register);
 
 const registerColor = {
     color: 'white'

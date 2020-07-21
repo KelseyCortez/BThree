@@ -10,9 +10,9 @@ export default function LandingPage() {
             <div style={{ display:"flex", flexDirection:"column", alignItems:"center", height: '100%', margin: '30px auto' }}>
                 {/* <h1 style={{ color: 'white', margin: '30px', fontFamily: "Bungee" }}> B3</h1> */}
 
-                <div style={{ display: "flex", flexDirection: "row",  width: "55vw", height:"65vh", alignItems:"center", justifyContent:"center", backgroundColor:"white" }}>
-                    <div style={{writingMode:"vertical-rl" ,textOrientation: "upright", backgroundColor:"black", color: "white", fontFamily:"Bungee", letterSpacing:"5px", fontSize:"25px", textAlign:"center", height:"100%", width:"5%", padding:"30px"}}>Better Together </div>
-                    <Card style={{width:"95%", borderStyle: "none",height:"100%"}} className="text-center">
+                {/* <div style={{ display: "flex", flexDirection: "row",  width: "55vw", height:"65vh", alignItems:"center", justifyContent:"center", backgroundColor:"white" }}> */}
+                    {/* <div style={{writingMode:"vertical-rl" ,textOrientation: "upright", backgroundColor:"black", color: "white", fontFamily:"Bungee", letterSpacing:"5px", fontSize:"25px", textAlign:"center", height:"100%", width:"5%", padding:"30px"}}>Better Together </div> */}
+                    <Card style={{width:"50%", borderStyle: "none", height:"45vh"}} className="text-center">
                         <Card.Body style={{ backgroundColor: '#000133', color: 'white', fontWeight: "bold"}}>
                             <Card.Text className="par" >
                                 B3 is an app that allows users to share their location via SMS to emergency contacts.
@@ -24,6 +24,6 @@ export default function LandingPage() {
                     </Card>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }

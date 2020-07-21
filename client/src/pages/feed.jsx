@@ -54,6 +54,7 @@ class Feed extends Component {
                             <header>
                                 <div className="greeting"> Welcome Back, {this.state.userName} </div>
                             </header>
+
                             {/* Users can see their location and have the option to have it turned on or off */}
                             <div className="LocationArea"> 👇 You are here  👇
                                 <div className="theMap">   <Map /> </div>
