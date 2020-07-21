@@ -86,9 +86,8 @@ class Login extends Component {
                         <input name="password" type="password" onChange={this.myChangeHandler} value={this.state.password} />
                             </label> <br />
                         </div>
-
-
                         <Button className="btn btn-primary btn-block" style={{display: 'flex', justifyContent: 'center', width: '100%', fontSize: '90%'}}onClick={this.authorizeLogin} > Login</Button>
+
 
                         <p className="text"><Link to={'/register'}>Not signed up? Register here</Link></p>
                     </form>
