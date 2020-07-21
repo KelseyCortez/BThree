@@ -48,7 +48,7 @@ Please make sure to update tests as appropriate.
 React/Redux
 JavaScript
 Express
-sequelze
+sequelize
 Socket.io
 bcrypt
 Twillio
