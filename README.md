@@ -10,6 +10,11 @@
 
 * [About](#about)
 * [Installation](#installation)
+* [Usage](#usage)
+* [Contributing](#contributing)
+* [Technology](#technology)
+* [DEV Team](#dev)
+* [Licence](#licence)
 
 
 ## Installation
@@ -31,25 +36,29 @@ Creating an account from the opening screen creates a user account in the DB enc
 
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
 
-## Tech used
+## Technology
 
 ```bash
-|   React/Redux	|   JavaScript	|
-|	Express |	sequelze|
-|   	Socket.io|   bcrypt	|
-|   Twillio	|   Google Maps API	|
-|   Bootstrap	|   Axios	|
-|   CSS	|   HTML	|
+React/Redux
+JavaScript
+Express
+sequelze
+Socket.io
+bcrypt
+Twillio
+Google Maps API
+Bootstrap
+Axios
+CSS
+HTML
 
 ```
-
-
-
 
 
 ## DEV Team
