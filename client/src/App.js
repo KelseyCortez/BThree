@@ -131,9 +131,10 @@ function App({latitude, longitude}) {
             <Route path="/login">
               <Login setLoggedIn={setLoggedIn} />
             </Route>
-            <Route path="/register" component={Register} />
+            <Route path="/register">
+              <Register setLoggedIn={setLoggedIn} />
+              </Route>
             <Route path="/about" component={About} />
-            <Route path="/contacts" component={Contacts} />
             <Redirect to='/login' />
           </Switch>
         )}
