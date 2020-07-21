@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Form, Col, Button, Container} from 'react-bootstrap';
+import { Form, Col, Button, Container } from 'react-bootstrap';
 import axios from 'axios';
+import './contacts.css'
 
 
 export default class Contacts extends Component {
@@ -123,93 +124,108 @@ export default class Contacts extends Component {
 
     render() {
         return (
-            <div>
-                <Container>
-                {this.state.editing ?
-                    <Form >
 
-                        <Form.Row>
-                            Emergency Contact 1 <Col>
-                                <Form.Control placeholder="Name" name='name' value={this.state.contact1.name} onChange={(e) => this.handleChange(e, 'contact1')} type="text" />
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Phone Number " name='phoneNumber' value={this.state.contact1.phoneNumber} onChange={(e) => this.handleChange(e, 'contact1')} type="text" required />
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact1.relationship} onChange={(e) => this.handleChange(e, 'contact1')} type="text" />
-                            </Col>
-                            <Button onClick={() => this.removeContact(this.state.contact1.id)}> X </Button>
-                        </Form.Row>
-                        <Form.Row>
-                            Emergency Contact 2
-                        <Col>
-                                <Form.Control placeholder="Name" name='name' value={this.state.contact2.name} onChange={(e) => this.handleChange(e, 'contact2')} type="text" />
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Phone Number" name='phoneNumber' value={this.state.contact2.phoneNumber} onChange={(e) => this.handleChange(e, 'contact2')} type="text" />
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact2.relationship} onChange={(e) => this.handleChange(e, 'contact2')} />
-                            </Col>
-                            <Button onClick={() => this.removeContact(this.state.contact2.id)}> X </Button>
-                        </Form.Row>
-                        <Form.Row>
-                            Emergency Contact 3
-                        <Col>
-                                <Form.Control placeholder="Name" name='name' value={this.state.contact3.name} onChange={(e) => this.handleChange(e, 'contact3')} type="text" />
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Phone Number" name='phoneNumber' value={this.state.contact3.phoneNumber} onChange={(e) => this.handleChange(e, 'contact3')} type="text" />
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact3.relationship} onChange={(e) => this.handleChange(e, 'contact3')} type="text" />
-                            </Col>
-                            <Button onClick={() => this.removeContact(this.state.contact3.id)}> X </Button>
-                        </Form.Row>
-                        <Button onClick={this.handleFormUpdate}>Save Changes</Button>
+            <div className='ContactsPage'>
+                <div className='header'>
+                    <h3>Choose Your Emergency Contacts</h3>
+                    <h5>These are the contacts that will receive your emergency text in your time of need</h5>
+                </div>
 
-                    </Form>
-                    :
-                    <Form>
-                        <Form.Row>
-                            Emergency Contact 1 <Col>
-                                <Form.Control placeholder="Name" name='name' value={this.state.contact1.name} onChange={(e) => this.handleChange(e, 'contact1')} type="text" required />
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Phone Number " name='phoneNumber' value={this.state.contact1.phoneNumber} onChange={(e) => this.handleChange(e, 'contact1')} type="text" required />
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact1.relationship} onChange={(e) => this.handleChange(e, 'contact1')} type="text" required />
-                            </Col>
-                        </Form.Row>
-                        <Form.Row>
-                            Emergency Contact 2
+                <div className='main'>
+                    <br />
+                    {this.state.editing ?
+                        <Form>
+
+                            <Form.Row>
+                                <Col>Emergency Contact </Col>
+                                <Col>
+                                    <Form.Control placeholder="Name" name='name' value={this.state.contact1.name} onChange={(e) => this.handleChange(e, 'contact1')} type="text" />
+                                </Col>
+                                <Col>
+                                    <Form.Control placeholder="Phone Number " name='phoneNumber' value={this.state.contact1.phoneNumber} onChange={(e) => this.handleChange(e, 'contact1')} type="text" required />
+                                </Col>
+                                <Col>
+                                    <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact1.relationship} onChange={(e) => this.handleChange(e, 'contact1')} type="text" />
+                                </Col>
+                                <Button size='sm' onClick={() => this.removeContact(this.state.contact1.id)}> X </Button>
+                            </Form.Row>
+                            <br />
+                            <Form.Row>
+                                <Col>Emergency Contact </Col>
+                                <Col>
+                                    <Form.Control placeholder="Name" name='name' value={this.state.contact2.name} onChange={(e) => this.handleChange(e, 'contact2')} type="text" />
+                                </Col>
+                                <Col>
+                                    <Form.Control placeholder="Phone Number" name='phoneNumber' value={this.state.contact2.phoneNumber} onChange={(e) => this.handleChange(e, 'contact2')} type="text" />
+                                </Col>
+                                <Col>
+                                    <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact2.relationship} onChange={(e) => this.handleChange(e, 'contact2')} />
+                                </Col>
+                                <Button size='sm' onClick={() => this.removeContact(this.state.contact2.id)}> X </Button>
+                            </Form.Row>
+                            <br />
+                            <Form.Row>
+                                <Col>Emergency Contact </Col>
+                                <Col>
+                                    <Form.Control placeholder="Name" name='name' value={this.state.contact3.name} onChange={(e) => this.handleChange(e, 'contact3')} type="text" />
+                                </Col>
+                                <Col>
+                                    <Form.Control placeholder="Phone Number" name='phoneNumber' value={this.state.contact3.phoneNumber} onChange={(e) => this.handleChange(e, 'contact3')} type="text" />
+                                </Col>
+                                <Col>
+                                    <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact3.relationship} onChange={(e) => this.handleChange(e, 'contact3')} type="text" />
+                                </Col>
+                                <Button size='sm' onClick={() => this.removeContact(this.state.contact3.id)}> X </Button>
+                            </Form.Row>
+                            <br />
+                            <Button onClick={this.handleFormUpdate}>Save Changes</Button>
+
+                        </Form>
+                        :
+                        <Form>
+                            <Form.Row>
+                                <Col>Emergency Contact </Col>
+                                <Col>
+                                    <Form.Control placeholder="Name" name='name' value={this.state.contact1.name} onChange={(e) => this.handleChange(e, 'contact1')} type="text" required />
+                                </Col>
+                                <Col>
+                                    <Form.Control placeholder="Phone Number " name='phoneNumber' value={this.state.contact1.phoneNumber} onChange={(e) => this.handleChange(e, 'contact1')} type="text" required />
+                                </Col>
+                                <Col>
+                                    <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact1.relationship} onChange={(e) => this.handleChange(e, 'contact1')} type="text" required />
+                                </Col>
+                            </Form.Row>
+                            <br />
+                            <Form.Row>
+                            <Col>Emergency Contact </Col>
                         <Col>
-                                <Form.Control placeholder="Name" name='name' value={this.state.contact2.name} onChange={(e) => this.handleChange(e, 'contact2')} type="text" required />
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Phone Number" name='phoneNumber' value={this.state.contact2.phoneNumber} onChange={(e) => this.handleChange(e, 'contact2')} type="text" required />
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact2.relationship} onChange={(e) => this.handleChange(e, 'contact2')} required />
-                            </Col>
-                        </Form.Row>
-                        <Form.Row>
-                            Emergency Contact 3
+                                    <Form.Control placeholder="Name" name='name' value={this.state.contact2.name} onChange={(e) => this.handleChange(e, 'contact2')} type="text" required />
+                                </Col>
+                                <Col>
+                                    <Form.Control placeholder="Phone Number" name='phoneNumber' value={this.state.contact2.phoneNumber} onChange={(e) => this.handleChange(e, 'contact2')} type="text" required />
+                                </Col>
+                                <Col>
+                                    <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact2.relationship} onChange={(e) => this.handleChange(e, 'contact2')} required />
+                                </Col>
+                            </Form.Row>
+                            <br />
+                            <Form.Row>
+                            <Col>Emergency Contact </Col>
                         <Col>
-                                <Form.Control placeholder="Name" name='name' value={this.state.contact3.name} onChange={(e) => this.handleChange(e, 'contact3')} type="text" required />
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Phone Number" name='phoneNumber' value={this.state.contact3.phoneNumber} onChange={(e) => this.handleChange(e, 'contact3')} type="text" required />
-                            </Col>
-                            <Col>
-                                <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact3.relationship} onChange={(e) => this.handleChange(e, 'contact3')} type="text" required />
-                            </Col>
-                        </Form.Row>
-                        <Button onClick={this.handleFormSubmit}>Submit</Button>
-                    </Form>
-                }
-                </Container>
+                                    <Form.Control placeholder="Name" name='name' value={this.state.contact3.name} onChange={(e) => this.handleChange(e, 'contact3')} type="text" required />
+                                </Col>
+                                <Col>
+                                    <Form.Control placeholder="Phone Number" name='phoneNumber' value={this.state.contact3.phoneNumber} onChange={(e) => this.handleChange(e, 'contact3')} type="text" required />
+                                </Col>
+                                <Col>
+                                    <Form.Control placeholder="Relationship" name='relationship' value={this.state.contact3.relationship} onChange={(e) => this.handleChange(e, 'contact3')} type="text" required />
+                                </Col>
+                            </Form.Row>
+                            <br />
+                            <Button onClick={this.handleFormSubmit}>Submit</Button>
+                        </Form>
+                    }
+                </div>
             </div>
         )
     }

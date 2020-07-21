@@ -78,6 +78,7 @@ class Feed extends Component {
                                     </div>
                                 </div>
                                 <br />
+                                <br />
                                 Today I am Feeling: {this.state.moodTitle} {this.state.mood}
                             </div>
 

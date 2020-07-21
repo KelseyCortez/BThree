@@ -3,8 +3,7 @@ import './pages.css'
 import './account.css'
 import { Button } from 'react-bootstrap'
 import EmergencyContacts1 from '../component/emergencyContacts'
-import { Redirect, Link } from 'react-router-dom';
-// import EditContact from './editcontact';
+import { Redirect, Link } from 'react-router-dom'
 import Timer from '../component/timer' 
 import PanicButton from '../component/PanicButton'
 
@@ -124,13 +123,13 @@ class Account extends Component {
                                     <div>Name: <span className="data">{name}</span> </div>
                                     <div>Username: <span className="data">{username}</span> </div>
                                     <div>Email: <span className="data">{email}</span> </div>
+                                    <Button style={{margin: '1vh'}} onClick={this.removeUser}> Delete Account </Button>
                                 </div>
 
                                 <div className="EC">
                                     <div ><h5 className="cont" style={{fontSize: '2vh'}}>Emergency Contacts</h5></div>
                                     {EmergencyContacts}
                                     <Button style={{margin: '1vh'}}><Link style={{color:"white"}} to='/contacts'>Edit Contacts</Link> </Button>
-                                    <Button style={{margin: '1vh'}} onClick={this.removeUser}> Delete Account </Button>
                                 </div>
                             </div>
                         </div>
