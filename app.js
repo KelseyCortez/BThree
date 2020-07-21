@@ -2,7 +2,7 @@ let createError = require('http-errors');
 let express = require('express');
 let socket = require('socket.io');
 let path = require('path');
-let cookieParser = require('cookie-parser'); 
+let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser')
 let apiRouter = require('./routes/api');
 let logger = require('morgan');
@@ -13,7 +13,6 @@ const db = require('./models');
 
 let app = express();
 
-app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -33,6 +32,7 @@ app.use(
   sessionData
 )
 
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use('/api/v1/', apiRouter);
 app.use('/api/v1/sms', smsRouter);
 
