@@ -15,8 +15,23 @@ h3{
     margin-top: 30px;
 } 
 
-p { 
-    font-size: 17px;
-    
-   
+input {
+    width: 100%;
 }
+.blackboard { 
+   width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+    .text {
+        font-size: 2vh;
+    }
+  }
+

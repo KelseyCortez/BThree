@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './pages.css'
 import './account.css'
 import { Button } from 'react-bootstrap'
 import EmergencyContacts1 from '../component/emergencyContacts'
@@ -111,28 +112,25 @@ class Account extends Component {
             <div className="AccountPage ">
                 {this.state.Redirect ? <Redirect to='/login' /> : (
 
-                    <div> 
-                        <div className="timerAndButton"> 
-                      <div className="TimerArea">   <Timer /> </div>  
-                      <div className="PB"> <PanicButton/> </div>
+                    <div className="cont"> 
+                     <div className="timerAndButton"> 
+                        <div className="TimerArea">   <Timer /> </div>  
+                        <div className="PB"> <PanicButton/> </div>
                       </div>
                         <div className="Main">
-                            <div className="Title"> Account Information </div>
                             <div className="Info">
-
+                            <div className="Title"> Account Information </div>
                                 <div className="TextArea">
                                     <div>Name: <span className="data">{name}</span> </div>
                                     <div>Username: <span className="data">{username}</span> </div>
                                     <div>Email: <span className="data">{email}</span> </div>
-                                    <Button onClick={this.removeUser}> Delete Account </Button>
                                 </div>
 
                                 <div className="EC">
-                                    <div> Emergency Contacts </div>
+                                    <div ><h5 className="cont" style={{fontSize: '2vh'}}>Emergency Contacts</h5></div>
                                     {EmergencyContacts}
-
-                                    <Button ><Link style={{color:"white"}} to='/contacts'>Edit</Link> </Button>
-
+                                    <Button style={{margin: '1vh'}}><Link style={{color:"white"}} to='/contacts'>Edit Contacts</Link> </Button>
+                                    <Button style={{margin: '1vh'}} onClick={this.removeUser}> Delete Account </Button>
                                 </div>
                             </div>
                         </div>

@@ -20,22 +20,22 @@ export default class NavBar extends Component {
             return (
                 <div>
 
-                    <Navbar style={{ backgroundColor: "#8B0000", height: "16vh" }}>
-                        <Navbar.Brand className="glow" style={{ fontSize: '85px', color: 'white', fontFamily: "Bungee Inline", letterSpacing: "3px", marginLeft: "20px" }}>BThree</Navbar.Brand>
+                    <Navbar style={{ backgroundColor: "#8B0000", height: '100%', width: "100%", display: 'flex', flexWrap: 'wrap'}}>
+                        <Navbar.Brand className="glow" style={{ fontSize: '85px', color: 'white', fontFamily: "Bungee Inline", letterSpacing: "3px", marginLeft: "20px", fontSize: '5vh'}}>BThree</Navbar.Brand>
 
-                        <Nav className="justify-content-end ml-auto" activeKey="/home">
-                            <Nav.Item>
-                                <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href="/feed">Feed </Nav.Link>
+                        <Nav className="justify-content-end ml-auto" id="links" activeKey="/home">
+                            <Nav.Item className="nav">
+                                <Nav.Link style={{ color: 'white'}} className="link" href="/feed">Feed </Nav.Link>
                             </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href='/chat'>Forum <div className="inviteFriends">  1  </div></Nav.Link>
+                            <Nav.Item className="nav">
+                                <Nav.Link style={{ color: 'white' }}  className="link" href='/chat'>Forum <div className="inviteFriends">  1  </div></Nav.Link>
                             </Nav.Item>
-                            <Nav.Item>
+                            <Nav.Item className="nav">
 
-                                <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href="/account">Account</Nav.Link>
+                                <Nav.Link style={{ color: 'white' }} className="link" href="/account">Account</Nav.Link>
                             </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link style={{ color: 'white', fontFamily: "Bungee" }} href="/"><Button style={{ color: 'white' }} onClick={this.onClick} >Log Out</Button></Nav.Link>
+                            <Nav.Item className="nav">
+                                <Nav.Link style={{ color: 'white', height: '2vh' }}  className="link" href="/"><Button style={{ color: 'white', height: '5vh'}} onClick={this.onClick} >Log Out</Button></Nav.Link>
                             </Nav.Item>
                         </Nav>
 

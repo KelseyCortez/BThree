@@ -6,22 +6,23 @@
     flex-direction: column;  
     align-items: center; 
     align-content: center;
+    flex-wrap: wrap;
 }  
 .timerAndButton{  
     /* margin-top: 20px; 
     margin-right: none; */ 
-    margin: auto;
-    width: 50vw; 
-    
+    padding-top: 1vh;
+    width: 80%; 
     display: flex; 
     flex-direction: row; 
-    justify-items: center;
     justify-content: space-around;
     align-items: center; 
+    flex-wrap: wrap;
 }
 
 .TimerArea{ 
-   
+    display: flex;
+    flex-wrap: wrap;
     width: 25% ;
 } 
 .PB{ 
@@ -34,15 +35,20 @@
     flex-direction: column; 
     justify-items: center; 
     align-items: center; 
-    width: 65vw; 
+    flex-wrap: wrap;
+    width: 80%; 
     height: 75vh; 
     margin: 0px;
 }
 
 .Title{  
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 40px; 
     text-align: center; 
-    font-size: 30px; 
+    font-size: 2vh; 
+    height: 5vh;
     color: whitesmoke; 
     background-color: #212F3D; 
     width: 100%; 
@@ -56,11 +62,11 @@
     justify-content: center; 
     justify-items: center;
     align-items: center; 
-    background-color:yellow;  
     /* margin-top: 10px; */
     margin-bottom: 10px; 
     display: flex; 
     flex-direction: row;
+    flex-wrap: wrap;
    
 }
 
@@ -76,6 +82,7 @@
     justify-content: space-around;  
    
 } 
+
 
 
 
@@ -100,15 +107,47 @@
     background-color:black;
     color: white; 
     overflow-y: scroll;
+    overflow-x: scroll;
     width: 50%!important; 
     height: 100%;  
     display: flex; 
     flex-direction: column;  
     justify-content: space-around;  
-} 
+}
 
-@media (min-width: 575px) {
-   .AccountPage{ 
-       width: 100vw;
-   }
+
+.cont {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+    .timerAndButton {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+@media screen and (max-width: 800px) {
+    .TextArea {
+      display: none;
+    }
+  }
+
+@media screen and (max-width: 800px) {
+    .EC {
+        height: 90%;
+        font-size: 2vh;
+    }
+  }
+
+@media screen and (max-width: 800px) {
+    .Title {
+        width: 52%;
+        font-size: 60%;
+        height: 3vh;
+    }
+
   }
