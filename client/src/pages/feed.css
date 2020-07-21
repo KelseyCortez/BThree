@@ -1,86 +1,90 @@
 .FeedPage{ 
     font-family: "Bungee"; 
     background-color: brown; 
-   margin-top: none;
+    margin-top: none;  
+    display: flex; 
+    flex-direction: column;
+    
+    min-height: 100vh; 
+    width: 100vw;
    
 }
 
+.stuffing{ 
+    height: 80%; 
+    width: 100%; 
+    display: flex; 
+    flex-direction: row-reverse; 
+    justify-content: space-around; 
+    align-content: space-around;
+}
+.rightColumn{  
+    display: flex; 
+    flex-direction: column; 
+    width: 70%;
 
-
+}
 header{ 
     border: 2px solid white; 
-    height: 10vh; 
+    height: 10%; 
     text-align: center; 
     font-family: "Bungee";  
-    width: 70vw; 
-    right: 0px ;
-    position: absolute; 
-    margin: 15px 15px 0px 15px;
+    width: 95%; 
     background-color: black; 
     display: flex; 
     flex-direction: column; 
-    justify-content: center; 
-    justify-items: center;
-
-    
+    justify-content: flex-end; 
+    justify-items: flex-end;  
+    padding: 10px;
+    margin: 15px 15px 15px 15px;
 } 
 
-.titleDiv{ 
-    display: flex; 
-    flex-direction: column; 
-    justify-items: center; 
-    justify-content: center; 
-    height: 100%;
-}
 
 
 .FriendsArea{  
     text-align: center; 
     border: 2px solid white;
-    margin: 15px;
-    padding: 10px;
     width: 25%; 
     font-family: "Bungee";
     color: white;
-    height: 75vh; 
+    min-height: 100%; 
     background-color: black; 
     display: flex; 
     flex-direction: column; 
-    align-items: center;
+    align-items: center; 
+    margin-top: 15px; 
 }
 
 .LocationArea{   
-    margin-top: 30px; 
     display: flex; 
     flex-direction: column;  
     justify-items: center;
     align-items: center;
     text-align: center; 
     border: 2px solid white;
-    margin: 30px 15px 15px 15px;
+    margin: 15px 15px 15px 15px;
     padding: 10px;
-    width: 70vw; 
-    height: 54.1vh ;
+    width: 95%; 
+    height: 69.1vh ;
     color: white;
-    top: calc(30% - 15px);
-    right: 0px; 
-    position: absolute; 
-    background-color: black;
+    background-color: black; 
+    font-size: 25px;
 } 
 
 
 
 
 .theMap{ 
-    width: 90%; 
-    height: 96%;
+    margin-top: 10px;
+    width: 80%; 
+    height: 80%;
 } 
 .time{ 
     padding: 10px;
 }
 .Clock{ 
     width: 75%;
-  margin: 30px;
+    margin: 30px;
     padding: 30px; 
     border: solid brown 3px; 
     background-color: brown; 
@@ -97,15 +101,19 @@ header{
 } 
 .MoodArea{ 
     width: 80%; 
-    height: 15%;  
+    height: 35%;   
+    display: flex; 
+    flex-direction: column ;
+    justify-content: space-between;
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #f5f5f5 ;
+    -webkit-text-stroke-color: #A4FF45 ;
     background-color:black ; 
     border: solid 5px black; 
     /* background-color:#F2EC2D ; 
     border: solid 5px #F1D81B;  */
     text-decoration-line: underline;
-    text-decoration-style: wavy;
+    text-decoration-style: wavy; 
+    font-size: 25px;
 }
 .upsideDown1{  
     rotate: 180deg; 
@@ -118,16 +126,94 @@ header{
 
 .greeting{ 
     font-family:"Kalam" ;   
-    margin-top: -20px;
-    margin-left: 30px;
-    color: #C91BF1; 
+    color: #001594; 
     font-size: 40px ; 
     font-weight: 300;  
     letter-spacing: 3px;
-    -webkit-text-stroke-width: 3px;
-    -webkit-text-stroke-color:#F25CFE ;
-    /* background-color: tomato;  */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color:#4560FF;
+    width: 100%; 
+    height: 100%;
     text-align: center;
   } 
-
+.PB2{ 
+    display: none;
+}
   
+  @media screen and (max-width: 800px) {
+    .FeedPage{  
+        width: 100vw; 
+        height: 100vh; 
+        background-color:  brown;
+    }
+    header{  
+        /* width: 70%; 
+        height: 10%; */
+    } 
+    .FriendsArea{ 
+        /* width: 25% ; 
+        height: 85%;  */
+        display: flex; 
+        flex-direction: column; 
+       
+        
+      
+    }   
+    .stuffing{ 
+        width: 100%;
+    }
+    button{ 
+        width: 25%;
+    }
+    .PanicButton{  
+      max-width:97% ; 
+    }
+    .LocationArea{   
+        height: 95%;
+        
+    }  
+    .feeling{
+        font-size: 40%; 
+        display: block;
+    }
+    
+  
+    
+    
+    .theMap{ 
+       
+    } 
+    .time{ 
+
+        
+    }
+    .Clock{ 
+        width: 100%; 
+        font-size: 70%; 
+        padding: 0%;
+      
+    } 
+    
+    .clockColumn{  
+        width: 85%;
+        
+    } 
+    .MoodArea{ 
+        width: 95%; 
+        font-size: 100%;
+      
+    }
+    .upsideDown1{  
+        width: 10%;
+       
+    
+    } 
+    .upsideDown2{  
+        width: 10%;
+        
+    } 
+    
+    .greeting{ 
+    font-size: 150%;
+      } 
+  }

@@ -47,50 +47,50 @@ class Feed extends Component {
     render() {
         console.log(this.props)
         return (
-            <div>
+            <div className="FeedPage">
                 {this.state.Redirect ? <Redirect to='/login' /> : (
-                    <div className="FeedPage">
-                        <header>
-                            <div className="titleDiv">
-                                {/* <h1 style={{ marginTop: "20px", color: 'white', }}> Feed </h1> */}
+                    <div className="stuffing flexRow ">
+                        <div className="rightColumn">
+                            <header>
                                 <div className="greeting"> Welcome Back, {this.state.userName} </div>
-                            </div>
-                        </header>
-                        <div className="flexRow ">
-                            {/* timeline of all notifications from friends and yourself */}
-                            <div className="FriendsArea">
-                                <PanicButton />
-                                <div className="Clock"> <div className="upsideDown1"> In </div> <div className="clockColumn"> <div> Be </div> <div className="time"> <Timer /> </div> <div> Back </div> </div> <div className="upsideDown2"> Right </div> </div>
-
-                                <div className="MoodArea">
-                                    <div> #MAJOR MOODZ </div>
-                                    <br />
-                                    <div>
-                                        <button onClick={this.setMyMood} value="Happy" name="&#128512; "> &#128512; </button>
-                                        <button onClick={this.setMyMood} value="Weary" name="&#128528; "> &#128528; </button>
-                                        <button onClick={this.setMyMood} value="silly" name="&#128541;">&#128541; </button>
-                                    </div>
-                                    <div>
-                                        <button onClick={this.setMyMood} value="Love" name="&#128525;"> &#128525;</button>
-                                        {/* <button value="Nervous"> & </button> */}
-                                        <button onClick={this.setMyMood} value="Sad" name="&#128532;"> &#128532; </button>
-                                        <button onClick={this.setMyMood} value="Angry" name="&#128545;"> &#128545; </button>
-                                    </div>
-                                </div>
-                                <br />
-                                <br />
-                                Today I am Feeling: {this.state.moodTitle} {this.state.mood}
-                            </div>
+                            </header>
 
                             {/* Users can see their location and have the option to have it turned on or off */}
                             <div className="LocationArea"> 👇 You are here  👇
                                 <div className="theMap">   <Map /> </div>
-
-
                             </div>
                         </div>
+                
+                        
+                            {/* timeline of all notifications from friends and yourself */}
+                <div className="FriendsArea">
+                    <div className="PanicButton">  <PanicButton /> </div>
+                    <div className="Clock"> <div className="upsideDown1"> In </div> <div className="clockColumn"> <div> Be </div> <div className="time"> <Timer /> </div> <div> Back </div> </div> <div className="upsideDown2"> Right </div> </div>
+
+                    <div className="MoodArea">
+                        <div> #MAJOR MOODZ </div>
+                        <div>
+                            <div> 
+                            <button onClick={this.setMyMood} value="Happy" name="&#128512; "> &#128512; </button>
+                            <button onClick={this.setMyMood} value="Weary" name="&#128528; "> &#128528; </button>
+                            <button onClick={this.setMyMood} value="silly" name="&#128541;">&#128541; </button>
+                            </div> 
+                            <div>
+                            <button onClick={this.setMyMood} value="Love" name="&#128525;"> &#128525;</button>
+                            {/* <button value="Nervous"> & </button> */}
+                            <button onClick={this.setMyMood} value="Sad" name="&#128532;"> &#128532; </button>
+                            <button onClick={this.setMyMood} value="Angry" name="&#128545;"> &#128545; </button>
+                        </div>
+                        </div>
                     </div>
-                )}
+                    <div className="feeling"> Today I am Feeling: {this.state.moodTitle} {this.state.mood} </div>
+                </div>
+
+
+            </div>
+
+        )
+    }
             </div>
         );
     }
