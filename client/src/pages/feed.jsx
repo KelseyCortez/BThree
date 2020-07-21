@@ -47,14 +47,11 @@ class Feed extends Component {
     render() {
         console.log(this.props)
         return (
-            <div>
+            <div className="FeedPage">
                 {this.state.Redirect ? <Redirect to='/login' /> : (
-                    <div className="FeedPage">
+                    <div >
                         <header>
-                            <div className="titleDiv">
-                                {/* <h1 style={{ marginTop: "20px", color: 'white', }}> Feed </h1> */}
                                 <div className="greeting"> Welcome Back, {this.state.userName} </div>
-                            </div>
                         </header>
                         <div className="flexRow ">
                             {/* timeline of all notifications from friends and yourself */}

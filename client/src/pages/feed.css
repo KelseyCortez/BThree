@@ -1,18 +1,20 @@
 .FeedPage{ 
     font-family: "Bungee"; 
     background-color: brown; 
-   margin-top: none;
+    margin-top: none; 
+    height: 100vh; 
+    width: 100vw;
    
 }
 
 
 
 header{ 
-    border: 2px solid white; 
-    height: 10vh; 
+    border: 5px solid #8B0000; 
+    height: 10%; 
     text-align: center; 
     font-family: "Bungee";  
-    width: 70vw; 
+    width: 70%; 
     right: 0px ;
     position: absolute; 
     margin: 15px 15px 0px 15px;
@@ -25,24 +27,17 @@ header{
     
 } 
 
-.titleDiv{ 
-    display: flex; 
-    flex-direction: column; 
-    justify-items: center; 
-    justify-content: center; 
-    height: 100%;
-}
 
 
 .FriendsArea{  
     text-align: center; 
-    border: 2px solid white;
+    border: 5px solid #8B0000;
     margin: 15px;
     padding: 10px;
     width: 25%; 
     font-family: "Bungee";
     color: white;
-    height: 75vh; 
+    height: 75%; 
     background-color: black; 
     display: flex; 
     flex-direction: column; 
@@ -56,7 +51,7 @@ header{
     justify-items: center;
     align-items: center;
     text-align: center; 
-    border: 2px solid white;
+    border: 5px solid #8B0000;
     margin: 30px 15px 15px 15px;
     padding: 10px;
     width: 70vw; 
@@ -72,8 +67,8 @@ header{
 
 
 .theMap{ 
-    width: 90%; 
-    height: 96%;
+    width: 80%; 
+    height: 80%;
 } 
 .time{ 
     padding: 10px;
@@ -131,3 +126,61 @@ header{
   } 
 
   
+  @media screen and (max-width: 800px) {
+    .FeedPage{  
+        width: 100vw; 
+        height: 100vh; 
+        background-color:  brown;
+    }
+    header{  
+        width: 70%; 
+        height: 15%;
+    } 
+    .FriendsArea{  
+        width: 20% ; 
+        height: 60%;
+      
+    }
+    .LocationArea{   
+        width: 50%;
+        height: 50%; 
+        top: 45%
+    } 
+    
+    
+    
+    
+    .theMap{ 
+       
+    } 
+    .time{ 
+        
+    }
+    .Clock{ 
+        width: 100%; 
+        font-size: 70%; 
+        padding: 0%;
+      
+    } 
+    
+    .clockColumn{  
+        width: 85%;
+        
+    } 
+    .MoodArea{ 
+      
+    }
+    .upsideDown1{  
+        width: 10%;
+       
+    
+    } 
+    .upsideDown2{  
+        width: 10%;
+        
+    } 
+    
+    .greeting{ 
+    
+      } 
+  }
