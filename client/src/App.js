@@ -133,6 +133,7 @@ function App({latitude, longitude}) {
             </Route>
             <Route path="/register" component={Register} />
             <Route path="/about" component={About} />
+            <Route path="/contacts" component={Contacts} />
             <Redirect to='/login' />
           </Switch>
         )}
