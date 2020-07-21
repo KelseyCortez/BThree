@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import { Link, withRouter } from 'react-router-dom'
 import axios from 'axios'
+import './pages.css'
 
 class Register extends Component {
     constructor(props) {
@@ -43,7 +44,7 @@ class Register extends Component {
 
     render() {
         return (
-            <div className="RegisterPage">
+            <div className="RegisterPage" style={{fontFamily: 'Montserrat'}}>
 
                 <h3 style={registerColor}>Sign Up</h3>
                 {/*  start of form for user registration   */}
