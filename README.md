@@ -14,7 +14,7 @@
 * [Contributing](#contributing)
 * [Technology](#technology)
 * [DEV Team](#dev)
-* [Licence](#licence)
+* [license](#license)
 
 
 ## Installation
