@@ -45,7 +45,7 @@ export default class NavBar extends Component {
         } else {
             return (
                 <Navbar style={{ backgroundColor: "#8B0000" }}>
-                    <Navbar.Brand style={{ fontSize: '55px', color: 'white', fontFamily: "Bungee Inline" }}>BThree</Navbar.Brand>
+                    <Nav.Link href='/' style={{ fontSize: '55px', color: 'white', fontFamily: "Bungee Inline" }}>BThree</Nav.Link>
                 </Navbar>
             )
         }

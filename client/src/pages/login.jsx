@@ -68,7 +68,7 @@ class Login extends Component {
                 <div className="blackboard">
                     {/* {this.state.redirect && <Redirect to={this.state.redirect} />} */}
 
-                    <h3 style={loginColor}>Sign In</h3>
+                    <h3 style={loginColor}>Log In</h3>
                     {/* <!-- form for user login  --> */}
                     <form onSubmit={this.authorizeLogin} style={{ width: '30%', margin: '40px auto' }} >
 
