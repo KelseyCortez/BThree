@@ -1,5 +1,7 @@
 # BThree ![](favicon.ico)
 
+[Click here to View](https://bthree.herokuapp.com/)
+
 ## About
 
 * This app was developed in an effort to provide a way for people to feel secure in their ability to send an emergency message to a list of contacts in an emergency situation
